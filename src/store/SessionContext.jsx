@@ -6,7 +6,14 @@ import {
   clearRecords, 
   getSessionMetadata, 
   saveSessionMetadata, 
-  clearSessionMetadata 
+  clearSessionMetadata,
+  saveMasterItems,
+  clearMasterItems,
+  saveBookStock,
+  clearBookStock,
+  getBookStock,
+  saveTemplate,
+  getAllTemplates
 } from '../services/db';
 import { exportAuditToExcel } from '../services/excel';
 
@@ -24,18 +31,31 @@ export const SessionProvider = ({ children }) => {
   const [sessionActive, setSessionActive] = useState(false);
   const [sessionMetadata, setSessionMetadata] = useState(null);
   const [records, setRecords] = useState([]);
+  const [bookStock, setBookStock] = useState([]);
+  const [templates, setTemplates] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Setup Wizard Step: 'metadata' | 'master_upload' | 'book_stock_upload' | 'active'
+  const [setupStep, setSetupStep] = useState('metadata');
 
-  // Load active session from IndexedDB on startup (Crash recovery)
+  // Load active session and templates on startup
   useEffect(() => {
-    const loadSessionData = async () => {
+    const initSession = async () => {
       try {
+        const savedTemplates = await getAllTemplates();
+        setTemplates(savedTemplates || []);
+
         const metadata = await getSessionMetadata();
         if (metadata) {
           setSessionMetadata(metadata);
-          setSessionActive(true);
-          const savedRecords = await getRecords();
-          setRecords(savedRecords);
+          setSetupStep(metadata.setupStep || 'active');
+          if (metadata.setupStep === 'active' || !metadata.setupStep) {
+            setSessionActive(true);
+            const savedRecords = await getRecords();
+            setRecords(savedRecords || []);
+            const savedBookStock = await getBookStock();
+            setBookStock(savedBookStock || []);
+          }
         }
       } catch (err) {
         console.error('Failed to restore offline session:', err);
@@ -43,23 +63,98 @@ export const SessionProvider = ({ children }) => {
         setLoading(false);
       }
     };
-    loadSessionData();
+    initSession();
   }, []);
 
-  const startSession = async (metadata) => {
+  const startSetup = async (metadata) => {
     setLoading(true);
     try {
-      const fullMetadata = {
+      const initMetadata = {
         ...metadata,
-        startTime: new Date().toISOString()
+        setupStep: 'master_upload',
+        startTime: new Date().toISOString(),
+        mapping: {},
+        bookMapping: {},
+        hasBookStock: false
       };
-      await saveSessionMetadata(fullMetadata);
-      setSessionMetadata(fullMetadata);
-      setSessionActive(true);
+      
+      await saveSessionMetadata(initMetadata);
+      setSessionMetadata(initMetadata);
+      setSetupStep('master_upload');
+      setSessionActive(false);
       setRecords([]);
-      await clearRecords(); // clear any stale records
+      setBookStock([]);
+      
+      await clearRecords();
+      await clearMasterItems();
+      await clearBookStock();
     } catch (err) {
-      console.error('Failed to start session:', err);
+      console.error('Failed to start setup:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveMasterCatalog = async (items, mapping) => {
+    setLoading(true);
+    try {
+      // Add a generated id field for autoIncrement keys, and store mapped fields
+      await saveMasterItems(items);
+      
+      const updatedMetadata = {
+        ...sessionMetadata,
+        setupStep: 'book_stock_upload',
+        mapping
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+      setSetupStep('book_stock_upload');
+    } catch (err) {
+      console.error('Failed to save master catalog items:', err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveBookStockCatalog = async (items, bookMapping) => {
+    setLoading(true);
+    try {
+      await saveBookStock(items);
+      setBookStock(items);
+      
+      const updatedMetadata = {
+        ...sessionMetadata,
+        setupStep: 'active',
+        bookMapping,
+        hasBookStock: true
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+      setSetupStep('active');
+      setSessionActive(true);
+    } catch (err) {
+      console.error('Failed to save book stock:', err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const skipBookStock = async () => {
+    setLoading(true);
+    try {
+      const updatedMetadata = {
+        ...sessionMetadata,
+        setupStep: 'active',
+        hasBookStock: false
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+      setSetupStep('active');
+      setSessionActive(true);
+    } catch (err) {
+      console.error('Failed to skip book stock:', err);
     } finally {
       setLoading(false);
     }
@@ -70,11 +165,16 @@ export const SessionProvider = ({ children }) => {
     try {
       await clearSessionMetadata();
       await clearRecords();
+      await clearMasterItems();
+      await clearBookStock();
+      
       setSessionMetadata(null);
       setSessionActive(false);
+      setSetupStep('metadata');
       setRecords([]);
+      setBookStock([]);
     } catch (err) {
-      console.error('Failed to end/clear session:', err);
+      console.error('Failed to end session:', err);
     } finally {
       setLoading(false);
     }
@@ -112,12 +212,30 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
+  const saveMappingTemplate = async (clientName, mapping, bookMapping = {}) => {
+    try {
+      const template = {
+        clientName,
+        mapping,
+        bookMapping,
+        savedAt: new Date().toISOString()
+      };
+      await saveTemplate(template);
+      
+      // Update local templates list
+      const savedTemplates = await getAllTemplates();
+      setTemplates(savedTemplates || []);
+    } catch (err) {
+      console.error('Failed to save mapping template:', err);
+    }
+  };
+
   const exportData = () => {
     if (records.length === 0) {
       alert('No scanned records available to export.');
       return;
     }
-    exportAuditToExcel(records, sessionMetadata);
+    exportAuditToExcel(records, sessionMetadata, bookStock);
   };
 
   return (
@@ -126,12 +244,19 @@ export const SessionProvider = ({ children }) => {
         sessionActive,
         sessionMetadata,
         records,
+        bookStock,
+        templates,
+        setupStep,
         loading,
-        startSession,
+        startSetup,
+        saveMasterCatalog,
+        saveBookStockCatalog,
+        skipBookStock,
         endSession,
         addRecord,
         updateRecord,
         removeRecord,
+        saveMappingTemplate,
         exportData
       }}
     >

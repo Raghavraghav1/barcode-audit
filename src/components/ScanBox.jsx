@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Camera, CameraOff, Sparkles, RefreshCw, Volume2 } from 'lucide-react';
 import { BrowserMultiFormatReader } from '@zxing/library';
-import masterData from '../data/item_master.json';
+import { findMasterItemsByBarcode } from '../services/db';
 
-// Simple HTML5 Web Audio synth beep generator
 const playScanBeep = (type = 'success') => {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -14,38 +13,34 @@ const playScanBeep = (type = 'success') => {
     gain.connect(ctx.destination);
     
     if (type === 'success') {
-      // Short high pitched beep
       osc.frequency.value = 880;
       gain.gain.setValueAtTime(0.08, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.12);
     } else if (type === 'warning') {
-      // Double medium beep
-      osc.frequency.value = 587.33; // D5
+      osc.frequency.value = 587.33;
       gain.gain.setValueAtTime(0.08, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.15);
     } else {
-      // Low failure buzz
-      osc.frequency.value = 220; // A3
+      osc.frequency.value = 220;
       gain.gain.setValueAtTime(0.12, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.3);
     }
   } catch (e) {
-    console.warn('AudioContext not allowed or not supported:', e);
+    console.warn('AudioContext failed:', e);
   }
 };
 
 export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, isEditing }) {
   const [inputValue, setInputValue] = useState('');
-  const [status, setStatus] = useState('idle'); // 'idle', 'found', 'multiple', 'notfound'
+  const [status, setStatus] = useState('idle');
   const [statusMsg, setStatusMsg] = useState('Ready for input');
   
-  // Camera Scanning States
   const [cameraActive, setCameraActive] = useState(false);
   const [availableDevices, setAvailableDevices] = useState([]);
   const [selectedDeviceId, setSelectedDeviceId] = useState('');
@@ -56,7 +51,6 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
   const codeReaderRef = useRef(null);
   const controlsRef = useRef(null);
 
-  // Keep input focused at all times (except when typing in fields or camera active)
   useEffect(() => {
     if (cameraActive || isEditing) return;
     
@@ -68,9 +62,7 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
     
     focusInput();
 
-    // Re-focus after standard click-out
     const handleDocumentClick = (e) => {
-      // Don't hijack focus if clicking interactive elements like buttons, inputs, etc.
       const tags = ['INPUT', 'TEXTAREA', 'BUTTON', 'SELECT', 'A', 'OPTION'];
       if (tags.includes(e.target.tagName) || e.target.closest('button')) {
         return;
@@ -78,7 +70,6 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
       focusInput();
     };
 
-    // Global keyboard listener for F2 to force focus
     const handleKeyDown = (e) => {
       if (e.key === 'F2') {
         e.preventDefault();
@@ -95,38 +86,43 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
     };
   }, [cameraActive, isEditing]);
 
-  // Handle manual/USB keyboard scanner submit
   const handleScanSubmit = (barcodeRaw) => {
     const barcode = barcodeRaw.trim();
     if (!barcode) return;
-
     processBarcode(barcode);
     setInputValue('');
   };
 
-  const processBarcode = (barcode) => {
-    // Lookup barcode in our static compiled dictionary
-    const matches = masterData[barcode];
+  const processBarcode = async (barcode) => {
+    setStatus('searching');
+    setStatusMsg(`Searching barcode ${barcode} in master...`);
 
-    if (!matches || matches.length === 0) {
+    try {
+      const matches = await findMasterItemsByBarcode(barcode);
+
+      if (!matches || matches.length === 0) {
+        setStatus('notfound');
+        setStatusMsg(`Barcode ${barcode} not found in Master`);
+        playScanBeep('error');
+        onScanNotFound(barcode);
+      } else if (matches.length === 1) {
+        setStatus('found');
+        setStatusMsg(`🟢 Barcode matches: ${matches[0].itemName}`);
+        playScanBeep('success');
+        onScanMatch(matches[0]);
+      } else {
+        setStatus('multiple');
+        setStatusMsg(`🟡 Multiple matches found (${matches.length} items)`);
+        playScanBeep('warning');
+        onScanMultiple(barcode, matches);
+      }
+    } catch (err) {
+      console.error(err);
       setStatus('notfound');
-      setStatusMsg(`Barcode ${barcode} not found in Master`);
-      playScanBeep('error');
-      onScanNotFound(barcode);
-    } else if (matches.length === 1) {
-      setStatus('found');
-      setStatusMsg(`🟢 Barcode matches: ${matches[0].itemName}`);
-      playScanBeep('success');
-      onScanMatch(matches[0]);
-    } else {
-      setStatus('multiple');
-      setStatusMsg(`🟡 Multiple matches found (${matches.length} items)`);
-      playScanBeep('warning');
-      onScanMultiple(barcode, matches);
+      setStatusMsg('Database query failed.');
     }
   };
 
-  // Initialize Camera Scan and ZXing Reader
   useEffect(() => {
     if (!cameraActive) {
       stopCamera();
@@ -139,7 +135,6 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
         const codeReader = new BrowserMultiFormatReader();
         codeReaderRef.current = codeReader;
 
-        // List video input devices
         const videoDevices = await codeReader.listVideoInputDevices();
         setAvailableDevices(videoDevices);
 
@@ -147,7 +142,6 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
           throw new Error('No camera devices found.');
         }
 
-        // Pick back camera if available, otherwise first camera
         const backCam = videoDevices.find(device => 
           device.label.toLowerCase().includes('back') || 
           device.label.toLowerCase().includes('rear') || 
@@ -174,7 +168,6 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
   const startDecoding = (deviceId) => {
     if (!codeReaderRef.current || !videoRef.current) return;
     
-    // Stop any existing stream first
     if (controlsRef.current) {
       controlsRef.current.stop();
       controlsRef.current = null;
@@ -186,20 +179,14 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
       (result, error) => {
         if (result) {
           const scannedText = result.getText();
-          console.log('ZXing decoded barcode:', scannedText);
-          
-          // Process immediately
           processBarcode(scannedText);
-          
-          // Disable camera after a successful scan to prevent loop scans
           setCameraActive(false);
         }
-        // Errors are thrown continuously during search, which is expected by ZXing library
       }
     ).then(controls => {
       controlsRef.current = controls;
     }).catch(err => {
-      console.error('decodeFromVideoDevice failed:', err);
+      console.error(err);
       setCameraError('Failed to capture video feed.');
     });
   };
@@ -222,15 +209,19 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
   };
 
   return (
-    <div className="bg-slate-800 rounded-2xl border border-slate-700 p-6 mb-6 shadow-xl">
+    <div className="bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-700/50 p-6 mb-6 shadow-xl relative overflow-hidden">
+      
+      {/* Decorative gradient background glow */}
+      <div className="absolute -right-32 -top-32 h-64 w-64 bg-orange-600/10 rounded-full blur-3xl pointer-events-none" />
+
       <div className="flex flex-col md:flex-row gap-6 items-stretch">
         
         {/* Left Side: Scan Inputs */}
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 flex flex-col justify-between z-10">
           <div>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-teal-400" />
+                <Sparkles className="h-5 w-5 text-amber-500" />
                 Barcode Scanner Input
               </h2>
               <div className="flex items-center gap-2">
@@ -238,17 +229,16 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                   type="button"
                   onClick={() => playScanBeep('success')}
                   title="Test Sound"
-                  className="p-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300 transition"
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-750"
                 >
-                  <Volume2 className="h-4 w-4" />
+                  <Volume2 className="h-4 w-4 text-amber-500" />
                 </button>
-                <span className="text-xs text-slate-400 bg-slate-900 px-2 py-1 rounded font-mono border border-slate-700">
+                <span className="text-xs text-slate-400 bg-slate-950 px-2 py-1 rounded font-mono border border-slate-800">
                   Shortcut: F2 Focus
                 </span>
               </div>
             </div>
 
-            {/* Focused Scan Input */}
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -262,29 +252,28 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Scan or type barcode here (Auto-Focused)..."
-                disabled={cameraActive}
-                className="w-full bg-slate-950 border-2 border-slate-700 rounded-xl px-5 py-4 text-xl font-mono text-teal-400 placeholder-slate-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/20 disabled:bg-slate-900 disabled:text-slate-500 transition-all shadow-inner"
+                disabled={cameraActive || status === 'searching'}
+                className="w-full bg-slate-950/80 border-2 border-slate-750 rounded-xl px-5 py-4 text-xl font-mono text-amber-400 placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 disabled:bg-slate-900/60 disabled:text-slate-600 transition-all shadow-inner"
               />
               <button
                 type="submit"
-                disabled={cameraActive}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-teal-600 hover:bg-teal-500 text-white font-medium px-4 py-2 rounded-lg transition disabled:opacity-40"
+                disabled={cameraActive || status === 'searching'}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold px-4 py-2 rounded-lg transition disabled:opacity-40"
               >
                 Scan (Enter)
               </button>
             </form>
 
-            {/* Status Banner */}
             <div className="mb-4">
               <div
                 className={`flex items-center gap-3 p-3.5 rounded-xl border transition-all duration-300 ${
                   status === 'found'
-                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 shadow-emerald-950/20'
+                    ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300'
                     : status === 'multiple'
-                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-300 shadow-amber-950/20'
+                    ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
                     : status === 'notfound'
-                    ? 'bg-red-500/10 border-red-500/30 text-red-300 shadow-red-950/20'
-                    : 'bg-slate-900/60 border-slate-750 text-slate-400'
+                    ? 'bg-rose-500/10 border-rose-500/30 text-rose-300'
+                    : 'bg-slate-950/50 border-slate-800 text-slate-400'
                 }`}
               >
                 <div
@@ -294,8 +283,10 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                       : status === 'multiple'
                       ? 'bg-amber-500 border-amber-400 animate-pulse'
                       : status === 'notfound'
-                      ? 'bg-red-500 border-red-400'
-                      : 'bg-slate-650 border-slate-500'
+                      ? 'bg-rose-500 border-rose-400'
+                      : status === 'searching'
+                      ? 'bg-amber-400 border-amber-300 animate-ping'
+                      : 'bg-slate-700 border-slate-600'
                   }`}
                 />
                 <span className="text-sm font-medium tracking-wide font-mono break-all">{statusMsg}</span>
@@ -303,14 +294,13 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
             </div>
           </div>
 
-          {/* Toggle Camera Stream */}
           <button
             type="button"
             onClick={() => setCameraActive(!cameraActive)}
-            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border font-medium transition ${
+            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border font-bold text-sm transition ${
               cameraActive
                 ? 'bg-rose-500/20 text-rose-300 border-rose-500/30 hover:bg-rose-500/30'
-                : 'bg-teal-500/10 text-teal-300 border-teal-500/20 hover:bg-teal-500/20 hover:border-teal-500/45'
+                : 'bg-amber-500/10 text-amber-400 border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40 shadow-sm'
             }`}
           >
             {cameraActive ? (
@@ -327,11 +317,11 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
           </button>
         </div>
 
-        {/* Right Side: Camera Scan Viewport */}
+        {/* Right Side: Camera Viewport */}
         {cameraActive && (
-          <div className="w-full md:w-80 shrink-0 flex flex-col border border-slate-700 bg-slate-950 rounded-xl overflow-hidden shadow-inner">
+          <div className="w-full md:w-80 shrink-0 flex flex-col border border-slate-700 bg-slate-950 rounded-xl overflow-hidden shadow-inner z-10">
             <div className="bg-slate-900 px-4 py-2 flex items-center justify-between border-b border-slate-800">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Live Camera</span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Live Camera feed</span>
               {availableDevices.length > 1 && (
                 <select
                   value={selectedDeviceId}
@@ -354,10 +344,9 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                 playsInline
                 muted
               />
-              {/* Scan box crosshair overlay */}
               <div className="absolute inset-0 border-[32px] border-black/40 flex items-center justify-center pointer-events-none">
-                <div className="w-44 h-28 border-2 border-teal-500 rounded relative shadow-[0_0_15px_rgba(20,184,166,0.3)]">
-                  <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-teal-500/70 animate-bounce" />
+                <div className="w-44 h-28 border-2 border-amber-500 rounded relative shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                  <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-amber-500/70 animate-bounce" />
                 </div>
               </div>
             </div>
