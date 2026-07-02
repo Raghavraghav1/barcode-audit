@@ -327,8 +327,12 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
                     </td>
 
                     <td className="px-4 py-3 text-center">
-                      <span className="font-bold text-slate-200 block">{row.netQty}</span>
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">{row.itemType || 'UNIT'}</span>
+                      <span className="font-bold text-slate-200 block">{row.netQty} Units</span>
+                      {(row.boxQty > 0 || row.looseQty > 0) && (
+                        <span className="text-[10px] text-slate-500 block font-semibold leading-tight">
+                          {row.boxQty || 0} Box + {row.looseQty || 0} Loose
+                        </span>
+                      )}
                       {row.netQty <= 0 && <span className="text-red-400 text-xs block font-semibold mt-0.5">Invalid</span>}
                     </td>
 

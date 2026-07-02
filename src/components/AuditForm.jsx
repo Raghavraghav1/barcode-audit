@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Calendar, Save, Trash2, HelpCircle, AlertTriangle } from 'lucide-react';
 
 export default function AuditForm({ activeProduct, onSave, onCancel, existingRecords, setIsEditing }) {
-  const [netQty, setNetQty] = useState('');
+  const [boxQty, setBoxQty] = useState('');
+  const [looseQty, setLooseQty] = useState('');
+  const [unitsPerBox, setUnitsPerBox] = useState(1);
   const [mrp, setMrp] = useState('');
   const [mfd, setMfd] = useState('');
   const [exp, setExp] = useState('');
   const [batchNumber, setBatchNumber] = useState('');
   const [remarks, setRemarks] = useState('');
-  const [itemType, setItemType] = useState('UNIT');
 
   // Editable fields for completely new barcodes not found in master
   const [itemName, setItemName] = useState('');
@@ -35,13 +36,14 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
       setPackType(activeProduct.packType || 'BOX');
       setHsn(activeProduct.hsn || '');
 
-      setNetQty(activeProduct.id ? String(activeProduct.netQty) : '');
+      setBoxQty(activeProduct.id && activeProduct.boxQty !== undefined ? String(activeProduct.boxQty) : '');
+      setLooseQty(activeProduct.id && activeProduct.looseQty !== undefined ? String(activeProduct.looseQty) : '');
+      setUnitsPerBox(Number(activeProduct.unitsPerBox) || 1);
       setMrp(activeProduct.id ? String(activeProduct.mrp) : '');
       setMfd(activeProduct.mfd || '');
       setExp(activeProduct.exp || '');
       setBatchNumber(activeProduct.batchNumber || '');
       setRemarks(activeProduct.remarks || '');
-      setItemType(activeProduct.itemType || 'UNIT');
       setErrors({});
       setWarnings([]);
 
@@ -85,7 +87,7 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [netQty, mrp, mfd, exp, batchNumber, remarks, itemName, productGroup, skuType, packType, hsn, errors]);
+  }, [boxQty, looseQty, unitsPerBox, mrp, mfd, exp, batchNumber, remarks, itemName, productGroup, skuType, packType, hsn, errors]);
 
   if (!activeProduct) {
     return (
@@ -104,9 +106,18 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
   const validate = () => {
     const errs = {};
     
-    const qtyVal = Number(netQty);
-    if (!netQty || isNaN(qtyVal) || qtyVal <= 0) {
-      errs.netQty = 'Quantity is required and must be greater than 0';
+    const bQty = Number(boxQty) || 0;
+    const lQty = Number(looseQty) || 0;
+    const totalQty = (bQty * unitsPerBox) + lQty;
+
+    if (bQty < 0 || lQty < 0) {
+      errs.quantity = 'Quantities cannot be negative';
+    } else if (totalQty <= 0) {
+      errs.quantity = 'At least one of Box Qty or Loose Qty is required and must be greater than 0';
+    }
+
+    if (isNaN(unitsPerBox) || unitsPerBox <= 0) {
+      errs.unitsPerBox = 'Units per box must be greater than 0';
     }
 
     const mrpVal = Number(mrp);
@@ -148,6 +159,10 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
     if (e) e.preventDefault();
     if (!validate()) return;
 
+    const bQty = Number(boxQty) || 0;
+    const lQty = Number(looseQty) || 0;
+    const calculatedTotalQty = (bQty * unitsPerBox) + lQty;
+
     const record = {
       barcode: activeProduct.barcode,
       itemCode: activeProduct.itemCode || 'MANUAL',
@@ -158,8 +173,10 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
       packType,
       hsn: hsn.trim(),
 
-      netQty: Number(netQty),
-      itemType,
+      boxQty: bQty,
+      looseQty: lQty,
+      unitsPerBox: Number(unitsPerBox) || 1,
+      netQty: calculatedTotalQty,
       mrp: Number(mrp),
       mfd: mfd || null,
       exp: exp || null,
@@ -281,40 +298,66 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
           </div>
         </div>
 
-        {/* Auditor Inputs */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Quantities & Math Panel */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-950/40 border border-slate-800">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
-              Net Quantity <span className="text-red-500">*</span>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              Box Quantity
             </label>
             <input
               ref={qtyInputRef}
               type="number"
-              min="1"
-              value={netQty}
-              onChange={(e) => setNetQty(e.target.value)}
-              placeholder="e.g. 10"
-              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors ${
-                errors.netQty ? 'border-red-500 focus:ring-1 focus:ring-red-500/20' : 'border-slate-750'
+              min="0"
+              value={boxQty}
+              onChange={(e) => setBoxQty(e.target.value)}
+              placeholder="e.g. 2"
+              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 ${
+                errors.quantity ? 'border-red-500' : 'border-slate-750'
               }`}
             />
-            {errors.netQty && <p className="text-red-400 text-xs mt-1">{errors.netQty}</p>}
           </div>
-
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">
-              Item Type <span className="text-red-500">*</span>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              Loose Quantity
             </label>
-            <select
-              value={itemType}
-              onChange={(e) => setItemType(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
-            >
-              <option value="UNIT">UNIT</option>
-              <option value="BOX">BOX</option>
-            </select>
+            <input
+              type="number"
+              min="0"
+              value={looseQty}
+              onChange={(e) => setLooseQty(e.target.value)}
+              placeholder="e.g. 5"
+              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 ${
+                errors.quantity ? 'border-red-500' : 'border-slate-750'
+              }`}
+            />
           </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">
+              Units Per Box (Pack Size)
+            </label>
+            <input
+              type="number"
+              min="1"
+              value={unitsPerBox}
+              onChange={(e) => setUnitsPerBox(Math.max(1, Number(e.target.value) || 1))}
+              disabled={!isNewBarcode}
+              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium ${
+                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-400 border-slate-850'
+              }`}
+            />
+            {errors.unitsPerBox && <p className="text-red-400 text-xs mt-1">{errors.unitsPerBox}</p>}
+          </div>
+          <div className="flex flex-col justify-center items-center bg-slate-950/60 rounded-lg border border-slate-800 p-2">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">Calculated Total</span>
+            <span className="text-lg font-black text-amber-400 font-mono">
+              {(Number(boxQty) * unitsPerBox) + Number(looseQty)} Units
+            </span>
+          </div>
+        </div>
+        {errors.quantity && <p className="text-red-400 text-xs mt-1 px-1">{errors.quantity}</p>}
 
+        {/* Auditor Inputs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
           <div>
             <label className="block text-sm font-medium text-slate-300 mb-1">
               MRP (Selling Price) <span className="text-red-500">*</span>

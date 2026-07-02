@@ -15,7 +15,8 @@ const MASTER_SYNONYMS = {
   subCategoryCol: ['subcategory', 'sub category', 'category', 'group'],
   skuTypeCol: ['sku type', 'skutype', 'type', 'channel', 'status'],
   packTypeCol: ['pack type', 'packtype', 'pack', 'packaging', 'container'],
-  hsnCol: ['hsn', 'hsn code', 'hsncode', 'tax code', 'taxcode']
+  hsnCol: ['hsn', 'hsn code', 'hsncode', 'tax code', 'taxcode'],
+  unitsPerBoxCol: ['unit/pack', 'units/pack', 'units per pack', 'units per box', 'pack size', 'box size', 'case size', 'qty/pack', 'qty per pack', 'quantity per pack']
 };
 
 const BOOK_SYNONYMS = {
@@ -79,7 +80,8 @@ export default function SetupWizard() {
     subCategoryCol: '',
     skuTypeCol: '',
     packTypeCol: '',
-    hsnCol: ''
+    hsnCol: '',
+    unitsPerBoxCol: ''
   });
   const [saveAsTemplate, setSaveAsTemplate] = useState(true);
   const [masterError, setMasterError] = useState('');
@@ -174,7 +176,8 @@ export default function SetupWizard() {
         subCategory: String(r[masterMapping.subCategoryCol] || '').trim(),
         skuType: String(r[masterMapping.skuTypeCol] || '').trim(),
         packType: String(r[masterMapping.packTypeCol] || '').trim(),
-        hsn: String(r[masterMapping.hsnCol] || '').trim()
+        hsn: String(r[masterMapping.hsnCol] || '').trim(),
+        unitsPerBox: Number(r[masterMapping.unitsPerBoxCol]) || 1
       }));
 
       // Ingest to IndexedDB
@@ -602,6 +605,19 @@ export default function SetupWizard() {
                     <select
                       value={masterMapping.hsnCol}
                       onChange={(e) => setMasterMapping({ ...masterMapping, hsnCol: e.target.value })}
+                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
+                    >
+                      <option value="">-- Select Column --</option>
+                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
+                    </select>
+                  </div>
+
+                  {/* Units Per Box */}
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Units Per Box (Pack Size) Column</label>
+                    <select
+                      value={masterMapping.unitsPerBoxCol}
+                      onChange={(e) => setMasterMapping({ ...masterMapping, unitsPerBoxCol: e.target.value })}
                       className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
                     >
                       <option value="">-- Select Column --</option>
