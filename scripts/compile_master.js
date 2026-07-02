@@ -48,6 +48,7 @@ try {
     const skuType = cleanRow['SKU TYPE'] ? String(cleanRow['SKU TYPE']).trim() : '';
     const packType = cleanRow['PACK TYPE'] ? String(cleanRow['PACK TYPE']).trim() : '';
     const hsn = cleanRow['HSN'] ? String(cleanRow['HSN']).trim() : '';
+    const unitsPerBox = cleanRow['UNIT/PACK'] ? Number(cleanRow['UNIT/PACK']) || 1 : 1;
 
     const record = {
       barcode,
@@ -57,7 +58,8 @@ try {
       subCategory,
       skuType,
       packType,
-      hsn
+      hsn,
+      unitsPerBox
     };
 
     if (!lookupMap[barcode]) {

@@ -8,7 +8,8 @@
       "subCategory": "CAN CURD",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -18,7 +19,8 @@
       "subCategory": "BUTTER MILK",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4039010"
+      "hsn": "4039010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -28,7 +30,8 @@
       "subCategory": "BUTTER MILK",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4039010"
+      "hsn": "4039010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -38,7 +41,8 @@
       "subCategory": "FEED",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -48,7 +52,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     },
     {
       "barcode": "0",
@@ -58,7 +63,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -68,7 +74,8 @@
       "subCategory": "FEED",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -78,7 +85,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -88,7 +96,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -98,7 +107,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39251000"
+      "hsn": "39251000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -108,7 +118,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39251000"
+      "hsn": "39251000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -118,7 +129,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -128,7 +140,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "63051040"
+      "hsn": "63051040",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -138,7 +151,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -148,7 +162,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "44150000"
+      "hsn": "44150000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -158,7 +173,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -168,7 +184,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40131010"
+      "hsn": "40131010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -178,7 +195,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -188,7 +206,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -198,7 +217,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -208,7 +228,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -218,7 +239,8 @@
       "subCategory": "FREIGHT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -228,7 +250,8 @@
       "subCategory": "FREIGHT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -238,7 +261,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -248,7 +272,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "72041000"
+      "hsn": "72041000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -258,7 +283,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "74040000"
+      "hsn": "74040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -268,7 +294,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "74040000"
+      "hsn": "74040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -278,7 +305,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "72041000"
+      "hsn": "72041000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -288,7 +316,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -298,7 +327,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "72044900"
+      "hsn": "72044900",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -308,7 +338,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -318,7 +349,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -328,7 +360,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -338,7 +371,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -348,7 +382,8 @@
       "subCategory": "FREIGHT",
       "skuType": "EXPORT",
       "packType": "PIECES",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -358,7 +393,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -368,7 +404,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "76020000"
+      "hsn": "76020000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -378,7 +415,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "76020000"
+      "hsn": "76020000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -388,7 +426,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "72044900"
+      "hsn": "72044900",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -398,7 +437,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "40040000"
+      "hsn": "40040000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -408,7 +448,8 @@
       "subCategory": "FEED",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -418,7 +459,8 @@
       "subCategory": "FREIGHT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -428,7 +470,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -438,7 +481,8 @@
       "subCategory": "FEED",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -448,7 +492,8 @@
       "subCategory": "FREIGHT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -458,7 +503,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -468,7 +514,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -478,7 +525,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -488,7 +536,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "0",
@@ -498,7 +547,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -508,7 +558,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -518,7 +569,8 @@
       "subCategory": "FROZEN KHOVA",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 4
     },
     {
       "barcode": "0",
@@ -528,7 +580,8 @@
       "subCategory": "FEED",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -538,7 +591,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -548,7 +602,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -558,7 +613,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "39159010"
+      "hsn": "39159010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -568,7 +624,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -578,7 +635,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "48191010"
+      "hsn": "48191010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -588,7 +646,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -598,7 +657,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -608,7 +668,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -618,7 +679,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -628,7 +690,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -638,7 +701,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -648,7 +712,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -658,7 +723,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -668,7 +734,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -678,7 +745,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -688,7 +756,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -698,7 +767,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -708,7 +778,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "84185000"
+      "hsn": "84185000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -718,7 +789,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -728,7 +800,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -738,7 +811,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -748,7 +822,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -758,7 +833,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -768,7 +844,8 @@
       "subCategory": "ICE CREAM",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 8
     },
     {
       "barcode": "0",
@@ -778,7 +855,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "0",
@@ -788,7 +866,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "0",
@@ -798,7 +877,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 168
     },
     {
       "barcode": "0",
@@ -808,7 +888,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "0",
@@ -818,7 +899,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "0",
@@ -828,7 +910,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "0",
@@ -838,7 +921,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "0",
@@ -848,7 +932,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "0",
@@ -858,7 +943,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "0",
@@ -868,7 +954,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "0",
@@ -878,7 +965,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "0",
@@ -888,7 +976,8 @@
       "subCategory": "PARLOUR PRODUCTS",
       "skuType": "RETAIL",
       "packType": "PIECES",
-      "hsn": "19051000"
+      "hsn": "19051000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -898,7 +987,8 @@
       "subCategory": "PARLOUR PRODUCTS",
       "skuType": "RETAIL",
       "packType": "PIECES",
-      "hsn": "19051000"
+      "hsn": "19051000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -908,7 +998,8 @@
       "subCategory": "PARLOUR PRODUCTS",
       "skuType": "RETAIL",
       "packType": "PIECES",
-      "hsn": "19051000"
+      "hsn": "19051000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -918,7 +1009,8 @@
       "subCategory": "CHEESE CAKE",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "0",
@@ -928,7 +1020,8 @@
       "subCategory": "FROZEN CHEESE BALLS",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 30
     },
     {
       "barcode": "0",
@@ -938,7 +1031,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -948,7 +1042,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -958,7 +1053,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -968,7 +1064,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -978,7 +1075,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -988,7 +1086,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -998,7 +1097,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "48061000"
+      "hsn": "48061000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1008,7 +1108,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1018,7 +1119,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1028,7 +1130,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1038,7 +1141,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1048,7 +1152,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1058,7 +1163,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1068,7 +1174,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1078,7 +1185,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1088,7 +1196,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1098,7 +1207,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1108,7 +1218,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1118,7 +1229,8 @@
       "subCategory": "FEED",
       "skuType": "CATTLE FEED 70KG",
       "packType": "PIECES",
-      "hsn": "23099010"
+      "hsn": "23099010",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1128,7 +1240,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1138,7 +1251,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "9983"
+      "hsn": "9983",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1148,7 +1262,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1158,7 +1273,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1168,7 +1284,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1178,7 +1295,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1188,7 +1306,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1198,7 +1317,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1208,7 +1328,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1218,7 +1339,8 @@
       "subCategory": "SCRAP",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "47071000"
+      "hsn": "47071000",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1228,7 +1350,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "1"
+      "hsn": "1",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1238,7 +1361,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "0",
@@ -1248,7 +1372,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1258,7 +1383,8 @@
       "subCategory": "NON-PRODUCT",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     },
     {
       "barcode": "0",
@@ -1268,7 +1394,8 @@
       "subCategory": "BUTTER MILK",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "0"
+      "hsn": "0",
+      "unitsPerBox": 1
     }
   ],
   "8904083300656": [
@@ -1280,7 +1407,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 150
     },
     {
       "barcode": "8904083300656",
@@ -1290,7 +1418,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 81
     }
   ],
   "8904083300670": [
@@ -1302,7 +1431,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 75
     },
     {
       "barcode": "8904083300670",
@@ -1312,7 +1442,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 75
     },
     {
       "barcode": "8904083300670",
@@ -1322,7 +1453,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 24
     }
   ],
   "8904083300625": [
@@ -1334,7 +1466,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083300625",
@@ -1344,7 +1477,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 24
     },
     {
       "barcode": "8904083300625",
@@ -1354,7 +1488,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 30
     }
   ],
   "8904083300663": [
@@ -1366,7 +1501,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 1
     }
   ],
   "8904083300519": [
@@ -1378,7 +1514,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 150
     },
     {
       "barcode": "8904083300519",
@@ -1388,7 +1525,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 81
     }
   ],
   "8904083300526": [
@@ -1400,7 +1538,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083300526",
@@ -1410,7 +1549,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 30
     }
   ],
   "8904083304036": [
@@ -1422,7 +1562,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 50
     }
   ],
   "8904083304012": [
@@ -1434,7 +1575,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 10
     },
     {
       "barcode": "8904083304012",
@@ -1444,7 +1586,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 10
     }
   ],
   "8904083307068": [
@@ -1456,7 +1599,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 60
     },
     {
       "barcode": "8904083307068",
@@ -1466,7 +1610,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 40
     }
   ],
   "8904083307129": [
@@ -1478,7 +1623,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083307075": [
@@ -1490,7 +1636,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083307075",
@@ -1500,7 +1647,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083307075",
@@ -1510,7 +1658,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 12
     }
   ],
   "8904083307112": [
@@ -1522,7 +1671,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 100
     }
   ],
   "8904083307037": [
@@ -1534,7 +1684,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 60
     },
     {
       "barcode": "8904083307037",
@@ -1544,7 +1695,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 40
     }
   ],
   "8904083307105": [
@@ -1556,7 +1708,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 20
     }
   ],
   "8904083310136": [
@@ -1568,7 +1721,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 120
     }
   ],
   "8904083310129": [
@@ -1580,7 +1734,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 60
     },
     {
       "barcode": "8904083310129",
@@ -1590,7 +1745,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 48
     }
   ],
   "8904083310143": [
@@ -1602,7 +1758,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 15
     }
   ],
   "8904083310037": [
@@ -1614,7 +1771,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083310013": [
@@ -1626,7 +1784,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083310020": [
@@ -1638,7 +1797,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083301035": [
@@ -1650,7 +1810,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 60
     }
   ],
   "8904083301011": [
@@ -1662,7 +1823,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 10
     }
   ],
   "8904083301066": [
@@ -1674,7 +1836,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 25
     }
   ],
   "8904083301059": [
@@ -1686,7 +1849,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 10
     }
   ],
   "8904083311010": [
@@ -1698,7 +1862,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 20
     }
   ],
   "8904083311034": [
@@ -1710,7 +1875,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 12
     }
   ],
   "8904083311027": [
@@ -1722,7 +1888,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8904083311027",
@@ -1732,7 +1899,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     }
   ],
   "8904083301080": [
@@ -1744,7 +1912,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     }
   ],
   "8904083301127": [
@@ -1756,7 +1925,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     }
   ],
   "8904083300090": [
@@ -1768,7 +1938,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 100
     }
   ],
   "8904083300021": [
@@ -1780,7 +1951,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 50
     }
   ],
   "8904083300045": [
@@ -1792,7 +1964,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     }
   ],
   "8904083300076": [
@@ -1804,7 +1977,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083300076",
@@ -1814,7 +1988,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083300076",
@@ -1824,7 +1999,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "8904083300434": [
@@ -1836,7 +2012,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 54
     },
     {
       "barcode": "8904083300434",
@@ -1846,7 +2023,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 54
     },
     {
       "barcode": "8904083300434",
@@ -1856,7 +2034,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 54
     },
     {
       "barcode": "8904083300434",
@@ -1866,7 +2045,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "8904083300441": [
@@ -1878,7 +2058,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     },
     {
       "barcode": "8904083300441",
@@ -1888,7 +2069,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     }
   ],
   "8904083300458": [
@@ -1900,7 +2082,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083300458",
@@ -1910,7 +2093,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "8904083306016": [
@@ -1922,7 +2106,8 @@
       "subCategory": "POUCH CURD",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 50
     }
   ],
   "8904083306030": [
@@ -1934,7 +2119,8 @@
       "subCategory": "POUCH CURD",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 10
     }
   ],
   "8904083306061": [
@@ -1946,7 +2132,8 @@
       "subCategory": "POUCH CURD",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 2
     }
   ],
   "8904083303060": [
@@ -1958,7 +2145,8 @@
       "subCategory": "SET CURD",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 48
     }
   ],
   "8904083303152": [
@@ -1970,7 +2158,8 @@
       "subCategory": "SET CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 36
     }
   ],
   "8904083303039": [
@@ -1982,7 +2171,8 @@
       "subCategory": "SET CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 24
     }
   ],
   "8904083303091": [
@@ -1994,7 +2184,8 @@
       "subCategory": "SET CURD",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 24
     }
   ],
   "8904083303015": [
@@ -2006,7 +2197,8 @@
       "subCategory": "SET CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083303015",
@@ -2016,7 +2208,8 @@
       "subCategory": "SET CURD",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 12
     }
   ],
   "8904083303077": [
@@ -2028,7 +2221,8 @@
       "subCategory": "SET CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 8
     },
     {
       "barcode": "8904083303077",
@@ -2038,7 +2232,8 @@
       "subCategory": "SET CURD",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 9
     }
   ],
   "8904083303114": [
@@ -2050,7 +2245,8 @@
       "subCategory": "SET CURD",
       "skuType": "IP",
       "packType": "PIECES",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 1
     }
   ],
   "8904083303138": [
@@ -2062,7 +2258,8 @@
       "subCategory": "SET CURD",
       "skuType": "IP",
       "packType": "PIECES",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 1
     }
   ],
   "8904083300243": [
@@ -2074,7 +2271,8 @@
       "subCategory": "KHOVA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 20
     }
   ],
   "8904083300212": [
@@ -2086,7 +2284,8 @@
       "subCategory": "KHOVA",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 12
     }
   ],
   "8904083300229": [
@@ -2098,7 +2297,8 @@
       "subCategory": "KHOVA",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 4
     }
   ],
   "8904083301226": [
@@ -2110,7 +2310,8 @@
       "subCategory": "GULAB JAMUN MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "17049090"
+      "hsn": "17049090",
+      "unitsPerBox": 20
     }
   ],
   "8904083300809": [
@@ -2122,7 +2323,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 800
     }
   ],
   "8904083300861": [
@@ -2134,7 +2336,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 120
     }
   ],
   "8904083300847": [
@@ -2146,7 +2349,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 60
     }
   ],
   "8904083300885": [
@@ -2158,7 +2362,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 24
     }
   ],
   "8904083300892": [
@@ -2170,7 +2375,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 24
     }
   ],
   "8904083300908": [
@@ -2182,7 +2388,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     }
   ],
   "8904083301844": [
@@ -2194,7 +2401,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 240
     }
   ],
   "8904083301851": [
@@ -2206,7 +2414,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083301851",
@@ -2216,7 +2425,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 120
     }
   ],
   "8904083301813": [
@@ -2228,7 +2438,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 75
     },
     {
       "barcode": "8904083301813",
@@ -2238,7 +2449,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 75
     }
   ],
   "8904083301820": [
@@ -2250,7 +2462,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 32
     },
     {
       "barcode": "8904083301820",
@@ -2260,7 +2473,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 32
     }
   ],
   "8904083301837": [
@@ -2272,7 +2486,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 15
     },
     {
       "barcode": "8904083301837",
@@ -2282,7 +2497,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 15
     }
   ],
   "8904083301868": [
@@ -2294,7 +2510,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 4
     }
   ],
   "8904083300830": [
@@ -2306,7 +2523,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 24
     }
   ],
   "8904083300823": [
@@ -2318,7 +2536,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083300823",
@@ -2328,7 +2547,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083300823",
@@ -2338,7 +2558,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     }
   ],
   "8904083300854": [
@@ -2350,7 +2571,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 4
     },
     {
       "barcode": "8904083300854",
@@ -2360,7 +2582,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 3
     }
   ],
   "8904083300816": [
@@ -2372,7 +2595,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "IP",
       "packType": "PIECES",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 1
     }
   ],
   "8904083302100": [
@@ -2384,7 +2608,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 36
     }
   ],
   "8904083302070": [
@@ -2396,7 +2621,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 36
     }
   ],
   "8904083302094": [
@@ -2408,7 +2634,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 36
     }
   ],
   "8904083302063": [
@@ -2420,7 +2647,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 36
     }
   ],
   "8904083300335": [
@@ -2432,7 +2660,8 @@
       "subCategory": "KALAKHAND",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4022910"
+      "hsn": "4022910",
+      "unitsPerBox": 24
     }
   ],
   "8904083300311": [
@@ -2444,7 +2673,8 @@
       "subCategory": "KALAKHAND",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "4022910"
+      "hsn": "4022910",
+      "unitsPerBox": 10
     }
   ],
   "8904083314035": [
@@ -2456,7 +2686,8 @@
       "subCategory": "MISHTI DOI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 36
     }
   ],
   "8904083312048": [
@@ -2468,7 +2699,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8904083312031": [
@@ -2480,7 +2712,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8904083312017": [
@@ -2492,7 +2725,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083312024": [
@@ -2504,7 +2738,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083315018": [
@@ -2516,7 +2751,8 @@
       "subCategory": "SKIM MILK POWDER",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4021010"
+      "hsn": "4021010",
+      "unitsPerBox": 1
     }
   ],
   "8904083315094": [
@@ -2528,7 +2764,8 @@
       "subCategory": "SKIM MILK POWDER",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4021010"
+      "hsn": "4021010",
+      "unitsPerBox": 1
     }
   ],
   "8904083315001": [
@@ -2540,7 +2777,8 @@
       "subCategory": "WHEY POWDER",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4041010"
+      "hsn": "4041010",
+      "unitsPerBox": 1
     }
   ],
   "8904083300724": [
@@ -2552,7 +2790,8 @@
       "subCategory": "MILK",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4014000"
+      "hsn": "4014000",
+      "unitsPerBox": 1
     }
   ],
   "8904083300731": [
@@ -2564,7 +2803,8 @@
       "subCategory": "MILK",
       "skuType": "B2B",
       "packType": "PIECES",
-      "hsn": "4011000"
+      "hsn": "4011000",
+      "unitsPerBox": 1
     }
   ],
   "8904083315063": [
@@ -2576,7 +2816,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 12
     }
   ],
   "8904083315056": [
@@ -2588,7 +2829,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 24
     }
   ],
   "8904083315049": [
@@ -2600,7 +2842,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 60
     }
   ],
   "8904083306047": [
@@ -2612,7 +2855,8 @@
       "subCategory": "POUCH CURD",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 60
     }
   ],
   "8904083315100": [
@@ -2624,7 +2868,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "IP",
       "packType": "PIECES",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 1
     }
   ],
   "8904083301134": [
@@ -2636,7 +2881,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 20
     }
   ],
   "8904083309895": [
@@ -2648,7 +2894,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 12
     }
   ],
   "8904083300540": [
@@ -2660,7 +2907,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 75
     }
   ],
   "8904083305057": [
@@ -2672,7 +2920,8 @@
       "subCategory": "PROBIOTIC CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8904083305064": [
@@ -2684,7 +2933,8 @@
       "subCategory": "PROBIOTIC CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083300373": [
@@ -2696,7 +2946,8 @@
       "subCategory": "MILK CAKE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4022910"
+      "hsn": "4022910",
+      "unitsPerBox": 50
     }
   ],
   "8904083309888": [
@@ -2708,7 +2959,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083301097": [
@@ -2720,7 +2972,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 12
     }
   ],
   "8908001588331": [
@@ -2732,7 +2985,8 @@
       "subCategory": "BATTER",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 12
     }
   ],
   "8908001588348": [
@@ -2744,7 +2998,8 @@
       "subCategory": "PAROTA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 20
     }
   ],
   "8904083312055": [
@@ -2756,7 +3011,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8904083312062": [
@@ -2768,7 +3024,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8908001588645": [
@@ -2780,7 +3037,8 @@
       "subCategory": "PAROTA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 40
     }
   ],
   "8908001588874": [
@@ -2792,7 +3050,8 @@
       "subCategory": "PAROTA",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 10
     },
     {
       "barcode": "8908001588874",
@@ -2802,7 +3061,8 @@
       "subCategory": "PAROTA",
       "skuType": "RETAIL",
       "packType": "PIECES",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 25
     }
   ],
   "8908001588560": [
@@ -2814,7 +3074,8 @@
       "subCategory": "CHAPATHI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21061000"
+      "hsn": "21061000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8908001588560",
@@ -2824,7 +3085,8 @@
       "subCategory": "CHAPATHI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21061000"
+      "hsn": "21061000",
+      "unitsPerBox": 20
     }
   ],
   "8908001588355": [
@@ -2836,7 +3098,8 @@
       "subCategory": "PAROTA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 20
     }
   ],
   "8904083310112": [
@@ -2848,7 +3111,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083310112",
@@ -2858,7 +3122,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 30
     }
   ],
   "8904083311041": [
@@ -2870,7 +3135,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 54
     }
   ],
   "8904083301110": [
@@ -2882,7 +3148,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 54
     }
   ],
   "8904083314042": [
@@ -2894,7 +3161,8 @@
       "subCategory": "MISHTI DOI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8908001588478": [
@@ -2906,7 +3174,8 @@
       "subCategory": "PEANUT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 120
     }
   ],
   "8908001588430": [
@@ -2918,7 +3187,8 @@
       "subCategory": "SESAME ROUND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8908001588430",
@@ -2928,7 +3198,8 @@
       "subCategory": "SESAME ROUND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 120
     }
   ],
   "8908001588409": [
@@ -2940,7 +3211,8 @@
       "subCategory": "PEANUT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 225
     }
   ],
   "8904083300571": [
@@ -2952,7 +3224,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 10
     }
   ],
   "8908001588416": [
@@ -2964,7 +3237,8 @@
       "subCategory": "PEANUT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 270
     }
   ],
   "8904083306900": [
@@ -2976,7 +3250,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 10
     }
   ],
   "8904083300595": [
@@ -2988,7 +3263,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 48
     }
   ],
   "8908001588256": [
@@ -3000,7 +3276,8 @@
       "subCategory": "BATTER",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 7
     }
   ],
   "8904083301240": [
@@ -3012,7 +3289,8 @@
       "subCategory": "GULAB JAMUN TIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 12
     }
   ],
   "8904083312093": [
@@ -3024,7 +3302,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083312086": [
@@ -3036,7 +3315,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8908001588850": [
@@ -3048,7 +3328,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8908001588850",
@@ -3058,7 +3339,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 24
     }
   ],
   "8908001588454": [
@@ -3070,7 +3352,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 23
     }
   ],
   "8908001588386": [
@@ -3082,7 +3365,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 12
     }
   ],
   "8908001588324": [
@@ -3094,7 +3378,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 12
     }
   ],
   "8908001588294": [
@@ -3106,7 +3391,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19042000"
+      "hsn": "19042000",
+      "unitsPerBox": 24
     }
   ],
   "8908001588287": [
@@ -3118,7 +3404,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19042000"
+      "hsn": "19042000",
+      "unitsPerBox": 24
     }
   ],
   "8904083312079": [
@@ -3130,7 +3417,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 24
     }
   ],
   "8904083303169": [
@@ -3142,7 +3430,8 @@
       "subCategory": "SET CURD",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 4
     }
   ],
   "8904083313441": [
@@ -3154,7 +3443,8 @@
       "subCategory": "FAT SPREAD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "15171021"
+      "hsn": "15171021",
+      "unitsPerBox": 30
     }
   ],
   "8904083310228": [
@@ -3166,7 +3456,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083306962": [
@@ -3178,7 +3469,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 60
     }
   ],
   "8904083316244": [
@@ -3190,7 +3482,8 @@
       "subCategory": "PANEER FINGERS",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 30
     }
   ],
   "8904083316251": [
@@ -3202,7 +3495,8 @@
       "subCategory": "DAHI TIKKI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 30
     }
   ],
   "8904083309901": [
@@ -3214,7 +3508,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 9
     }
   ],
   "8904083306085": [
@@ -3226,7 +3521,8 @@
       "subCategory": "POUCH CURD",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 25
     }
   ],
   "8908008563102": [
@@ -3238,7 +3534,8 @@
       "subCategory": "PEANUT BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "20081930"
+      "hsn": "20081930",
+      "unitsPerBox": 12
     }
   ],
   "8908008563119": [
@@ -3250,7 +3547,8 @@
       "subCategory": "PEANUT BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "20081930"
+      "hsn": "20081930",
+      "unitsPerBox": 12
     }
   ],
   "8904083304074": [
@@ -3262,7 +3560,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 12
     }
   ],
   "8904083305071": [
@@ -3274,7 +3573,8 @@
       "subCategory": "PROBIOTIC CURD",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 8
     }
   ],
   "8904083307174": [
@@ -3286,7 +3586,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 54
     }
   ],
   "8904083302483": [
@@ -3298,7 +3599,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083302292": [
@@ -3310,7 +3612,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083301141": [
@@ -3322,7 +3625,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 12
     }
   ],
   "8904083301394": [
@@ -3334,7 +3638,8 @@
       "subCategory": "UHT MILK",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 12
     }
   ],
   "8904083301455": [
@@ -3346,7 +3651,8 @@
       "subCategory": "UHT MILK",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 12
     }
   ],
   "8904083300151": [
@@ -3358,7 +3664,8 @@
       "subCategory": "UHT CREAM",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4015000"
+      "hsn": "4015000",
+      "unitsPerBox": 12
     }
   ],
   "8904083301387": [
@@ -3370,7 +3677,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 18
     }
   ],
   "8904083301363": [
@@ -3382,7 +3690,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 32
     }
   ],
   "8904083301448": [
@@ -3394,7 +3703,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 18
     }
   ],
   "8904083302926": [
@@ -3406,7 +3716,8 @@
       "subCategory": "SOUR CURD",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4031000"
+      "hsn": "4031000",
+      "unitsPerBox": 9
     }
   ],
   "8904083316275": [
@@ -3418,7 +3729,8 @@
       "subCategory": "FROZEN CHEESE BALLS",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 30
     }
   ],
   "8908001588461": [
@@ -3430,7 +3742,8 @@
       "subCategory": "PAROTA",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 16
     }
   ],
   "8904083300144": [
@@ -3442,7 +3755,8 @@
       "subCategory": "UHT CREAM",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4015000"
+      "hsn": "4015000",
+      "unitsPerBox": 32
     }
   ],
   "8904083300755": [
@@ -3454,7 +3768,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083300953": [
@@ -3466,7 +3781,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083300748": [
@@ -3478,7 +3794,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083309178": [
@@ -3490,7 +3807,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 32
     }
   ],
   "8904083309772": [
@@ -3502,7 +3820,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083309765": [
@@ -3514,7 +3833,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083308065": [
@@ -3526,7 +3846,8 @@
       "subCategory": "UHT BUTTER MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039010"
+      "hsn": "4039010",
+      "unitsPerBox": 32
     }
   ],
   "8904083300472": [
@@ -3538,7 +3859,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 10
     },
     {
       "barcode": "8904083300472",
@@ -3548,7 +3870,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     }
   ],
   "8908001588300": [
@@ -3560,7 +3883,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19042000"
+      "hsn": "19042000",
+      "unitsPerBox": 24
     }
   ],
   "8904083309161": [
@@ -3572,7 +3896,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 18
     }
   ],
   "8904083309093": [
@@ -3584,7 +3909,8 @@
       "subCategory": "UHT LASSI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 32
     }
   ],
   "8904083309123": [
@@ -3596,7 +3922,8 @@
       "subCategory": "UHT LASSI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 32
     }
   ],
   "8904083309109": [
@@ -3608,7 +3935,8 @@
       "subCategory": "UHT LASSI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 32
     }
   ],
   "8904083320029": [
@@ -3620,7 +3948,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083319993": [
@@ -3632,7 +3961,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320074": [
@@ -3644,7 +3974,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320081": [
@@ -3656,7 +3987,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320104": [
@@ -3668,7 +4000,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320005": [
@@ -3680,7 +4013,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320012": [
@@ -3692,7 +4026,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320418": [
@@ -3704,7 +4039,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320418",
@@ -3714,7 +4050,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320418",
@@ -3724,7 +4061,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320463": [
@@ -3736,7 +4074,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083320463",
@@ -3746,7 +4085,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083320463",
@@ -3756,7 +4096,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083320364": [
@@ -3768,7 +4109,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320364",
@@ -3778,7 +4120,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320364",
@@ -3788,7 +4131,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320364",
@@ -3798,7 +4142,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320364",
@@ -3808,7 +4153,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320296": [
@@ -3820,7 +4166,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320401": [
@@ -3832,7 +4179,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320401",
@@ -3842,7 +4190,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320401",
@@ -3852,7 +4201,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320494": [
@@ -3864,7 +4214,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083320494",
@@ -3874,7 +4225,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320586": [
@@ -3886,7 +4238,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320333": [
@@ -3898,7 +4251,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320340": [
@@ -3910,7 +4264,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320319": [
@@ -3922,7 +4277,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320326": [
@@ -3934,7 +4290,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320302": [
@@ -3946,7 +4303,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083320562": [
@@ -3958,7 +4316,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320425": [
@@ -3970,7 +4329,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320425",
@@ -3980,7 +4340,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320425",
@@ -3990,7 +4351,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320630": [
@@ -4002,7 +4364,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320630",
@@ -4012,7 +4375,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320616": [
@@ -4024,7 +4388,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320616",
@@ -4034,7 +4399,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320616",
@@ -4044,7 +4410,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320647": [
@@ -4056,7 +4423,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320647",
@@ -4066,7 +4434,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320678": [
@@ -4078,7 +4447,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320623": [
@@ -4090,7 +4460,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320623",
@@ -4100,7 +4471,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8904083320623",
@@ -4110,7 +4482,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320654": [
@@ -4122,7 +4495,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320661": [
@@ -4134,7 +4508,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     }
   ],
   "8904083320531": [
@@ -4146,7 +4521,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8908001588843": [
@@ -4158,7 +4534,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 24
     }
   ],
   "8908001588867": [
@@ -4170,7 +4547,8 @@
       "subCategory": "ASAL READY MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "11023000"
+      "hsn": "11023000",
+      "unitsPerBox": 24
     }
   ],
   "8904083320708": [
@@ -4182,7 +4560,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083320708",
@@ -4192,7 +4571,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083320708",
@@ -4202,7 +4582,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083320746": [
@@ -4214,7 +4595,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083320746",
@@ -4224,7 +4606,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083320579": [
@@ -4236,7 +4619,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083320579",
@@ -4246,7 +4630,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320517": [
@@ -4258,7 +4643,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320524": [
@@ -4270,7 +4656,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320548": [
@@ -4282,7 +4669,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083301547": [
@@ -4294,7 +4682,8 @@
       "subCategory": "CONDENSED MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4029920"
+      "hsn": "4029920",
+      "unitsPerBox": 48
     }
   ],
   "8904083316138": [
@@ -4306,7 +4695,8 @@
       "subCategory": "FROZEN PIZZA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 32
     }
   ],
   "8904083316121": [
@@ -4318,7 +4708,8 @@
       "subCategory": "FROZEN PIZZA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 32
     }
   ],
   "8904083316152": [
@@ -4330,7 +4721,8 @@
       "subCategory": "FROZEN PIZZA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 32
     }
   ],
   "8904083316145": [
@@ -4342,7 +4734,8 @@
       "subCategory": "FROZEN PIZZA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 32
     }
   ],
   "8904083320432": [
@@ -4354,7 +4747,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083320432",
@@ -4364,7 +4758,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083320098": [
@@ -4376,7 +4771,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083302339": [
@@ -4388,7 +4784,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083320470": [
@@ -4400,7 +4797,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320470",
@@ -4410,7 +4808,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320470",
@@ -4420,7 +4819,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320555": [
@@ -4432,7 +4832,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083320555",
@@ -4442,7 +4843,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083320944": [
@@ -4454,7 +4856,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320944",
@@ -4464,7 +4867,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083320944",
@@ -4474,7 +4878,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083301219": [
@@ -4486,7 +4891,8 @@
       "subCategory": "GULAB JAMUN MIX",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "17049090"
+      "hsn": "17049090",
+      "unitsPerBox": 60
     }
   ],
   "8904083300281": [
@@ -4498,7 +4904,8 @@
       "subCategory": "FROZEN KHOVA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 20
     }
   ],
   "8904083300298": [
@@ -4510,7 +4917,8 @@
       "subCategory": "FROZEN KHOVA",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4022100"
+      "hsn": "4022100",
+      "unitsPerBox": 12
     }
   ],
   "8904083320920": [
@@ -4522,7 +4930,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320920",
@@ -4532,7 +4941,8 @@
       "subCategory": "STICK",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320920",
@@ -4542,7 +4952,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320852": [
@@ -4554,7 +4965,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 108
     }
   ],
   "8904083320203": [
@@ -4566,7 +4978,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083301004": [
@@ -4578,7 +4991,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 12
     }
   ],
   "8904083300991": [
@@ -4590,7 +5004,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 12
     }
   ],
   "8904083300984": [
@@ -4602,7 +5017,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 12
     }
   ],
   "8904083320487": [
@@ -4614,7 +5030,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083321651": [
@@ -4626,7 +5043,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083321675": [
@@ -4638,7 +5056,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083321668": [
@@ -4650,7 +5069,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 240
     }
   ],
   "8904083321682": [
@@ -4662,7 +5082,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321699": [
@@ -4674,7 +5095,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321712": [
@@ -4686,7 +5108,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 40
     }
   ],
   "8904083321329": [
@@ -4698,7 +5121,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 240
     }
   ],
   "8904083321743": [
@@ -4710,7 +5134,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083321736": [
@@ -4722,7 +5147,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083321750": [
@@ -4734,7 +5160,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321774": [
@@ -4746,7 +5173,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 40
     }
   ],
   "8904083321781": [
@@ -4758,7 +5186,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 80
     }
   ],
   "8904083321804": [
@@ -4770,7 +5199,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321798": [
@@ -4782,7 +5212,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321811": [
@@ -4794,7 +5225,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083321835": [
@@ -4806,7 +5238,8 @@
       "subCategory": "SINGLE ORIGIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 40
     }
   ],
   "8904083321842": [
@@ -4818,7 +5251,8 @@
       "subCategory": "SINGLE ORIGIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 40
     }
   ],
   "8904083321897": [
@@ -4830,7 +5264,8 @@
       "subCategory": "SINGLE ORIGIN",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 40
     }
   ],
   "8904083320791": [
@@ -4842,7 +5277,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 16
     }
   ],
   "8904083320456": [
@@ -4854,7 +5290,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083321019": [
@@ -4866,7 +5303,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321019",
@@ -4876,7 +5314,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083307181": [
@@ -4888,7 +5327,8 @@
       "subCategory": "MOZZARELLA CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4061010"
+      "hsn": "4061010",
+      "unitsPerBox": 6
     }
   ],
   "8904083301479": [
@@ -4900,7 +5340,8 @@
       "subCategory": "UHT MILK",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8904083301479",
@@ -4910,7 +5351,8 @@
       "subCategory": "UHT MILK",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 12
     }
   ],
   "8904083321927": [
@@ -4922,7 +5364,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 20
     }
   ],
   "8904083321934": [
@@ -4934,7 +5377,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 20
     }
   ],
   "8904083320968": [
@@ -4946,7 +5390,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320951": [
@@ -4958,7 +5403,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320951",
@@ -4968,7 +5414,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083309260": [
@@ -4980,7 +5427,8 @@
       "subCategory": "UHT BUTTER MILK",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4039010"
+      "hsn": "4039010",
+      "unitsPerBox": 12
     }
   ],
   "8904083301493": [
@@ -4992,7 +5440,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083301509": [
@@ -5004,7 +5453,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083320760": [
@@ -5016,7 +5466,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083320715": [
@@ -5028,7 +5479,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083320739": [
@@ -5040,7 +5492,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083320739",
@@ -5050,7 +5503,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083321217": [
@@ -5062,7 +5516,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083321200": [
@@ -5074,7 +5529,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083321064": [
@@ -5086,7 +5542,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083301585": [
@@ -5098,7 +5555,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083321439": [
@@ -5110,7 +5568,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083321446": [
@@ -5122,7 +5581,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083320722": [
@@ -5134,7 +5594,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083320722",
@@ -5144,7 +5605,8 @@
       "subCategory": "CUP",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083321347": [
@@ -5156,7 +5618,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083321330": [
@@ -5168,7 +5631,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083320971": [
@@ -5180,7 +5644,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320913": [
@@ -5192,7 +5657,8 @@
       "subCategory": "CASSATA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 64
     },
     {
       "barcode": "8904083320913",
@@ -5202,7 +5668,8 @@
       "subCategory": "CASSATA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 64
     },
     {
       "barcode": "8904083320913",
@@ -5212,7 +5679,8 @@
       "subCategory": "CASSATA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 64
     }
   ],
   "8904083320388": [
@@ -5224,7 +5692,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320388",
@@ -5234,7 +5703,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320388",
@@ -5244,7 +5714,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320388",
@@ -5254,7 +5725,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083321026": [
@@ -5266,7 +5738,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321026",
@@ -5276,7 +5749,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083322085": [
@@ -5288,7 +5762,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083322092": [
@@ -5300,7 +5775,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083321545": [
@@ -5312,7 +5788,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "8904083321552": [
@@ -5324,7 +5801,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "8904083321569": [
@@ -5336,7 +5814,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8904083321569",
@@ -5346,7 +5825,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "8904083321514": [
@@ -5358,7 +5838,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8904083321514",
@@ -5368,7 +5849,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "8904083321521": [
@@ -5380,7 +5862,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8904083321521",
@@ -5390,7 +5873,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "8904083321316": [
@@ -5402,7 +5886,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083321316",
@@ -5412,7 +5897,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083321309": [
@@ -5424,7 +5910,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083321323": [
@@ -5436,7 +5923,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8904083321323",
@@ -5446,7 +5934,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083309246": [
@@ -5458,7 +5947,8 @@
       "subCategory": "UHT LASSI",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083301578": [
@@ -5470,7 +5960,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083301561": [
@@ -5482,7 +5973,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "890408300458": [
@@ -5494,7 +5986,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "8904083321378": [
@@ -5506,7 +5999,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321378",
@@ -5516,7 +6010,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083321361": [
@@ -5528,7 +6023,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083321224": [
@@ -5540,7 +6036,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083321262": [
@@ -5552,7 +6049,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083322146": [
@@ -5564,7 +6062,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083322139": [
@@ -5576,7 +6075,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083321460": [
@@ -5588,7 +6088,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 18
     }
   ],
   "8904083322108": [
@@ -5600,7 +6101,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083322115": [
@@ -5612,7 +6114,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083320210": [
@@ -5624,7 +6127,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083322122": [
@@ -5636,7 +6140,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083322153": [
@@ -5648,7 +6153,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "8904083300496": [
@@ -5660,7 +6166,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 50
     }
   ],
   "8904083321088": [
@@ -5672,7 +6179,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321088",
@@ -5682,7 +6190,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083321071": [
@@ -5694,7 +6203,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321071",
@@ -5704,7 +6214,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083321095": [
@@ -5716,7 +6227,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 128
     },
     {
       "barcode": "8904083321095",
@@ -5726,7 +6238,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 128
     }
   ],
   "8904083321101": [
@@ -5738,7 +6251,8 @@
       "subCategory": "SANDWICH",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 128
     }
   ],
   "8904083321248": [
@@ -5750,7 +6264,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083321255": [
@@ -5762,7 +6277,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8904083321620": [
@@ -5774,7 +6290,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 180
     }
   ],
   "8904083301875": [
@@ -5786,7 +6303,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 20
     }
   ],
   "8904083321613": [
@@ -5798,7 +6316,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 160
     },
     {
       "barcode": "8904083321613",
@@ -5808,7 +6327,8 @@
       "subCategory": "STICK",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 160
     },
     {
       "barcode": "8904083321613",
@@ -5818,7 +6338,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 160
     }
   ],
   "8904083310134": [
@@ -5830,7 +6351,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 84
     }
   ],
   "6294011690716": [
@@ -5842,7 +6364,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 100
     }
   ],
   "6294011690723": [
@@ -5854,7 +6377,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 20
     }
   ],
   "6294011682476": [
@@ -5866,7 +6390,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     }
   ],
   "6294011682483": [
@@ -5878,7 +6403,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "6294011682490": [
@@ -5890,7 +6416,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "6294011690730": [
@@ -5902,7 +6429,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 100
     }
   ],
   "6294011690747": [
@@ -5914,7 +6442,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 20
     }
   ],
   "8904083301516": [
@@ -5926,7 +6455,8 @@
       "subCategory": "UHT MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 32
     }
   ],
   "8904083300601": [
@@ -5938,7 +6468,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 10
     }
   ],
   "8.90408E+12": [
@@ -5950,7 +6481,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 48
     },
     {
       "barcode": "8.90408E+12",
@@ -5960,7 +6492,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -5970,7 +6503,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8.90408E+12",
@@ -5980,7 +6514,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8.90408E+12",
@@ -5990,7 +6525,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 168
     },
     {
       "barcode": "8.90408E+12",
@@ -6000,7 +6536,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 168
     },
     {
       "barcode": "8.90408E+12",
@@ -6010,7 +6547,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     },
     {
       "barcode": "8.90408E+12",
@@ -6020,7 +6558,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6030,7 +6569,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90408E+12",
@@ -6040,7 +6580,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6050,7 +6591,8 @@
       "subCategory": "SUNDAE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8.90408E+12",
@@ -6060,7 +6602,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6070,7 +6613,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6080,7 +6624,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90408E+12",
@@ -6090,7 +6635,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6100,7 +6646,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6110,7 +6657,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8.90408E+12",
@@ -6120,7 +6668,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6130,7 +6679,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6140,7 +6690,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     },
     {
       "barcode": "8.90408E+12",
@@ -6150,7 +6701,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8.90408E+12",
@@ -6160,7 +6712,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6170,7 +6723,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8.90408E+12",
@@ -6180,7 +6734,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90408E+12",
@@ -6190,7 +6745,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6200,7 +6756,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6210,7 +6767,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8.90408E+12",
@@ -6220,7 +6778,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     },
     {
       "barcode": "8.90408E+12",
@@ -6230,7 +6789,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 180
     },
     {
       "barcode": "8.90408E+12",
@@ -6240,7 +6800,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6250,7 +6811,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90408E+12",
@@ -6260,7 +6822,8 @@
       "subCategory": "CHEDDAR CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4064000"
+      "hsn": "4064000",
+      "unitsPerBox": 50
     },
     {
       "barcode": "8.90408E+12",
@@ -6270,7 +6833,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6280,7 +6844,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90408E+12",
@@ -6290,7 +6855,8 @@
       "subCategory": "WHEY POWDER",
       "skuType": "B2B",
       "packType": "ACTIVE",
-      "hsn": "4041010"
+      "hsn": "4041010",
+      "unitsPerBox": 1
     }
   ],
   "8904083320371": [
@@ -6302,7 +6868,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320371",
@@ -6312,7 +6879,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320371",
@@ -6322,7 +6890,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320371",
@@ -6332,7 +6901,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083320288": [
@@ -6344,7 +6914,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320288",
@@ -6354,7 +6925,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083301158": [
@@ -6366,7 +6938,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 6
     }
   ],
   "8904083306917": [
@@ -6378,7 +6951,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 24
     }
   ],
   "8904083322276": [
@@ -6390,7 +6964,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083322283": [
@@ -6402,7 +6977,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083322306": [
@@ -6414,7 +6990,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083322313": [
@@ -6426,7 +7003,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083322290": [
@@ -6438,7 +7016,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083322320": [
@@ -6450,7 +7029,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083321958": [
@@ -6462,7 +7042,8 @@
       "subCategory": "ASSORTED CHOCOLATES",
       "skuType": "RETAIL",
       "packType": "PIECES",
-      "hsn": "18063200"
+      "hsn": "18063200",
+      "unitsPerBox": 12
     }
   ],
   "8904083320395": [
@@ -6474,7 +7055,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320395",
@@ -6484,7 +7066,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320395",
@@ -6494,7 +7077,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320395",
@@ -6504,7 +7088,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8904083320395",
@@ -6514,7 +7099,8 @@
       "subCategory": "CONE",
       "skuType": "GC",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     }
   ],
   "8904083301554": [
@@ -6526,7 +7112,8 @@
       "subCategory": "CONDENSED MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4029920"
+      "hsn": "4029920",
+      "unitsPerBox": 36
     }
   ],
   "6294011691096": [
@@ -6538,7 +7125,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 24
     }
   ],
   "6294011691102": [
@@ -6550,7 +7138,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     }
   ],
   "6294011691119": [
@@ -6562,7 +7151,8 @@
       "subCategory": "GHEE - TIN",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 24
     }
   ],
   "6294011691089": [
@@ -6574,7 +7164,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 12
     }
   ],
   "8904083321637": [
@@ -6586,7 +7177,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8904083321637",
@@ -6596,7 +7188,8 @@
       "subCategory": "CANDY",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 192
     }
   ],
   "86294011682506": [
@@ -6608,7 +7201,8 @@
       "subCategory": "UHT MILK",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4012000"
+      "hsn": "4012000",
+      "unitsPerBox": 12
     }
   ],
   "8904083302346": [
@@ -6620,7 +7214,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 24
     }
   ],
   "8904083302353": [
@@ -6632,7 +7227,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 8
     }
   ],
   "8904083302384": [
@@ -6644,7 +7240,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 8
     }
   ],
   "8904083302360": [
@@ -6656,7 +7253,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 8
     }
   ],
   "8904083302377": [
@@ -6668,7 +7266,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 8
     }
   ],
   "8904083321590": [
@@ -6680,7 +7279,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083321590",
@@ -6690,7 +7290,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083300106": [
@@ -6702,7 +7303,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 50
     }
   ],
   "8904083300687": [
@@ -6714,7 +7316,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 1
     }
   ],
   "8904083300694": [
@@ -6726,7 +7329,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 10
     }
   ],
   "8904083322160": [
@@ -6738,7 +7342,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083322207": [
@@ -6750,7 +7355,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083322030": [
@@ -6762,7 +7368,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     },
     {
       "barcode": "8904083322030",
@@ -6772,7 +7379,8 @@
       "subCategory": "DARK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "8904083322009": [
@@ -6784,7 +7392,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 240
     }
   ],
   "8904083321996": [
@@ -6796,7 +7405,8 @@
       "subCategory": "MILK CHOCOLATE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18063100"
+      "hsn": "18063100",
+      "unitsPerBox": 80
     }
   ],
   "9349580002976": [
@@ -6808,7 +7418,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 6
     }
   ],
   "8904083302490": [
@@ -6820,7 +7431,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 24
     }
   ],
   "8904083302407": [
@@ -6832,7 +7444,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8908001588584-2": [
@@ -6844,7 +7457,8 @@
       "subCategory": "CHIKKI",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 12
     }
   ],
   "8904083302445": [
@@ -6856,7 +7470,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083302438": [
@@ -6868,7 +7483,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 12
     }
   ],
   "8904083302421": [
@@ -6880,7 +7496,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083302414": [
@@ -6892,7 +7509,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083302391": [
@@ -6904,7 +7522,8 @@
       "subCategory": "FRUIT YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 12
     }
   ],
   "8904083322337": [
@@ -6916,7 +7535,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     }
   ],
   "8904083302453": [
@@ -6928,7 +7548,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 24
     }
   ],
   "8904083300489": [
@@ -6940,7 +7561,8 @@
       "subCategory": "FROZEN PANEER",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 12
     }
   ],
   "8904083302513": [
@@ -6952,7 +7574,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 12
     }
   ],
   "8904083300304": [
@@ -6964,7 +7587,8 @@
       "subCategory": "DAIRY WHITENER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4022990"
+      "hsn": "4022990",
+      "unitsPerBox": 240
     }
   ],
   "8904083321941": [
@@ -6976,7 +7600,8 @@
       "subCategory": "WAFER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19053211"
+      "hsn": "19053211",
+      "unitsPerBox": 12
     }
   ],
   "8904083321910": [
@@ -6988,7 +7613,8 @@
       "subCategory": "WAFER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "19053211"
+      "hsn": "19053211",
+      "unitsPerBox": 6
     }
   ],
   "8904083321903": [
@@ -7000,7 +7626,8 @@
       "subCategory": "WAFER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "18069010"
+      "hsn": "18069010",
+      "unitsPerBox": 12
     }
   ],
   "1.93E+13": [
@@ -7012,7 +7639,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "4059020"
+      "hsn": "4059020",
+      "unitsPerBox": 8
     }
   ],
   "8.90E+12": [
@@ -7024,7 +7652,8 @@
       "subCategory": "TUB - 4LTR",
       "skuType": "B2B",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90E+12",
@@ -7034,7 +7663,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 168
     },
     {
       "barcode": "8.90E+12",
@@ -7044,7 +7674,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90E+12",
@@ -7054,7 +7685,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90E+12",
@@ -7064,7 +7696,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 96
     },
     {
       "barcode": "8.90E+12",
@@ -7074,7 +7707,8 @@
       "subCategory": "STICK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8.90E+12",
@@ -7084,7 +7718,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90E+12",
@@ -7094,7 +7729,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90E+12",
@@ -7104,7 +7740,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90E+12",
@@ -7114,7 +7751,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     },
     {
       "barcode": "8.90E+12",
@@ -7124,7 +7762,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "8.90E+12",
@@ -7134,7 +7773,8 @@
       "subCategory": "CONE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 120
     },
     {
       "barcode": "8.90E+12",
@@ -7144,7 +7784,8 @@
       "subCategory": "MEGA PARTY ZONE - 4LTR",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 6
     },
     {
       "barcode": "8.90E+12",
@@ -7154,7 +7795,8 @@
       "subCategory": "FAMILY PACK - 700ML",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 38
     }
   ],
   "########": [
@@ -7166,7 +7808,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     },
     {
       "barcode": "########",
@@ -7176,7 +7819,8 @@
       "subCategory": "TUB - 500ML",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 30
     }
   ],
   "8908008563003-1": [
@@ -7188,7 +7832,8 @@
       "subCategory": "TOFU SOY",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "12081000"
+      "hsn": "12081000",
+      "unitsPerBox": 40
     }
   ],
   "8.90801E+12": [
@@ -7200,7 +7845,8 @@
       "subCategory": "TOFU SOY",
       "skuType": "IP",
       "packType": "CRATE",
-      "hsn": "12081000"
+      "hsn": "12081000",
+      "unitsPerBox": 10
     }
   ],
   "8904083322412": [
@@ -7212,7 +7858,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083322412",
@@ -7222,7 +7869,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "8904083322436": [
@@ -7234,7 +7882,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     },
     {
       "barcode": "8904083322436",
@@ -7244,7 +7893,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 144
     }
   ],
   "6294011696022": [
@@ -7256,7 +7906,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "6294011696039": [
@@ -7268,7 +7919,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "6294011696060": [
@@ -7280,7 +7932,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "6294011696077": [
@@ -7292,7 +7945,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "6294011696046": [
@@ -7304,7 +7958,8 @@
       "subCategory": "TUB - 1LTR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "6294011696053": [
@@ -7316,7 +7971,8 @@
       "subCategory": "CHEESE CAKE",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 72
     }
   ],
   "8904083300359": [
@@ -7328,7 +7984,8 @@
       "subCategory": "PROCESSED CHEESE",
       "skuType": "IP",
       "packType": "BOX",
-      "hsn": "4063000"
+      "hsn": "4063000",
+      "unitsPerBox": 12
     }
   ],
   "8904083322726": [
@@ -7340,7 +7997,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322764": [
@@ -7352,7 +8010,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 21
     }
   ],
   "8904083322856": [
@@ -7364,7 +8023,8 @@
       "subCategory": "FRESH PANEER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4061000"
+      "hsn": "4061000",
+      "unitsPerBox": 24
     }
   ],
   "8904083300366": [
@@ -7376,7 +8036,8 @@
       "subCategory": "UHT CREAM",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4015000"
+      "hsn": "4015000",
+      "unitsPerBox": 18
     }
   ],
   "8904083322702": [
@@ -7388,7 +8049,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 24
     }
   ],
   "8908001588133": [
@@ -7400,7 +8062,8 @@
       "subCategory": "PAROTA",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "19059090"
+      "hsn": "19059090",
+      "unitsPerBox": 40
     }
   ],
   "8904083322689": [
@@ -7412,7 +8075,8 @@
       "subCategory": "CONDENSED MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4029920"
+      "hsn": "4029920",
+      "unitsPerBox": 2
     }
   ],
   "8904083320890": [
@@ -7424,7 +8088,8 @@
       "subCategory": "KULFI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 40
     }
   ],
   "8904083322443": [
@@ -7436,7 +8101,8 @@
       "subCategory": "CUP",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21050000"
+      "hsn": "21050000",
+      "unitsPerBox": 24
     }
   ],
   "8904083322573": [
@@ -7448,7 +8114,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083300397": [
@@ -7460,7 +8127,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083322597": [
@@ -7472,7 +8140,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083300403": [
@@ -7484,7 +8153,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083322580": [
@@ -7496,7 +8166,8 @@
       "subCategory": "UHT MILKSHAKE",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "22029930"
+      "hsn": "22029930",
+      "unitsPerBox": 32
     }
   ],
   "8904083322603": [
@@ -7508,7 +8179,8 @@
       "subCategory": "GHEE - POUCH",
       "skuType": "MT",
       "packType": "BOX",
-      "hsn": "04059020"
+      "hsn": "04059020",
+      "unitsPerBox": 6
     }
   ],
   "6082012021123": [
@@ -7520,7 +8192,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 72
     }
   ],
   "6082012021246": [
@@ -7532,7 +8205,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 36
     }
   ],
   "6082012021277": [
@@ -7544,7 +8218,8 @@
       "subCategory": "COOKING BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 24
     }
   ],
   "6082012021215": [
@@ -7556,7 +8231,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 72
     }
   ],
   "6082012021154": [
@@ -7568,7 +8244,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 36
     }
   ],
   "6082012021185": [
@@ -7580,7 +8257,8 @@
       "subCategory": "TABLE BUTTER",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4051000"
+      "hsn": "4051000",
+      "unitsPerBox": 24
     }
   ],
   "8904083323075": [
@@ -7592,7 +8270,8 @@
       "subCategory": "CONDENSED MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4029920"
+      "hsn": "4029920",
+      "unitsPerBox": 4
     }
   ],
   "890800158065": [
@@ -7604,7 +8283,8 @@
       "subCategory": "BATTER",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083323204": [
@@ -7616,7 +8296,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 4
     }
   ],
   "8904083323198": [
@@ -7628,7 +8309,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 4
     }
   ],
   "8904083323211": [
@@ -7640,7 +8322,8 @@
       "subCategory": "SHRIKHAND",
       "skuType": "B2B",
       "packType": "BOX",
-      "hsn": "4039090"
+      "hsn": "4039090",
+      "unitsPerBox": 4
     }
   ],
   "890408330820": [
@@ -7652,7 +8335,8 @@
       "subCategory": "GHEE - JAR",
       "skuType": "EXPORT",
       "packType": "BOX",
-      "hsn": "04059020"
+      "hsn": "04059020",
+      "unitsPerBox": 18
     }
   ],
   "8904083322665": [
@@ -7664,7 +8348,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     },
     {
       "barcode": "8904083322665",
@@ -7674,7 +8359,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322627": [
@@ -7686,7 +8372,8 @@
       "subCategory": "FROZEN SPRING ROLL",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     },
     {
       "barcode": "8904083322627",
@@ -7696,7 +8383,8 @@
       "subCategory": "FROZEN SPRING ROLL",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322672": [
@@ -7708,7 +8396,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     },
     {
       "barcode": "8904083322672",
@@ -7718,7 +8407,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322634": [
@@ -7730,7 +8420,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     },
     {
       "barcode": "8904083322634",
@@ -7740,7 +8431,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322641": [
@@ -7752,7 +8444,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083322658": [
@@ -7764,7 +8457,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     },
     {
       "barcode": "8904083322658",
@@ -7774,7 +8468,8 @@
       "subCategory": "FROZEN SAMOSA",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ],
   "8904083323181": [
@@ -7786,7 +8481,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 24
     }
   ],
   "8904083323174": [
@@ -7798,7 +8494,8 @@
       "subCategory": "SKYR",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4032000"
+      "hsn": "4032000",
+      "unitsPerBox": 36
     }
   ],
   "8904083323167": [
@@ -7810,7 +8507,8 @@
       "subCategory": "CONDENSED MILK",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "4029920"
+      "hsn": "4029920",
+      "unitsPerBox": 48
     }
   ],
   "8904083323242": [
@@ -7822,7 +8520,8 @@
       "subCategory": "GREEK YOGHURT",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "04032000"
+      "hsn": "04032000",
+      "unitsPerBox": 36
     }
   ],
   "8908001588492": [
@@ -7834,7 +8533,8 @@
       "subCategory": "COCONUT LADDU",
       "skuType": "RETAIL",
       "packType": "BOX",
-      "hsn": "17029090"
+      "hsn": "17029090",
+      "unitsPerBox": 120
     }
   ],
   "8908001588614": [
@@ -7846,7 +8546,8 @@
       "subCategory": "CHAPATHI",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21061000"
+      "hsn": "21061000",
+      "unitsPerBox": 30
     }
   ],
   "8908001588621": [
@@ -7858,7 +8559,8 @@
       "subCategory": "BATTER",
       "skuType": "RETAIL",
       "packType": "CRATE",
-      "hsn": "21069099"
+      "hsn": "21069099",
+      "unitsPerBox": 20
     }
   ]
 }
