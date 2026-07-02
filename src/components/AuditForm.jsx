@@ -8,6 +8,7 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
   const [exp, setExp] = useState('');
   const [batchNumber, setBatchNumber] = useState('');
   const [remarks, setRemarks] = useState('');
+  const [itemType, setItemType] = useState('UNIT');
 
   // Editable fields for completely new barcodes not found in master
   const [itemName, setItemName] = useState('');
@@ -34,12 +35,13 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
       setPackType(activeProduct.packType || 'BOX');
       setHsn(activeProduct.hsn || '');
 
-      setNetQty('');
-      setMrp('');
-      setMfd('');
-      setExp('');
-      setBatchNumber('');
-      setRemarks('');
+      setNetQty(activeProduct.id ? String(activeProduct.netQty) : '');
+      setMrp(activeProduct.id ? String(activeProduct.mrp) : '');
+      setMfd(activeProduct.mfd || '');
+      setExp(activeProduct.exp || '');
+      setBatchNumber(activeProduct.batchNumber || '');
+      setRemarks(activeProduct.remarks || '');
+      setItemType(activeProduct.itemType || 'UNIT');
       setErrors({});
       setWarnings([]);
 
@@ -157,6 +159,7 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
       hsn: hsn.trim(),
 
       netQty: Number(netQty),
+      itemType,
       mrp: Number(mrp),
       mfd: mfd || null,
       exp: exp || null,
@@ -296,6 +299,20 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               }`}
             />
             {errors.netQty && <p className="text-red-400 text-xs mt-1">{errors.netQty}</p>}
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-1">
+              Item Type <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={itemType}
+              onChange={(e) => setItemType(e.target.value)}
+              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
+            >
+              <option value="UNIT">UNIT</option>
+              <option value="BOX">BOX</option>
+            </select>
           </div>
 
           <div>

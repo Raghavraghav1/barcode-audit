@@ -47,6 +47,7 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     'Pack Type': r.packType || '',
     'HSN': r.hsn || '',
     'Physical Net Qty': typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0,
+    'Item Type': r.itemType || 'UNIT',
     'MRP': typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0,
     'MFD': r.mfd || '',
     'EXP': r.exp || '',
