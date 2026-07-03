@@ -100,14 +100,16 @@ function AuditApp() {
   // --- Audit Form Callbacks ---
   const handleSaveRecord = async (recordData) => {
     try {
-      if (activeProduct && activeProduct.id) {
+      if (activeProduct && activeProduct.scannedAt) {
         await updateRecord({
           ...recordData,
           id: activeProduct.id,
           scannedAt: activeProduct.scannedAt
         });
       } else {
-        await addRecord(recordData);
+        const newRecord = { ...recordData };
+        delete newRecord.id;
+        await addRecord(newRecord);
       }
       setActiveProduct(null);
     } catch (err) {

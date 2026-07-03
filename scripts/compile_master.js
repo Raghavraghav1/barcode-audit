@@ -65,8 +65,17 @@ try {
     if (!lookupMap[barcode]) {
       lookupMap[barcode] = [];
     }
-    lookupMap[barcode].push(record);
-    totalValid++;
+    
+    const isDuplicate = lookupMap[barcode].some(r => 
+      r.itemCode === record.itemCode && 
+      r.itemName === record.itemName && 
+      r.unitsPerBox === record.unitsPerBox
+    );
+    
+    if (!isDuplicate) {
+      lookupMap[barcode].push(record);
+      totalValid++;
+    }
   });
 
   if (!fs.existsSync(OUTPUT_DIR)) {

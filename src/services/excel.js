@@ -63,13 +63,9 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
   // 2. Prepare Exception Report Data
   const exceptions = [];
   const scannedBarcodes = new Set();
-  const duplicateBarcodes = new Set();
 
   records.forEach((r) => {
     if (r.barcode) {
-      if (scannedBarcodes.has(r.barcode)) {
-        duplicateBarcodes.add(r.barcode);
-      }
       scannedBarcodes.add(r.barcode);
     }
   });
@@ -100,10 +96,6 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
       reasons.push('Manufacturing Date cannot be in the future');
     }
 
-    if (r.barcode && duplicateBarcodes.has(r.barcode)) {
-      reasons.push('Duplicate barcode scan in active session');
-    }
-
     if (reasons.length > 0) {
       exceptions.push({
         'Barcode': r.barcode || '',
@@ -123,9 +115,6 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
   const varianceReportData = [];
   
   if (bookStock && bookStock.length > 0) {
-    const bookBarcodeKey = bookMapping.barcodeCol;
-    const bookQtyKey = bookMapping.qtyCol;
-    
     // Map of barcode -> sum of physical scanned quantities
     const scannedQtyMap = {};
     records.forEach((r) => {
@@ -138,7 +127,7 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     // Map of barcode -> book stock item
     const bookStockMap = {};
     bookStock.forEach((item) => {
-      const barcode = String(item[bookBarcodeKey]).trim();
+      const barcode = String(item.barcode).trim();
       if (barcode) {
         bookStockMap[barcode] = item;
       }
@@ -153,12 +142,13 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     allBarcodes.forEach((barcode) => {
       const bookItem = bookStockMap[barcode];
       const scannedQty = scannedQtyMap[barcode] || 0;
-      const bookQty = bookItem ? Number(bookItem[bookQtyKey]) || 0 : 0;
+      const bookQty = bookItem ? Number(bookItem.qty) || 0 : 0;
       const variance = scannedQty - bookQty;
 
-      // Extract item properties dynamically from mapping configurations
-      const itemCode = bookItem ? String(bookItem[mapping.itemCodeCol] || '') : 'MANUAL';
-      const itemName = bookItem ? String(bookItem[mapping.nameCol] || '') : (records.find(r => r.barcode === barcode)?.itemName || 'Unknown Item');
+      // Find item details from physical records
+      const physicalMatch = records.find(r => r.barcode === barcode);
+      const itemName = physicalMatch ? physicalMatch.itemName : `Item ${barcode}`;
+      const itemCode = physicalMatch ? physicalMatch.itemCode : 'MANUAL';
       
       let status = 'MATCHED';
       if (variance < 0) status = 'DEFICIT (MISSING)';
@@ -204,7 +194,6 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     { 'Metric': 'Total Scanned Entries', 'Value': records.length },
     { 'Metric': 'Unique Products Scanned', 'Value': scannedBarcodes.size },
     { 'Metric': 'Total Verified Item Quantity', 'Value': totalQty },
-    { 'Metric': 'Duplicate Scans Flagged', 'Value': duplicateBarcodes.size },
     { 'Metric': 'Validation Exceptions Found', 'Value': exceptions.length },
     { 'Metric': 'Audit Time Duration', 'Value': durationStr },
     { 'Metric': 'First Scan Timestamp', 'Value': earliestScan ? formatDateTime(earliestScan.toISOString()) : 'N/A' },

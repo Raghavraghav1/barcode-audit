@@ -86,9 +86,18 @@ export default function Reconciliation() {
     setProcessing(true);
     setUploadError('');
     try {
-      const standardizedStock = bookRows.map((r) => ({
-        barcode: String(r[bookMapping.barcodeCol] || '').trim(),
-        qty: Number(r[bookMapping.qtyCol]) || 0
+      // Standardize and aggregate book stock items by summing quantities of duplicate barcodes
+      const aggregatedStockMap = new Map();
+      bookRows.forEach((r) => {
+        const barcode = String(r[bookMapping.barcodeCol] || '').trim();
+        const qty = Number(r[bookMapping.qtyCol]) || 0;
+        if (barcode) {
+          aggregatedStockMap.set(barcode, (aggregatedStockMap.get(barcode) || 0) + qty);
+        }
+      });
+      const standardizedStock = Array.from(aggregatedStockMap.entries()).map(([barcode, qty]) => ({
+        barcode,
+        qty
       }));
       await saveBookStockCatalog(standardizedStock, bookMapping);
     } catch (err) {

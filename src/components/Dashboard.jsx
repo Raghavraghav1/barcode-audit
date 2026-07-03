@@ -1,20 +1,11 @@
 import React from 'react';
-import { Barcode, AlertTriangle, Layers, FileSpreadsheet, Package } from 'lucide-react';
+import { Barcode, AlertTriangle, FileSpreadsheet, Package } from 'lucide-react';
 
 export default function Dashboard({ records }) {
   const totalScans = records.length;
   const totalQty = records.reduce((sum, r) => sum + (Number(r.netQty) || 0), 0);
   const uniqueBarcodes = new Set(records.map((r) => r.barcode).filter(Boolean));
   const uniqueProductsCount = uniqueBarcodes.size;
-
-  const barcodeCounts = {};
-  records.forEach((r) => {
-    if (r.barcode) {
-      barcodeCounts[r.barcode] = (barcodeCounts[r.barcode] || 0) + 1;
-    }
-  });
-  
-  const duplicateScansCount = Object.values(barcodeCounts).filter(count => count > 1).length;
 
   let exceptionCount = 0;
   records.forEach((r) => {
@@ -51,13 +42,6 @@ export default function Dashboard({ records }) {
       color: 'from-orange-600/15 to-amber-500/15 border-orange-500/30 text-amber-400'
     },
     {
-      title: 'Duplicate Scans',
-      value: duplicateScansCount,
-      description: 'Multi-scan event codes',
-      icon: Layers,
-      color: 'from-amber-600/15 to-orange-500/15 border-amber-500/30 text-amber-400'
-    },
-    {
       title: 'Exception Warnings',
       value: exceptionCount,
       description: 'Failed validation checks',
@@ -69,7 +53,7 @@ export default function Dashboard({ records }) {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
       {stats.map((stat, idx) => {
         const Icon = stat.icon;
         return (

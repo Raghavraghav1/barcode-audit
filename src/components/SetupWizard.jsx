@@ -180,8 +180,18 @@ export default function SetupWizard() {
         unitsPerBox: Number(r[masterMapping.unitsPerBoxCol]) || 1
       }));
 
+      // Deduplicate master items to prevent multiple identical options in SKU selector
+      const uniqueItemsMap = new Map();
+      standardizedItems.forEach((item) => {
+        const key = `${item.barcode}_${item.itemCode}_${item.itemName}_${item.unitsPerBox}`;
+        if (!uniqueItemsMap.has(key)) {
+          uniqueItemsMap.set(key, item);
+        }
+      });
+      const deduplicatedItems = Array.from(uniqueItemsMap.values());
+
       // Ingest to IndexedDB
-      await saveMasterCatalog(standardizedItems, masterMapping);
+      await saveMasterCatalog(deduplicatedItems, masterMapping);
 
       // Save template if checked
       if (saveAsTemplate) {
@@ -232,10 +242,18 @@ export default function SetupWizard() {
     setBookError('');
 
     try {
-      // Standardize book stock items
-      const standardizedStock = bookRows.map((r) => ({
-        barcode: String(r[bookMapping.barcodeCol] || '').trim(),
-        qty: Number(r[bookMapping.qtyCol]) || 0
+      // Standardize and aggregate book stock items by summing quantities of duplicate barcodes
+      const aggregatedStockMap = new Map();
+      bookRows.forEach((r) => {
+        const barcode = String(r[bookMapping.barcodeCol] || '').trim();
+        const qty = Number(r[bookMapping.qtyCol]) || 0;
+        if (barcode) {
+          aggregatedStockMap.set(barcode, (aggregatedStockMap.get(barcode) || 0) + qty);
+        }
+      });
+      const standardizedStock = Array.from(aggregatedStockMap.entries()).map(([barcode, qty]) => ({
+        barcode,
+        qty
       }));
 
       await saveBookStockCatalog(standardizedStock, bookMapping);
