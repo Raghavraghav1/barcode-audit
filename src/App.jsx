@@ -9,8 +9,10 @@ import SetupWizard from './components/SetupWizard';
 import Reconciliation from './components/Reconciliation';
 import { 
   FileDown, RefreshCw, LogOut, CheckCircle2, ClipboardCheck, 
-  Layers, ChevronRight, User, MapPin, Calendar, HelpCircle 
+  Layers, ChevronRight, User, MapPin, Calendar, HelpCircle,
+  AlertTriangle
 } from 'lucide-react';
+import { formatDateStr } from './utils/date';
 
 function AuditApp() {
   const {
@@ -22,18 +24,63 @@ function AuditApp() {
     addRecord,
     updateRecord,
     removeRecord,
+    saveColumnPreferences,
     exportData
   } = useSession();
 
   // Active workspace tab: 'scan' | 'reconciliation'
   const [activeTab, setActiveTab] = useState('scan');
+
+  const scanType = sessionMetadata?.scanType || 'audit';
+  const scanTypeBadge = scanType === 'inward' ? (
+    <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 uppercase tracking-wider">
+      Inward (+)
+    </span>
+  ) : scanType === 'outward' ? (
+    <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-rose-500/10 text-rose-400 border border-rose-500/20 uppercase tracking-wider animate-pulse">
+      Outward (-)
+    </span>
+  ) : (
+    <span className="px-2 py-0.5 rounded text-[10px] font-extrabold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-wider">
+      Audit (Stock Take)
+    </span>
+  );
   
   // Scanned item states
   const [activeProduct, setActiveProduct] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [endSessionConfirmOpen, setEndSessionConfirmOpen] = useState(false);
 
   // Sku Resolution Modal States
   const [skuModalOpen, setSkuModalOpen] = useState(false);
+
+  // Column Select Modal States
+  const ALL_COLUMNS = [
+    'Barcode', 'Item Code', 'Item Name', 'Product Group', 'Sub Category',
+    'SKU Type', 'Pack Type', 'HSN', 'Box Qty', 'Loose Qty', 'Units Per Box',
+    'Physical Total Qty', 'MRP', 'MFD', 'EXP', 'Shelved shelf life Days (elapsed days)',
+    'Bal shelf life Days', 'Shelf-Life in %', 'Batch Number', 'Remarks',
+    'Scanned At', 'Auditor', 'Location'
+  ];
+  const MANDATORY_COLUMNS = ['Barcode', 'Item Name', 'Physical Total Qty', 'MRP'];
+  
+  const [columnModalOpen, setColumnModalOpen] = useState(false);
+  const [activeColumns, setActiveColumns] = useState(ALL_COLUMNS);
+
+  useEffect(() => {
+    if (sessionMetadata && sessionMetadata.selectedColumns) {
+      setActiveColumns(sessionMetadata.selectedColumns);
+    } else {
+      setActiveColumns(ALL_COLUMNS);
+    }
+  }, [sessionMetadata, columnModalOpen]);
+
+  const handleToggleColumn = (col) => {
+    if (MANDATORY_COLUMNS.includes(col)) return;
+    setActiveColumns(prev => 
+      prev.includes(col) ? prev.filter(c => c !== col) : [...prev, col]
+    );
+  };
   const [skuModalBarcode, setSkuModalBarcode] = useState('');
   const [skuModalOptions, setSkuModalOptions] = useState([]);
 
@@ -158,14 +205,7 @@ function AuditApp() {
   };
 
   const handleEndSessionSubmit = () => {
-    const text = records.length > 0 
-      ? `This will end the session and CLEAR all ${records.length} scanned records. Make sure you have exported your Excel reports. Proceed?` 
-      : 'End audit session?';
-    if (window.confirm(text)) {
-      endSession();
-      setActiveProduct(null);
-      setActiveTab('scan');
-    }
+    setEndSessionConfirmOpen(true);
   };
 
   return (
@@ -200,23 +240,36 @@ function AuditApp() {
           </div>
 
           {sessionActive && (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
+              {/* Columns Selector Button */}
+              <button
+                type="button"
+                onClick={() => setColumnModalOpen(true)}
+                title="Customize Columns"
+                className="flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-750 text-slate-300 hover:bg-slate-800 transition cursor-pointer shrink-0"
+              >
+                <ClipboardCheck className="h-4.5 w-4.5 text-amber-500" />
+                <span className="hidden sm:inline text-xs font-bold ml-1.5">Columns</span>
+              </button>
+
               <button
                 type="button"
                 onClick={exportData}
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-extrabold bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 shadow-lg shadow-orange-950/20 hover:shadow-xl transition-all duration-300"
+                title="Export Excel Report (F3)"
+                className="flex items-center justify-center p-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 shadow-md transition cursor-pointer shrink-0"
               >
-                <FileDown className="h-4 w-4" />
-                <span>Export Report (F3)</span>
+                <FileDown className="h-4.5 w-4.5" />
+                <span className="hidden sm:inline text-xs font-extrabold ml-1.5">Export Report (F3)</span>
               </button>
               
               <button
                 type="button"
                 onClick={handleEndSessionSubmit}
-                className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-750 text-rose-400 hover:bg-slate-800 hover:text-rose-300 transition"
+                title="End Audit Session"
+                className="flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-750 text-rose-400 hover:bg-slate-800 hover:text-rose-300 transition cursor-pointer shrink-0"
               >
-                <LogOut className="h-4 w-4" />
-                <span className="hidden sm:inline">End Audit</span>
+                <LogOut className="h-4.5 w-4.5" />
+                <span className="hidden sm:inline text-xs font-bold ml-1.5">End Audit</span>
               </button>
             </div>
           )}
@@ -253,7 +306,11 @@ function AuditApp() {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Date</span>
-                  <strong className="text-slate-100">{sessionMetadata.auditDate}</strong>
+                  <strong className="text-slate-100">{formatDateStr(sessionMetadata.auditDate)}</strong>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider text-[9px]">Flow</span>
+                  {scanTypeBadge}
                 </div>
               </div>
 
@@ -308,6 +365,7 @@ function AuditApp() {
                   onScanNotFound={handleScanNotFound}
                   onScanMultiple={handleScanMultiple}
                   isEditing={isEditing}
+                  recordsCount={records.length}
                 />
 
                 {/* SKU Resolution Modal */}
@@ -351,6 +409,181 @@ function AuditApp() {
           </div>
         )}
       </main>
+
+      {/* Mid-session Columns Customization Modal */}
+      {columnModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-2xl overflow-hidden rounded-2xl border border-slate-700 bg-slate-900/95 shadow-2xl animate-zoom-in">
+            {/* Header */}
+            <div className="flex items-center justify-between bg-slate-950 px-6 py-4 border-b border-slate-800">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                  <ClipboardCheck className="h-5 w-5 animate-pulse" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold text-slate-100">Customize Report Columns</h3>
+                  <p className="text-xs text-slate-400 font-medium">Select columns to include in the exported spreadsheet</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-h-96 overflow-y-auto pr-1 mb-6">
+                
+                {/* Product Details */}
+                <div className="space-y-2">
+                  <h4 className="text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-2">Product Details</h4>
+                  {['Barcode', 'Item Code', 'Item Name', 'Product Group', 'Sub Category', 'SKU Type', 'Pack Type', 'HSN'].map((col) => {
+                    const isMandatory = ['Barcode', 'Item Name'].includes(col);
+                    const isChecked = activeColumns.includes(col);
+                    return (
+                      <label key={col} className="flex items-center gap-2 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          disabled={isMandatory}
+                          onChange={() => handleToggleColumn(col)}
+                          className="h-4.5 w-4.5 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0 disabled:opacity-55"
+                        />
+                        <span>{col}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {/* Quantities & Dates */}
+                <div className="space-y-2">
+                  <h4 className="text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-2">Quantities & Dates</h4>
+                  {['Box Qty', 'Loose Qty', 'Units Per Box', 'Physical Total Qty', 'MRP', 'MFD', 'EXP', 'Batch Number', 'Remarks'].map((col) => {
+                    const isMandatory = ['Physical Total Qty', 'MRP'].includes(col);
+                    const isChecked = activeColumns.includes(col);
+                    return (
+                      <label key={col} className="flex items-center gap-2 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          disabled={isMandatory}
+                          onChange={() => handleToggleColumn(col)}
+                          className="h-4.5 w-4.5 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0 disabled:opacity-55"
+                        />
+                        <span>{col}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                {/* Calculations & Session */}
+                <div className="space-y-2">
+                  <h4 className="text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-2">Calculations & Session</h4>
+                  {['Shelved shelf life Days (elapsed days)', 'Bal shelf life Days', 'Shelf-Life in %', 'Scanned At', 'Auditor', 'Location'].map((col) => {
+                    const isChecked = activeColumns.includes(col);
+                    return (
+                      <label key={col} className="flex items-center gap-2 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => handleToggleColumn(col)}
+                          className="h-4 w-4 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0"
+                        />
+                        <span className="leading-tight">{col}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setActiveColumns(ALL_COLUMNS)}
+                    className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition cursor-pointer"
+                  >
+                    Select All
+                  </button>
+                  <button
+                    onClick={() => setActiveColumns(MANDATORY_COLUMNS)}
+                    className="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition cursor-pointer"
+                  >
+                    Reset
+                  </button>
+                </div>
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => setColumnModalOpen(false)}
+                    className="px-4 py-2 bg-slate-850 hover:bg-slate-800 text-slate-350 hover:text-white rounded-lg text-xs font-bold transition cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={async () => {
+                      await saveColumnPreferences(activeColumns);
+                      setColumnModalOpen(false);
+                    }}
+                    className="px-5 py-2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 rounded-lg text-xs font-bold transition cursor-pointer"
+                  >
+                    Save Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* End Session Confirmation Modal */}
+      {endSessionConfirmOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-md overflow-hidden rounded-2xl border border-slate-700 bg-slate-900 shadow-2xl animate-zoom-in">
+            {/* Header */}
+            <div className="flex items-center gap-3 bg-slate-950 px-6 py-4 border-b border-slate-800">
+              <div className="p-2 rounded-lg bg-rose-500/10 text-rose-455 border border-rose-500/20">
+                <AlertTriangle className="h-5 w-5 animate-pulse" />
+              </div>
+              <h3 className="text-base font-bold text-slate-100">End Audit Session?</h3>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-4">
+              <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                {records.length > 0 ? (
+                  <>
+                    This will permanently end the active session and <strong className="text-rose-400">CLEAR all {records.length} scanned records</strong> from local offline storage.
+                    <br /><br />
+                    Please ensure you have exported your Excel reports before proceeding.
+                  </>
+                ) : (
+                  "Are you sure you want to end the active auditing session?"
+                )}
+              </p>
+
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setEndSessionConfirmOpen(false)}
+                  className="px-4 py-2 bg-slate-850 hover:bg-slate-800 text-slate-350 hover:text-white rounded-lg text-xs font-bold transition cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await endSession();
+                    setActiveProduct(null);
+                    setActiveTab('scan');
+                    setEndSessionConfirmOpen(false);
+                  }}
+                  className="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition cursor-pointer shadow-lg shadow-rose-950/20"
+                >
+                  Clear & End Session
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="bg-slate-950 py-6 border-t border-slate-900 text-center text-xs text-slate-500 z-10">

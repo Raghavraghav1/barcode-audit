@@ -5,6 +5,29 @@
   --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
   --color-brand-teal: #0d9488;
   --color-brand-emerald: #10b981;
+
+  /* Overrides for dynamic minimal light theme with yellow & black accents */
+  --color-slate-50: #000000;
+  --color-slate-100: #000000;
+  --color-slate-200: #0f172a;
+  --color-slate-300: #1e293b;
+  --color-slate-350: #334155;
+  --color-slate-400: #475569;
+  --color-slate-550: #64748b; /* extra text support */
+  --color-slate-500: #64748b;
+  --color-slate-650: #8c959f;
+  --color-slate-700: #cbd5e1;
+  --color-slate-750: #cbd5e1;
+  --color-slate-800: #e2e8f0;
+  --color-slate-850: #f1f5f9;
+  --color-slate-900: #f8fafc;
+  --color-slate-950: #ffffff;
+
+  /* Overrides for vibrant yellow/gold Audit Avengers brand colors */
+  --color-amber-500: #eab308; /* Bright yellow */
+  --color-amber-400: #ca8a04; /* Darker yellow for text contrast */
+  --color-amber-450: #a16207; /* Dark yellow/gold text */
+  --color-orange-600: #000000; /* Map orange to black for bold yellow/black contrast! */
 }
 
 /* Custom global rules */
@@ -14,22 +37,69 @@ html, body, #root {
   width: 100%;
   min-height: 100vh;
   font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-  background-color: #0f172a; /* Slate 900 background by default */
-  color: #f8fafc; /* Slate 50 text by default */
+  background-color: #f8fafc !important; /* Clean light background */
+  color: #0f172a !important; /* Readable dark charcoal text */
 }
 
-/* Custom scrollbar for premium feel */
+/* Make selection look nice and yellow */
+::selection {
+  background-color: rgba(250, 204, 21, 0.3) !important;
+  color: #854d0e !important;
+}
+
+/* Custom scrollbar matching yellow/black theme */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #94a3b8;
+}
+
+/* Additional Audit Avengers theme styling */
+header {
+  background-color: #000000 !important; /* Pure black header background */
+  border-bottom: 4px solid #facc15 !important; /* Avengers yellow bottom border */
+}
+header h1 {
+  color: #ffffff !important; /* White title in header */
+}
+header span {
+  color: #facc15 !important; /* Yellow subtitle in header */
+}
+/* Ensure the End Audit and export buttons look sharp in black header */
+header button {
+  border-color: rgba(250, 204, 21, 0.4) !important;
+}
+
+/* Modal header overrides for black-and-yellow styling */
+.fixed.inset-0 .bg-slate-950 {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+.fixed.inset-0 .bg-slate-950 h3 {
+  color: #ffffff !important;
+}
+
+/* Ensure form/setup step headers look prominent and clean */
+.border-b.border-slate-800 {
+  border-color: #e2e8f0 !important;
+}
+
+/* Form and input shadows */
+input[type="text"], input[type="number"], select, input[type="date"] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+input[type="text"]:focus, input[type="number"]:focus, select:focus, input[type="date"]:focus {
+  border-color: #facc15 !important;
+  box-shadow: 0 0 0 2px rgba(250, 204, 21, 0.2) !important;
 }

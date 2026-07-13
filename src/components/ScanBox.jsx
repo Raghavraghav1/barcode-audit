@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Camera, CameraOff, Sparkles, RefreshCw, Volume2 } from 'lucide-react';
+import { Camera, CameraOff, Sparkles, RefreshCw, Volume2, Keyboard, Layers } from 'lucide-react';
 import { BrowserMultiFormatReader } from '@zxing/library';
 import { findMasterItemsByBarcode } from '../services/db';
 
@@ -36,7 +36,7 @@ const playScanBeep = (type = 'success') => {
   }
 };
 
-export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, isEditing }) {
+export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, isEditing, recordsCount }) {
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('idle');
   const [statusMsg, setStatusMsg] = useState('Ready for input');
@@ -45,6 +45,8 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
   const [availableDevices, setAvailableDevices] = useState([]);
   const [selectedDeviceId, setSelectedDeviceId] = useState('');
   const [cameraError, setCameraError] = useState('');
+
+  const [preventKeyboard, setPreventKeyboard] = useState(false);
 
   const inputRef = useRef(null);
   const videoRef = useRef(null);
@@ -219,20 +221,53 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
         {/* Left Side: Scan Inputs */}
         <div className="flex-1 flex flex-col justify-between z-10">
           <div>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-3 mb-4">
               <h2 className="text-lg font-semibold text-slate-100 flex items-center gap-2">
                 <Sparkles className="h-5 w-5 text-amber-500" />
                 Barcode Scanner Input
               </h2>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                
+                {/* View Verified Stock Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const gridEl = document.getElementById('audit-grid-panel');
+                    if (gridEl) {
+                      gridEl.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition cursor-pointer"
+                >
+                  <Layers className="h-3.5 w-3.5" />
+                  View Verified Stock ({recordsCount || 0})
+                </button>
+
+                {/* Keyboard Block Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => setPreventKeyboard(!preventKeyboard)}
+                  title={preventKeyboard ? "Enable Virtual Keyboard" : "Block Virtual Keyboard (Mobile Scanner Mode)"}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer ${
+                    preventKeyboard 
+                      ? 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold' 
+                      : 'bg-slate-800 hover:bg-slate-750 text-slate-300 border-slate-750'
+                  }`}
+                >
+                  <Keyboard className="h-3.5 w-3.5" />
+                  <span>{preventKeyboard ? "Keyboard Locked" : "Lock Keyboard"}</span>
+                </button>
+
+                {/* Sound Test Button */}
                 <button
                   type="button"
                   onClick={() => playScanBeep('success')}
                   title="Test Sound"
-                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition border border-slate-750"
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-705 text-slate-350 transition border border-slate-750"
                 >
                   <Volume2 className="h-4 w-4 text-amber-500" />
                 </button>
+
                 <span className="text-xs text-slate-400 bg-slate-950 px-2 py-1 rounded font-mono border border-slate-800">
                   Shortcut: F2 Focus
                 </span>
@@ -253,6 +288,7 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Scan or type barcode here (Auto-Focused)..."
                 disabled={cameraActive || status === 'searching'}
+                inputMode={preventKeyboard ? 'none' : 'text'}
                 className="w-full bg-slate-950/80 border-2 border-slate-750 rounded-xl px-5 py-4 text-xl font-mono text-amber-400 placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 disabled:bg-slate-900/60 disabled:text-slate-600 transition-all shadow-inner"
               />
               <button

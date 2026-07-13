@@ -57,8 +57,36 @@ export default function SetupWizard() {
     saveMasterCatalog,
     saveBookStockCatalog,
     skipBookStock,
+    saveColumnPreferences,
     saveMappingTemplate
   } = useSession();
+
+  const ALL_COLUMNS = [
+    'Barcode', 'Item Code', 'Item Name', 'Product Group', 'Sub Category',
+    'SKU Type', 'Pack Type', 'HSN', 'Box Qty', 'Loose Qty', 'Units Per Box',
+    'Physical Total Qty', 'MRP', 'MFD', 'EXP', 'Shelved shelf life Days (elapsed days)',
+    'Bal shelf life Days', 'Shelf-Life in %', 'Batch Number', 'Remarks',
+    'Scanned At', 'Auditor', 'Location'
+  ];
+
+  const MANDATORY_COLUMNS = ['Barcode', 'Item Name', 'Physical Total Qty', 'MRP'];
+
+  const [selectedCols, setSelectedCols] = useState(ALL_COLUMNS);
+
+  const handleToggleColumn = (col) => {
+    if (MANDATORY_COLUMNS.includes(col)) return;
+    setSelectedCols(prev => 
+      prev.includes(col) ? prev.filter(c => c !== col) : [...prev, col]
+    );
+  };
+
+  const handleSelectAllCols = () => {
+    setSelectedCols(ALL_COLUMNS);
+  };
+
+  const handleClearOptionalCols = () => {
+    setSelectedCols(MANDATORY_COLUMNS);
+  };
 
   // Step 1: Session Details States
   const [auditorName, setAuditorName] = useState('');
@@ -67,6 +95,7 @@ export default function SetupWizard() {
   const [auditDate, setAuditDate] = useState(new Date().toISOString().split('T')[0]);
   const [selectedTemplateName, setSelectedTemplateName] = useState('');
   const [sessionError, setSessionError] = useState('');
+  const [scanType, setScanType] = useState('audit'); // 'audit' | 'inward' | 'outward'
 
   // Step 2: Master File States
   const [masterFile, setMasterFile] = useState(null);
@@ -83,6 +112,19 @@ export default function SetupWizard() {
     hsnCol: '',
     unitsPerBoxCol: ''
   });
+  const [customCols, setCustomCols] = useState([]); // Array of { id: string, key: string, col: string }
+
+  const handleAddCustomCol = () => {
+    setCustomCols(prev => [...prev, { id: String(Date.now()), key: '', col: '' }]);
+  };
+
+  const handleUpdateCustomCol = (id, field, value) => {
+    setCustomCols(prev => prev.map(cc => cc.id === id ? { ...cc, [field]: value } : cc));
+  };
+
+  const handleRemoveCustomCol = (id) => {
+    setCustomCols(prev => prev.filter(cc => cc.id !== id));
+  };
   const [saveAsTemplate, setSaveAsTemplate] = useState(true);
   const [masterError, setMasterError] = useState('');
   const [parsingFile, setParsingFile] = useState(false);
@@ -107,7 +149,14 @@ export default function SetupWizard() {
       const t = templates.find(temp => temp.clientName === name);
       if (t) {
         setClientName(t.clientName);
-        if (t.mapping) setMasterMapping(t.mapping);
+        if (t.mapping) {
+          setMasterMapping(t.mapping);
+          if (t.mapping.customCols) {
+            setCustomCols(t.mapping.customCols);
+          } else {
+            setCustomCols([]);
+          }
+        }
         if (t.bookMapping) setBookMapping(t.bookMapping);
       }
     }
@@ -125,7 +174,8 @@ export default function SetupWizard() {
       auditor: auditorName.trim(),
       clientName: clientName.trim(),
       location: location.trim(),
-      auditDate: auditDate
+      auditDate: auditDate,
+      scanType: scanType
     });
   };
 
@@ -167,23 +217,38 @@ export default function SetupWizard() {
     setMasterError('');
     
     try {
+      const mappingWithCustom = {
+        ...masterMapping,
+        customCols: customCols.filter(cc => cc.key.trim() && cc.col)
+      };
+
       // Map parsed raw rows to standard structure based on user selected columns
-      const standardizedItems = masterRows.map((r) => ({
-        barcode: String(r[masterMapping.barcodeCol] || '').trim(),
-        itemCode: String(r[masterMapping.itemCodeCol] || '').trim(),
-        itemName: String(r[masterMapping.nameCol] || '').trim(),
-        product: String(r[masterMapping.productCol] || '').trim(),
-        subCategory: String(r[masterMapping.subCategoryCol] || '').trim(),
-        skuType: String(r[masterMapping.skuTypeCol] || '').trim(),
-        packType: String(r[masterMapping.packTypeCol] || '').trim(),
-        hsn: String(r[masterMapping.hsnCol] || '').trim(),
-        unitsPerBox: Number(r[masterMapping.unitsPerBoxCol]) || 1
-      }));
+      const standardizedItems = masterRows.map((r) => {
+        const item = {
+          barcode: String(r[masterMapping.barcodeCol] || '').trim(),
+          itemCode: String(r[masterMapping.itemCodeCol] || '').trim(),
+          itemName: String(r[masterMapping.nameCol] || '').trim(),
+          product: String(r[masterMapping.productCol] || '').trim(),
+          subCategory: String(r[masterMapping.subCategoryCol] || '').trim(),
+          skuType: String(r[masterMapping.skuTypeCol] || '').trim(),
+          packType: String(r[masterMapping.packTypeCol] || '').trim(),
+          hsn: String(r[masterMapping.hsnCol] || '').trim(),
+          unitsPerBox: Number(r[masterMapping.unitsPerBoxCol]) || 1,
+          customFields: {}
+        };
+        
+        mappingWithCustom.customCols.forEach((cc) => {
+          item.customFields[cc.key.trim()] = String(r[cc.col] || '').trim();
+        });
+
+        return item;
+      });
 
       // Deduplicate master items to prevent multiple identical options in SKU selector
       const uniqueItemsMap = new Map();
       standardizedItems.forEach((item) => {
-        const key = `${item.barcode}_${item.itemCode}_${item.itemName}_${item.unitsPerBox}`;
+        const customFieldsStr = JSON.stringify(item.customFields);
+        const key = `${item.barcode}_${item.itemCode}_${item.itemName}_${item.unitsPerBox}_${customFieldsStr}`;
         if (!uniqueItemsMap.has(key)) {
           uniqueItemsMap.set(key, item);
         }
@@ -191,11 +256,11 @@ export default function SetupWizard() {
       const deduplicatedItems = Array.from(uniqueItemsMap.values());
 
       // Ingest to IndexedDB
-      await saveMasterCatalog(deduplicatedItems, masterMapping);
+      await saveMasterCatalog(deduplicatedItems, mappingWithCustom);
 
       // Save template if checked
       if (saveAsTemplate) {
-        await saveMappingTemplate(clientName, masterMapping, bookMapping);
+        await saveMappingTemplate(clientName, mappingWithCustom, bookMapping);
       }
     } catch (err) {
       setMasterError('IndexedDB Ingestion failed: ' + (err.message || err.toString()));
@@ -270,7 +335,7 @@ export default function SetupWizard() {
   return (
     <div className="max-w-4xl mx-auto my-6 p-4">
       {/* Onboarding Steps Indicators */}
-      <div className="flex items-center justify-between mb-8 max-w-xl mx-auto">
+      <div className="flex items-center justify-between mb-8 max-w-2xl mx-auto">
         <div className="flex flex-col items-center">
           <div className={`h-10 w-10 rounded-full flex items-center justify-center border font-bold text-sm transition-all duration-300 ${
             setupStep === 'metadata' 
@@ -286,7 +351,7 @@ export default function SetupWizard() {
           <div className={`h-10 w-10 rounded-full flex items-center justify-center border font-bold text-sm transition-all duration-300 ${
             setupStep === 'master_upload' 
               ? 'bg-amber-500 border-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
-              : setupStep === 'book_stock_upload' || setupStep === 'active'
+              : setupStep === 'book_stock_upload' || setupStep === 'column_select' || setupStep === 'active'
               ? 'bg-teal-600/30 border-teal-500 text-teal-400'
               : 'bg-slate-900 border-slate-800 text-slate-600'
           }`}>
@@ -299,13 +364,26 @@ export default function SetupWizard() {
           <div className={`h-10 w-10 rounded-full flex items-center justify-center border font-bold text-sm transition-all duration-300 ${
             setupStep === 'book_stock_upload' 
               ? 'bg-amber-500 border-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.4)]' 
-              : setupStep === 'active'
+              : setupStep === 'column_select' || setupStep === 'active'
               ? 'bg-teal-600/30 border-teal-500 text-teal-400'
               : 'bg-slate-900 border-slate-800 text-slate-600'
           }`}>
             3
           </div>
           <span className="text-xs text-slate-400 mt-2 font-medium">Book Stock</span>
+        </div>
+        <div className="flex-1 h-0.5 bg-slate-800 mx-2" />
+        <div className="flex flex-col items-center">
+          <div className={`h-10 w-10 rounded-full flex items-center justify-center border font-bold text-sm transition-all duration-300 ${
+            setupStep === 'column_select' 
+              ? 'bg-amber-500 border-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.4)]' 
+              : setupStep === 'active'
+              ? 'bg-teal-600/30 border-teal-500 text-teal-400'
+              : 'bg-slate-900 border-slate-800 text-slate-600'
+          }`}>
+            4
+          </div>
+          <span className="text-xs text-slate-400 mt-2 font-medium">Report Columns</span>
         </div>
       </div>
 
@@ -440,6 +518,21 @@ export default function SetupWizard() {
                 onChange={(e) => setAuditDate(e.target.value)}
                 className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
               />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                <ClipboardList className="h-3.5 w-3.5 animate-pulse" /> Operation Flow (Scanning Type)
+              </label>
+              <select
+                value={scanType}
+                onChange={(e) => setScanType(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-amber-500 transition-colors font-bold"
+              >
+                <option value="audit">Audit (Stock Take)</option>
+                <option value="inward">Inward (+)</option>
+                <option value="outward">Outward (-)</option>
+              </select>
             </div>
 
             <button
@@ -643,6 +736,69 @@ export default function SetupWizard() {
                     </select>
                   </div>
                 </div>
+
+                {/* Custom Column Mappings Section */}
+                <div className="border-t border-slate-800 pt-6 mt-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-200 flex items-center gap-1.5">
+                        <Layers className="h-4 w-4 text-amber-400" />
+                        Custom Mapped Columns
+                      </h4>
+                      <p className="text-xs text-slate-400 mt-0.5 font-medium">
+                        Auditing additional data? Map any other columns from your spreadsheet here.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleAddCustomCol}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20 transition cursor-pointer"
+                    >
+                      + Add Custom Column
+                    </button>
+                  </div>
+
+                  {customCols.length === 0 ? (
+                    <p className="text-xs text-slate-500 italic bg-slate-950/20 p-3.5 rounded-xl border border-dashed border-slate-800 text-center font-medium">
+                      No custom columns mapped yet. Click button above to map custom fields.
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {customCols.map((cc) => (
+                        <div key={cc.id} className="flex flex-col sm:flex-row gap-3 items-end sm:items-center bg-slate-950/20 border border-slate-800 p-3.5 rounded-xl animate-fade-in">
+                          <div className="flex-1 w-full">
+                            <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Field Label / Key</label>
+                            <input
+                              type="text"
+                              placeholder="e.g. Brand, Vendor, Rack No"
+                              value={cc.key}
+                              onChange={(e) => handleUpdateCustomCol(cc.id, 'key', e.target.value)}
+                              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-500 font-bold"
+                            />
+                          </div>
+                          <div className="flex-1 w-full">
+                            <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Excel Column Header</label>
+                            <select
+                              value={cc.col}
+                              onChange={(e) => handleUpdateCustomCol(cc.id, 'col', e.target.value)}
+                              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-3 py-2 text-xs text-slate-300 focus:outline-none focus:border-amber-500"
+                            >
+                              <option value="">-- Select Excel Header --</option>
+                              {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
+                            </select>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveCustomCol(cc.id)}
+                            className="px-3 py-2 rounded-xl text-rose-400 hover:bg-rose-500/10 transition text-xs font-semibold cursor-pointer border border-rose-500/20 shrink-0"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Save Template Checkbox */}
@@ -813,6 +969,126 @@ export default function SetupWizard() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* STEP 4: COLUMN SELECTION */}
+      {setupStep === 'column_select' && (
+        <div className="bg-slate-900/50 backdrop-blur-md rounded-2xl border border-slate-700/60 shadow-2xl p-8 animate-zoom-in">
+          <h3 className="text-xl font-bold text-slate-50 mb-2 flex items-center gap-2">
+            <ClipboardList className="h-5 w-5 text-amber-500" />
+            Configure Report Columns
+          </h3>
+          <p className="text-xs text-slate-400 mb-6 leading-relaxed">
+            Select the columns that you want to include in the exported Audit Excel Report.
+            Core columns are mandatory and cannot be disabled.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            
+            {/* Category 1: Product Details */}
+            <div className="bg-slate-950/40 border border-slate-800 rounded-xl p-4">
+              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 pb-1.5 border-b border-slate-800">
+                Product Details
+              </h4>
+              <div className="space-y-2.5">
+                {['Barcode', 'Item Code', 'Item Name', 'Product Group', 'Sub Category', 'SKU Type', 'Pack Type', 'HSN'].map((col) => {
+                  const isMandatory = ['Barcode', 'Item Name'].includes(col);
+                  const isChecked = selectedCols.includes(col);
+                  return (
+                    <label key={col} className="flex items-center gap-2.5 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        disabled={isMandatory}
+                        onChange={() => handleToggleColumn(col)}
+                        className="h-4.5 w-4.5 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0 disabled:opacity-55"
+                      />
+                      <span>{col}</span>
+                      {isMandatory && <span className="text-[10px] text-slate-500">(Required)</span>}
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Category 2: Quantities & Verification */}
+            <div className="bg-slate-950/40 border border-slate-800 rounded-xl p-4">
+              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 pb-1.5 border-b border-slate-800">
+                Quantities & Dates
+              </h4>
+              <div className="space-y-2.5">
+                {['Box Qty', 'Loose Qty', 'Units Per Box', 'Physical Total Qty', 'MRP', 'MFD', 'EXP', 'Batch Number', 'Remarks'].map((col) => {
+                  const isMandatory = ['Physical Total Qty', 'MRP'].includes(col);
+                  const isChecked = selectedCols.includes(col);
+                  return (
+                    <label key={col} className="flex items-center gap-2.5 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        disabled={isMandatory}
+                        onChange={() => handleToggleColumn(col)}
+                        className="h-4.5 w-4.5 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0 disabled:opacity-55"
+                      />
+                      <span>{col}</span>
+                      {isMandatory && <span className="text-[10px] text-slate-500">(Required)</span>}
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Category 3: Calculations & Metadata */}
+            <div className="bg-slate-950/40 border border-slate-800 rounded-xl p-4">
+              <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 pb-1.5 border-b border-slate-800">
+                Calculations & Session
+              </h4>
+              <div className="space-y-2.5">
+                {['Shelved shelf life Days (elapsed days)', 'Bal shelf life Days', 'Shelf-Life in %', 'Scanned At', 'Auditor', 'Location'].map((col) => {
+                  const isChecked = selectedCols.includes(col);
+                  return (
+                    <label key={col} className="flex items-center gap-2.5 text-xs text-slate-300 font-medium select-none cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={isChecked}
+                        onChange={() => handleToggleColumn(col)}
+                        className="h-4.5 w-4.5 text-amber-500 rounded bg-slate-950 border-slate-700 focus:ring-0"
+                      />
+                      <span className="leading-tight">{col}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+          </div>
+
+          <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleSelectAllCols}
+                className="px-3 py-1.5 rounded bg-slate-850 hover:bg-slate-800 text-xs text-slate-300 transition"
+              >
+                Select All
+              </button>
+              <button
+                type="button"
+                onClick={handleClearOptionalCols}
+                className="px-3 py-1.5 rounded bg-slate-850 hover:bg-slate-800 text-xs text-slate-300 transition"
+              >
+                Reset to Core
+              </button>
+            </div>
+            
+            <button
+              onClick={() => saveColumnPreferences(selectedCols)}
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-sm shadow-md transition flex items-center gap-1.5 cursor-pointer animate-pulse"
+            >
+              Start Active Audit
+              <CheckCircle2 className="h-4.5 w-4.5 text-slate-950" />
+            </button>
+          </div>
         </div>
       )}
     </div>

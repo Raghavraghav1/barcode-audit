@@ -125,14 +125,13 @@ export const SessionProvider = ({ children }) => {
       
       const updatedMetadata = {
         ...sessionMetadata,
-        setupStep: 'active',
+        setupStep: 'column_select',
         bookMapping,
         hasBookStock: true
       };
       await saveSessionMetadata(updatedMetadata);
       setSessionMetadata(updatedMetadata);
-      setSetupStep('active');
-      setSessionActive(true);
+      setSetupStep('column_select');
     } catch (err) {
       console.error('Failed to save book stock:', err);
       throw err;
@@ -146,15 +145,38 @@ export const SessionProvider = ({ children }) => {
     try {
       const updatedMetadata = {
         ...sessionMetadata,
-        setupStep: 'active',
+        setupStep: 'column_select',
         hasBookStock: false
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+      setSetupStep('column_select');
+    } catch (err) {
+      console.error('Failed to skip book stock:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveColumnPreferences = async (selectedCols) => {
+    setLoading(true);
+    try {
+      const updatedMetadata = {
+        ...sessionMetadata,
+        setupStep: 'active',
+        selectedColumns: selectedCols
       };
       await saveSessionMetadata(updatedMetadata);
       setSessionMetadata(updatedMetadata);
       setSetupStep('active');
       setSessionActive(true);
+      
+      const savedRecords = await getRecords();
+      setRecords(savedRecords || []);
+      const savedBookStock = await getBookStock();
+      setBookStock(savedBookStock || []);
     } catch (err) {
-      console.error('Failed to skip book stock:', err);
+      console.error('Failed to save column preferences:', err);
     } finally {
       setLoading(false);
     }
@@ -252,6 +274,7 @@ export const SessionProvider = ({ children }) => {
         saveMasterCatalog,
         saveBookStockCatalog,
         skipBookStock,
+        saveColumnPreferences,
         endSession,
         addRecord,
         updateRecord,

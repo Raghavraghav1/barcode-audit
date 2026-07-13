@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronUp, ChevronDown, Trash2, Edit2, AlertCircle, Layers, CheckSquare, Square } from 'lucide-react';
+import { formatDateStr } from '../utils/date';
 
 export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
   const [searchQuery, setSearchQuery] = useState('');
@@ -138,7 +139,7 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
   };
 
   return (
-    <div className="bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-700/50 p-6 shadow-xl">
+    <div id="audit-grid-panel" className="bg-slate-900/40 backdrop-blur-md rounded-2xl border border-slate-700/50 p-6 shadow-xl scroll-mt-24">
       <div className="flex flex-col gap-4 mb-6">
         
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
@@ -231,8 +232,8 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
         </div>
       </div>
 
-      {/* Grid Table */}
-      <div className="overflow-x-auto border border-slate-750 rounded-xl bg-slate-950/20">
+      {/* Grid Table (Desktop Only) */}
+      <div className="hidden md:block overflow-x-auto border border-slate-750 rounded-xl bg-slate-950/20">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="bg-slate-950/60 border-b border-slate-750 text-slate-300 font-semibold">
@@ -346,8 +347,8 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
                     </td>
 
                     <td className="px-4 py-3 text-xs leading-normal text-slate-400">
-                      <div>MFD: {row.mfd || '-'}</div>
-                      <div>EXP: {row.exp || '-'}</div>
+                      <div>MFD: {formatDateStr(row.mfd) || '-'}</div>
+                      <div>EXP: {formatDateStr(row.exp) || '-'}</div>
                     </td>
 
                     <td className="px-4 py-3 text-center font-mono text-xs text-slate-400 leading-normal">
@@ -387,6 +388,111 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Grid Cards (Mobile View Only) */}
+      <div className="block md:hidden space-y-3">
+        {paginatedRecords.length === 0 ? (
+          <div className="text-center text-slate-500 font-medium py-10 bg-slate-950/15 border border-slate-800 rounded-xl">
+            No records match the current filters.
+          </div>
+        ) : (
+          paginatedRecords.map((row) => {
+            const warn = hasWarning(row);
+            const isSelected = selectedIds.has(row.id);
+            return (
+              <div
+                key={row.id}
+                className={`bg-slate-900/50 backdrop-blur-md border p-4 rounded-xl flex flex-col gap-3 transition-colors ${
+                  warn ? 'border-red-500/30 bg-red-955/5' : 'border-slate-850'
+                } ${isSelected ? 'border-amber-500/40 bg-amber-500/5' : ''}`}
+              >
+                {/* Header (Selection + Item Name + Actions) */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <button
+                      type="button"
+                      onClick={() => handleSelectRow(row.id)}
+                      className="text-slate-500 hover:text-amber-400 transition mt-0.5"
+                    >
+                      {isSelected ? (
+                        <CheckSquare className="h-4.5 w-4.5 text-amber-500" />
+                      ) : (
+                        <Square className="h-4.5 w-4.5" />
+                      )}
+                    </button>
+                    <div>
+                      <h4 className="font-bold text-sm text-slate-200 leading-tight">{row.itemName}</h4>
+                      <p className="text-[10px] text-slate-500 mt-1 font-semibold">{row.product} | {row.skuType}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => onEdit(row)}
+                      className="p-2 bg-slate-800 hover:bg-slate-750 text-amber-400 hover:text-amber-300 rounded-lg transition border border-slate-700"
+                      title="Edit Row"
+                    >
+                      <Edit2 className="h-3.5 w-3.5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (window.confirm('Delete this audit entry?')) {
+                          onDelete(row.id);
+                        }
+                      }}
+                      className="p-2 bg-slate-800 hover:bg-slate-750 text-rose-400 hover:text-rose-350 rounded-lg transition border border-slate-700"
+                      title="Delete Row"
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Subtitle details */}
+                <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs border-y border-slate-800/80 py-2.5 my-0.5">
+                  <div>
+                    <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Quantity</span>
+                    <strong className={`text-base font-extrabold block mt-0.5 ${row.netQty < 0 ? 'text-rose-400' : 'text-emerald-400'}`}>
+                      {row.netQty}
+                    </strong>
+                    <span className="text-slate-500 text-[10px] block mt-0.5">({row.boxQty} bx / {row.looseQty} ls)</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">MRP / Value</span>
+                    <strong className="text-slate-200 text-base font-extrabold block mt-0.5">₹{row.mrp}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Batch Number</span>
+                    <span className="text-slate-300 font-bold truncate block mt-0.5">{row.batchNumber || '-'}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Barcode</span>
+                    <span className="text-slate-300 font-mono text-xs block mt-0.5">{row.barcode}</span>
+                  </div>
+                </div>
+
+                {/* Footer details (Dates & Warnings) */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs">
+                  <div className="text-[10px] text-slate-500 font-medium">
+                    <span>MFD: {formatDateStr(row.mfd) || '-'}</span>
+                    <span className="mx-2 text-slate-700">|</span>
+                    <span>EXP: {formatDateStr(row.exp) || '-'}</span>
+                  </div>
+
+                  {warn && (
+                    <div className="flex items-center gap-1.5 text-[9px] font-bold text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded border border-rose-500/20 animate-pulse uppercase tracking-wider">
+                      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                      <span>Validation Issue</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
       </div>
 
       {/* Pagination */}

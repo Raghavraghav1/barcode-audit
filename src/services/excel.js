@@ -1,16 +1,5 @@
 import * as XLSX from 'xlsx';
-
-const formatDateTime = (isoString) => {
-  if (!isoString) return '';
-  try {
-    const d = new Date(isoString);
-    if (isNaN(d.getTime())) return '';
-    const pad = (n) => String(n).padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  } catch (e) {
-    return '';
-  }
-};
+import { formatDateStr, formatDateTime, calculateShelfLifeMetrics } from '../utils/date';
 
 const formatDuration = (ms) => {
   if (ms < 0) return '0 secs';
@@ -36,29 +25,61 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
   const mapping = sessionMetadata?.mapping || {};
   const bookMapping = sessionMetadata?.bookMapping || {};
 
+  // Selected columns (default to all if not specified)
+  const selectedColumns = sessionMetadata?.selectedColumns || [
+    'Barcode', 'Item Code', 'Item Name', 'Product Group', 'Sub Category',
+    'SKU Type', 'Pack Type', 'HSN', 'Box Qty', 'Loose Qty', 'Units Per Box',
+    'Physical Total Qty', 'MRP', 'MFD', 'EXP', 'Shelved shelf life Days (elapsed days)',
+    'Bal shelf life Days', 'Shelf-Life in %', 'Batch Number', 'Remarks',
+    'Scanned At', 'Auditor', 'Location'
+  ];
+
   // 1. Prepare Audit Report Data
-  const auditData = records.map((r) => ({
-    'Barcode': r.barcode || '',
-    'Item Code': r.itemCode || '',
-    'Item Name': r.itemName || '',
-    'Product Group': r.product || '',
-    'Sub Category': r.subCategory || '',
-    'SKU Type': r.skuType || '',
-    'Pack Type': r.packType || '',
-    'HSN': r.hsn || '',
-    'Box Qty': typeof r.boxQty === 'number' ? r.boxQty : Number(r.boxQty) || 0,
-    'Loose Qty': typeof r.looseQty === 'number' ? r.looseQty : Number(r.looseQty) || 0,
-    'Units Per Box': typeof r.unitsPerBox === 'number' ? r.unitsPerBox : Number(r.unitsPerBox) || 1,
-    'Physical Total Qty': typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0,
-    'MRP': typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0,
-    'MFD': r.mfd || '',
-    'EXP': r.exp || '',
-    'Batch Number': r.batchNumber || '',
-    'Remarks': r.remarks || '',
-    'Scanned At': formatDateTime(r.scannedAt),
-    'Auditor': auditor,
-    'Location': location
-  }));
+  const auditData = records.map((r) => {
+    const { shelvedDays, balDays, pct } = calculateShelfLifeMetrics(r.mfd, r.exp, auditDate);
+    const fullRow = {
+      'Barcode': r.barcode || '',
+      'Item Code': r.itemCode || '',
+      'Item Name': r.itemName || '',
+      'Product Group': r.product || '',
+      'Sub Category': r.subCategory || '',
+      'SKU Type': r.skuType || '',
+      'Pack Type': r.packType || '',
+      'HSN': r.hsn || '',
+      'Box Qty': typeof r.boxQty === 'number' ? r.boxQty : Number(r.boxQty) || 0,
+      'Loose Qty': typeof r.looseQty === 'number' ? r.looseQty : Number(r.looseQty) || 0,
+      'Units Per Box': typeof r.unitsPerBox === 'number' ? r.unitsPerBox : Number(r.unitsPerBox) || 1,
+      'Physical Total Qty': typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0,
+      'MRP': typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0,
+      'MFD': formatDateStr(r.mfd),
+      'EXP': formatDateStr(r.exp),
+      'Shelved shelf life Days (elapsed days)': shelvedDays,
+      'Bal shelf life Days': balDays,
+      'Shelf-Life in %': pct !== '' ? `${pct}%` : '',
+      'Batch Number': r.batchNumber || '',
+      'Remarks': r.remarks || '',
+      'Scanned At': formatDateTime(r.scannedAt),
+      'Auditor': auditor,
+      'Location': location
+    };
+
+    // Filter columns based on user preferences
+    const filteredRow = {};
+    selectedColumns.forEach((colName) => {
+      if (fullRow.hasOwnProperty(colName)) {
+        filteredRow[colName] = fullRow[colName];
+      }
+    });
+
+    // Dynamically append any mapped custom fields at the end of the row
+    if (r.customFields) {
+      Object.entries(r.customFields).forEach(([key, val]) => {
+        filteredRow[key] = val || '';
+      });
+    }
+
+    return filteredRow;
+  });
 
   // 2. Prepare Exception Report Data
   const exceptions = [];
@@ -190,7 +211,7 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     { 'Metric': 'Client Name', 'Value': clientName },
     { 'Metric': 'Auditor Name', 'Value': auditor },
     { 'Metric': 'Location', 'Value': location },
-    { 'Metric': 'Audit Date', 'Value': auditDate || formatDateTime(new Date()).split(' ')[0] },
+    { 'Metric': 'Audit Date', 'Value': formatDateStr(auditDate) || formatDateStr(new Date().toISOString().split('T')[0]) },
     { 'Metric': 'Total Scanned Entries', 'Value': records.length },
     { 'Metric': 'Unique Products Scanned', 'Value': scannedBarcodes.size },
     { 'Metric': 'Total Verified Item Quantity', 'Value': totalQty },

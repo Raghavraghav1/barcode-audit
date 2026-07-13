@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Calendar, Save, Trash2, HelpCircle, AlertTriangle } from 'lucide-react';
+import { Calendar, Save, Trash2, HelpCircle, AlertTriangle, Layers } from 'lucide-react';
+import { useSession } from '../store/SessionContext';
 
 export default function AuditForm({ activeProduct, onSave, onCancel, existingRecords, setIsEditing }) {
+  const { sessionMetadata } = useSession();
+  const scanType = sessionMetadata?.scanType || 'audit';
+
   const [boxQty, setBoxQty] = useState('');
   const [looseQty, setLooseQty] = useState('');
   const [unitsPerBox, setUnitsPerBox] = useState(1);
@@ -163,6 +167,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
     const lQty = Number(looseQty) || 0;
     const calculatedTotalQty = (bQty * unitsPerBox) + lQty;
 
+    const isOutward = scanType === 'outward';
+    const netQty = isOutward ? -calculatedTotalQty : calculatedTotalQty;
+
     const record = {
       barcode: activeProduct.barcode,
       itemCode: activeProduct.itemCode || 'MANUAL',
@@ -176,12 +183,13 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
       boxQty: bQty,
       looseQty: lQty,
       unitsPerBox: Number(unitsPerBox) || 1,
-      netQty: calculatedTotalQty,
+      netQty: netQty,
       mrp: Number(mrp),
       mfd: mfd || null,
       exp: exp || null,
       batchNumber: batchNumber.trim(),
-      remarks: remarks.trim()
+      remarks: remarks.trim(),
+      customFields: activeProduct.customFields || {}
     };
 
     onSave(record);
@@ -430,6 +438,21 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
             />
           </div>
         </div>
+
+        {/* Dynamic Custom Fields */}
+        {activeProduct.customFields && Object.keys(activeProduct.customFields).length > 0 && (
+          <div className="mt-2 p-4 bg-slate-900/60 border border-slate-800 rounded-xl space-y-2 animate-fade-in">
+            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 block">Custom Mapped Details (Master Catalog)</span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+              {Object.entries(activeProduct.customFields).map(([key, val]) => (
+                <div key={key} className="bg-slate-950/40 p-2.5 rounded-lg border border-slate-850">
+                  <span className="text-slate-450 font-semibold block uppercase tracking-wider text-[9px]">{key}</span>
+                  <span className="text-slate-200 truncate block mt-0.5 font-bold" title={val}>{val || <span className="text-slate-650 italic font-normal">N/A</span>}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Warnings Banner */}
         {warnings.length > 0 && (
