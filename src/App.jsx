@@ -10,9 +10,14 @@ import Reconciliation from './components/Reconciliation';
 import { 
   FileDown, RefreshCw, LogOut, CheckCircle2, ClipboardCheck, 
   Layers, ChevronRight, User, MapPin, Calendar, HelpCircle,
-  AlertTriangle
+  AlertTriangle, BarChart2
 } from 'lucide-react';
 import { formatDateStr } from './utils/date';
+import AuditAnalytics from './components/AuditAnalytics';
+import { playScanBeep } from './components/ScanBox';
+import { 
+  triggerSuccessVibe, triggerWarningVibe, triggerErrorVibe, triggerLockVibe 
+} from './utils/haptics';
 
 function AuditApp() {
   const {
@@ -25,11 +30,30 @@ function AuditApp() {
     updateRecord,
     removeRecord,
     saveColumnPreferences,
-    exportData
+    exportData,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
+    downloadSessionSnapshot,
+    toggleSupervisorLock
   } = useSession();
 
-  // Active workspace tab: 'scan' | 'reconciliation'
+  // Active workspace tab: 'scan' | 'reconciliation' | 'analytics'
   const [activeTab, setActiveTab] = useState('scan');
+  const [rapidScan, setRapidScan] = useState(false);
+  const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
+
+  useEffect(() => {
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   const scanType = sessionMetadata?.scanType || 'audit';
   const scanTypeBadge = scanType === 'inward' ? (
@@ -84,7 +108,7 @@ function AuditApp() {
   const [skuModalBarcode, setSkuModalBarcode] = useState('');
   const [skuModalOptions, setSkuModalOptions] = useState([]);
 
-  // Global F3 shortcut handler for Excel Export
+  // Global F3/Undo/Redo shortcut handlers
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'F3') {
@@ -92,11 +116,21 @@ function AuditApp() {
         if (sessionActive) {
           exportData();
         }
+      } else if (e.ctrlKey && e.key.toLowerCase() === 'z') {
+        if (sessionActive && canUndo) {
+          e.preventDefault();
+          undo();
+        }
+      } else if (e.ctrlKey && e.key.toLowerCase() === 'y') {
+        if (sessionActive && canRedo) {
+          e.preventDefault();
+          redo();
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [sessionActive, records]);
+  }, [sessionActive, records, canUndo, canRedo]);
 
   if (loading) {
     return (
@@ -108,11 +142,55 @@ function AuditApp() {
   }
 
   // --- Scan Callbacks ---
-  const handleScanMatch = (product) => {
-    setActiveProduct({ ...product, isEditing: false });
+  const handleScanMatch = async (product) => {
+    if (rapidScan) {
+      try {
+        const existing = records.find(r => r.barcode === product.barcode && !r.batchNumber);
+        if (existing) {
+          const updated = {
+            ...existing,
+            looseQty: (existing.looseQty || 0) + 1,
+            netQty: (existing.netQty || 0) + 1
+          };
+          await updateRecord(updated);
+        } else {
+          const newRecord = {
+            barcode: product.barcode,
+            itemCode: product.itemCode || 'MANUAL',
+            itemName: product.itemName || '',
+            product: product.product || 'MANUAL',
+            subCategory: product.subCategory || 'MANUAL',
+            skuType: product.skuType || 'RETAIL',
+            packType: product.packType || 'BOX',
+            hsn: product.hsn || '',
+            boxQty: 0,
+            looseQty: 1,
+            unitsPerBox: Number(product.unitsPerBox) || 1,
+            netQty: 1,
+            mrp: Number(product.mrp) || 0,
+            mfd: null,
+            exp: null,
+            batchNumber: '',
+            remarks: 'Rapid Scanned'
+          };
+          await addRecord(newRecord);
+        }
+        playScanBeep('success');
+        triggerSuccessVibe();
+      } catch (err) {
+        console.error('Failed to rapid save record:', err);
+        playScanBeep('error');
+        triggerErrorVibe();
+      }
+    } else {
+      setActiveProduct({ ...product, isEditing: false });
+      triggerSuccessVibe();
+    }
   };
 
   const handleScanNotFound = (barcode) => {
+    playScanBeep('error'); // Play buzz beep on not found
+    triggerErrorVibe();
     setActiveProduct({
       barcode,
       itemCode: 'UNREG',
@@ -128,15 +206,60 @@ function AuditApp() {
   };
 
   const handleScanMultiple = (barcode, options) => {
+    playScanBeep('warning'); // Play alert tone for multiple SKUs resolved
+    triggerWarningVibe();
     setSkuModalBarcode(barcode);
     setSkuModalOptions(options);
     setSkuModalOpen(true);
   };
 
   // --- Sku Resolution Callbacks ---
-  const handleSkuSelect = (selectedProduct) => {
-    setActiveProduct({ ...selectedProduct, isEditing: false });
-    setSkuModalOpen(false);
+  const handleSkuSelect = async (selectedProduct) => {
+    if (rapidScan) {
+      try {
+        const existing = records.find(r => r.barcode === selectedProduct.barcode && !r.batchNumber);
+        if (existing) {
+          const updated = {
+            ...existing,
+            looseQty: (existing.looseQty || 0) + 1,
+            netQty: (existing.netQty || 0) + 1
+          };
+          await updateRecord(updated);
+        } else {
+          const newRecord = {
+            barcode: selectedProduct.barcode,
+            itemCode: selectedProduct.itemCode || 'MANUAL',
+            itemName: selectedProduct.itemName || '',
+            product: selectedProduct.product || 'MANUAL',
+            subCategory: selectedProduct.subCategory || 'MANUAL',
+            skuType: selectedProduct.skuType || 'RETAIL',
+            packType: selectedProduct.packType || 'BOX',
+            hsn: selectedProduct.hsn || '',
+            boxQty: 0,
+            looseQty: 1,
+            unitsPerBox: Number(selectedProduct.unitsPerBox) || 1,
+            netQty: 1,
+            mrp: Number(selectedProduct.mrp) || 0,
+            mfd: null,
+            exp: null,
+            batchNumber: '',
+            remarks: 'Rapid Scanned'
+          };
+          await addRecord(newRecord);
+        }
+        playScanBeep('success');
+        triggerSuccessVibe();
+      } catch (err) {
+        console.error('Failed to rapid save resolved Sku:', err);
+        playScanBeep('error');
+        triggerErrorVibe();
+      }
+      setSkuModalOpen(false);
+    } else {
+      setActiveProduct({ ...selectedProduct, isEditing: false });
+      triggerSuccessVibe();
+      setSkuModalOpen(false);
+    }
   };
 
   const handleSkuCancel = () => {
@@ -218,11 +341,11 @@ function AuditApp() {
       {/* Header Shell */}
       <header className="sticky top-0 z-30 bg-slate-950/80 backdrop-blur-md border-b border-slate-850 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <img 
               src="/logo.png" 
               alt="Audit Avengers Logo" 
-              className="h-12 w-auto object-contain"
+              className="h-9 sm:h-12 w-auto object-contain"
               onError={(e) => {
                 // Fail-safe icon fallback if logo is not found
                 e.target.style.display = 'none';
@@ -230,17 +353,44 @@ function AuditApp() {
               }}
             />
             {/* Fail-safe fallback container */}
-            <div className="hidden h-10 w-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 items-center justify-center shadow-lg font-black text-slate-950">
+            <div className="hidden h-8 w-8 sm:h-10 sm:w-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 items-center justify-center shadow-lg font-black text-slate-950">
               AA
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-amber-500 block">Enterprise Service</span>
-              <h1 className="text-sm font-black tracking-wider text-slate-50 uppercase">Audit Avengers</h1>
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="hidden xs:block text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-500">Enterprise Service</span>
+                {isOnline ? (
+                  <span className="px-1.5 py-0.2 bg-emerald-500/10 text-emerald-450 border border-emerald-500/20 text-[8px] font-extrabold rounded-md uppercase tracking-wider">
+                    Online
+                  </span>
+                ) : (
+                  <span className="px-1.5 py-0.2 bg-rose-500/10 text-rose-450 border border-rose-500/20 text-[8px] font-extrabold rounded-md uppercase tracking-wider animate-pulse">
+                    Offline Mode
+                  </span>
+                )}
+                {sessionMetadata?.locked && (
+                  <span className="px-1.5 py-0.2 bg-rose-600 text-slate-950 text-[8px] font-black rounded-md uppercase tracking-wider">
+                    Locked
+                  </span>
+                )}
+              </div>
+              <h1 className="text-xs sm:text-sm font-black tracking-wider text-slate-50 uppercase">Audit Avengers</h1>
             </div>
           </div>
 
           {sessionActive && (
             <div className="flex items-center gap-2">
+              {/* Session Backup Button */}
+              <button
+                type="button"
+                onClick={downloadSessionSnapshot}
+                title="Download Session Snapshot Backup"
+                className="flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-750 text-slate-350 hover:bg-slate-800 transition cursor-pointer shrink-0"
+              >
+                <FileDown className="h-4.5 w-4.5 text-emerald-500" />
+                <span className="hidden sm:inline text-xs font-bold ml-1.5">Backup</span>
+              </button>
+
               {/* Columns Selector Button */}
               <button
                 type="button"
@@ -277,7 +427,7 @@ function AuditApp() {
       </header>
 
       {/* Main Workspace */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 z-10">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-24 md:pb-6 z-10">
         
         {!sessionActive ? (
           
@@ -314,40 +464,91 @@ function AuditApp() {
                 </div>
               </div>
 
-              <div className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
-                <span>Start Time:</span>
-                <span>{new Date(sessionMetadata.startTime).toLocaleTimeString()}</span>
+              <div className="flex flex-wrap items-center justify-between w-full sm:w-auto gap-3">
+                <div className="text-[10px] text-slate-550 font-mono flex items-center gap-1.5">
+                  <span>Start Time:</span>
+                  <span className="text-slate-350">{new Date(sessionMetadata.startTime).toLocaleTimeString()}</span>
+                </div>
+
+                <div>
+                  {sessionMetadata.locked ? (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const pin = prompt('Enter Supervisor PIN to Unlock:');
+                        if (pin === '1234') {
+                          toggleSupervisorLock(false);
+                          triggerLockVibe();
+                          alert('Audit session unlocked successfully.');
+                        } else if (pin !== null) {
+                          alert('Invalid Supervisor PIN.');
+                        }
+                      }}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 transition text-[10px] font-bold cursor-pointer"
+                    >
+                      Unlock Session
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const pin = prompt('Set Supervisor PIN to Lock:');
+                        if (pin === '1234') {
+                          toggleSupervisorLock(true);
+                          triggerLockVibe();
+                          alert('Audit session is now locked (Read-Only).');
+                        } else if (pin !== null) {
+                          alert('Action aborted.');
+                        }
+                      }}
+                      className="flex items-center gap-1 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-750 text-slate-300 border border-slate-750 transition text-[10px] font-bold cursor-pointer"
+                    >
+                      Lock Session
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* TAB SELECTOR CONTROL */}
-            <div className="flex border-b border-slate-800">
+            <div className="flex border-b border-slate-800 w-full">
               <button
                 onClick={() => setActiveTab('scan')}
-                className={`px-6 py-3.5 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
+                className={`flex-1 justify-center px-3 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center gap-1.5 ${
                   activeTab === 'scan'
                     ? 'border-amber-500 text-amber-450 bg-slate-900/10'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <ClipboardCheck className="h-4 w-4" />
-                Audit Scanner Workspace
+                <ClipboardCheck className="h-4 w-4 shrink-0" />
+                <span>Scanner</span>
               </button>
               <button
                 onClick={() => setActiveTab('reconciliation')}
-                className={`px-6 py-3.5 text-sm font-bold border-b-2 transition-all flex items-center gap-2 ${
+                className={`flex-1 justify-center px-3 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center gap-1.5 ${
                   activeTab === 'reconciliation'
                     ? 'border-amber-500 text-amber-450 bg-slate-900/10'
                     : 'border-transparent text-slate-400 hover:text-slate-200'
                 }`}
               >
-                <Layers className="h-4 w-4" />
-                Variance Reconciliation
+                <Layers className="h-4 w-4 shrink-0" />
+                <span className="truncate">Reconciliation</span>
                 {sessionMetadata.hasBookStock && (
-                  <span className="ml-1 text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.2 rounded-full font-bold">
+                  <span className="ml-1 text-[8px] sm:text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-1.5 py-0.2 rounded-full font-bold shrink-0">
                     Active
                   </span>
                 )}
+              </button>
+              <button
+                onClick={() => setActiveTab('analytics')}
+                className={`flex-1 justify-center px-3 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all flex items-center gap-1.5 ${
+                  activeTab === 'analytics'
+                    ? 'border-amber-500 text-amber-450 bg-slate-900/10'
+                    : 'border-transparent text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <BarChart2 className="h-4 w-4 shrink-0" />
+                <span>Analytics</span>
               </button>
             </div>
 
@@ -366,6 +567,8 @@ function AuditApp() {
                   onScanMultiple={handleScanMultiple}
                   isEditing={isEditing}
                   recordsCount={records.length}
+                  rapidScan={rapidScan}
+                  setRapidScan={setRapidScan}
                 />
 
                 {/* SKU Resolution Modal */}
@@ -397,11 +600,18 @@ function AuditApp() {
                 />
               </div>
 
-            ) : (
+            ) : activeTab === 'reconciliation' ? (
 
               /* WORKSPACE B: Variance Reconciliation Sheet */
               <div className="animate-fade-in">
                 <Reconciliation />
+              </div>
+
+            ) : (
+
+              /* WORKSPACE C: Analytics & Chronological Timeline */
+              <div className="animate-fade-in">
+                <AuditAnalytics />
               </div>
 
             )}
@@ -582,6 +792,50 @@ function AuditApp() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Floating Bottom Nav for Mobile */}
+      {sessionActive && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 bg-slate-950/90 backdrop-blur-md border-t border-slate-850 px-4 py-2.5 flex items-center justify-around md:hidden shadow-lg">
+          <button
+            onClick={() => {
+              setActiveTab('scan');
+              triggerSuccessVibe();
+            }}
+            className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition ${
+              activeTab === 'scan' ? 'text-amber-500 font-bold' : 'text-slate-400'
+            }`}
+          >
+            <ClipboardCheck className="h-5 w-5" />
+            <span className="text-[9px]">Scanner</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('reconciliation');
+              triggerSuccessVibe();
+            }}
+            className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition ${
+              activeTab === 'reconciliation' ? 'text-amber-500 font-bold' : 'text-slate-400'
+            }`}
+          >
+            <Layers className="h-5 w-5" />
+            <span className="text-[9px]">Variance</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('analytics');
+              triggerSuccessVibe();
+            }}
+            className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition ${
+              activeTab === 'analytics' ? 'text-amber-500 font-bold' : 'text-slate-400'
+            }`}
+          >
+            <BarChart2 className="h-5 w-5" />
+            <span className="text-[9px]">Analytics</span>
+          </button>
         </div>
       )}
 

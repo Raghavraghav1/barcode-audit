@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { 
   getRecords, 
   saveRecord, 
@@ -13,9 +13,12 @@ import {
   clearBookStock,
   getBookStock,
   saveTemplate,
-  getAllTemplates
+  getAllTemplates,
+  saveSessionToHistory,
+  getSessionHistory
 } from '../services/db';
 import { exportAuditToExcel } from '../services/excel';
+import useUndoRedo from '../hooks/useUndoRedo';
 
 const SessionContext = createContext();
 
@@ -33,17 +36,31 @@ export const SessionProvider = ({ children }) => {
   const [records, setRecords] = useState([]);
   const [bookStock, setBookStock] = useState([]);
   const [templates, setTemplates] = useState([]);
+  const [sessionHistory, setSessionHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   
   // Setup Wizard Step: 'metadata' | 'master_upload' | 'book_stock_upload' | 'active'
   const [setupStep, setSetupStep] = useState('metadata');
 
-  // Load active session and templates on startup
+  const {
+    canUndo,
+    canRedo,
+    recordAction,
+    undo: triggerUndo,
+    redo: triggerRedo,
+    clearHistory,
+    actionLog
+  } = useUndoRedo();
+
+  // Load active session, templates, and history on startup
   useEffect(() => {
     const initSession = async () => {
       try {
         const savedTemplates = await getAllTemplates();
         setTemplates(savedTemplates || []);
+
+        const history = await getSessionHistory();
+        setSessionHistory(history || []);
 
         const metadata = await getSessionMetadata();
         if (metadata) {
@@ -84,6 +101,7 @@ export const SessionProvider = ({ children }) => {
       setSessionActive(false);
       setRecords([]);
       setBookStock([]);
+      clearHistory();
       
       await clearRecords();
       await clearMasterItems();
@@ -98,7 +116,6 @@ export const SessionProvider = ({ children }) => {
   const saveMasterCatalog = async (items, mapping) => {
     setLoading(true);
     try {
-      // Add a generated id field for autoIncrement keys, and store mapped fields
       await saveMasterItems(items);
       
       const updatedMetadata = {
@@ -182,13 +199,65 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
+  const goToStep = async (step) => {
+    setLoading(true);
+    try {
+      const updatedMetadata = {
+        ...sessionMetadata,
+        setupStep: step
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+      setSetupStep(step);
+    } catch (err) {
+      console.error('Failed to change step:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const toggleSupervisorLock = async (locked) => {
+    setLoading(true);
+    try {
+      const updatedMetadata = {
+        ...sessionMetadata,
+        locked: !!locked
+      };
+      await saveSessionMetadata(updatedMetadata);
+      setSessionMetadata(updatedMetadata);
+    } catch (err) {
+      console.error('Failed to toggle supervisor lock:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const endSession = async () => {
     setLoading(true);
     try {
+      if (sessionMetadata) {
+        // Save current session to history log
+        const historyData = {
+          clientName: sessionMetadata.clientName,
+          auditor: sessionMetadata.auditor,
+          location: sessionMetadata.location,
+          auditDate: sessionMetadata.auditDate,
+          startTime: sessionMetadata.startTime,
+          endTime: new Date().toISOString(),
+          totalScans: records.length,
+          totalQty: records.reduce((sum, r) => sum + (Number(r.netQty) || 0), 0)
+        };
+        await saveSessionToHistory(historyData);
+        // Refresh session history list
+        const history = await getSessionHistory();
+        setSessionHistory(history || []);
+      }
+
       await clearSessionMetadata();
       await clearRecords();
       await clearMasterItems();
       await clearBookStock();
+      clearHistory();
       
       setSessionMetadata(null);
       setSessionActive(false);
@@ -202,10 +271,14 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const addRecord = async (recordData) => {
+  const addRecord = async (recordData, skipHistory = false) => {
     try {
       const saved = await saveRecord(recordData);
       setRecords((prev) => [saved, ...prev]);
+      
+      if (!skipHistory) {
+        recordAction({ type: 'ADD', record: saved });
+      }
       return saved;
     } catch (err) {
       console.error('Failed to save record:', err);
@@ -213,10 +286,15 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const updateRecord = async (updatedData) => {
+  const updateRecord = async (updatedData, skipHistory = false) => {
     try {
+      const before = records.find(r => r.id === updatedData.id);
       const saved = await saveRecord(updatedData);
       setRecords((prev) => prev.map((r) => (r.id === saved.id ? saved : r)));
+      
+      if (!skipHistory && before) {
+        recordAction({ type: 'EDIT', before, after: saved });
+      }
       return saved;
     } catch (err) {
       console.error('Failed to update record:', err);
@@ -224,15 +302,58 @@ export const SessionProvider = ({ children }) => {
     }
   };
 
-  const removeRecord = async (id) => {
+  const removeRecord = async (id, skipHistory = false) => {
     try {
+      const before = records.find(r => r.id === id);
       await dbDeleteRecord(id);
       setRecords((prev) => prev.filter((r) => r.id !== id));
+      
+      if (!skipHistory && before) {
+        recordAction({ type: 'DELETE', record: before });
+      }
     } catch (err) {
       console.error('Failed to delete record:', err);
       throw err;
     }
   };
+
+  const undo = useCallback(() => {
+    triggerUndo(async (action) => {
+      try {
+        if (action.type === 'ADD') {
+          await dbDeleteRecord(action.record.id);
+          setRecords((prev) => prev.filter((r) => r.id !== action.record.id));
+        } else if (action.type === 'DELETE') {
+          const saved = await saveRecord(action.record);
+          setRecords((prev) => [saved, ...prev]);
+        } else if (action.type === 'EDIT') {
+          const saved = await saveRecord(action.before);
+          setRecords((prev) => prev.map((r) => (r.id === saved.id ? saved : r)));
+        }
+      } catch (err) {
+        console.error('Failed to execute undo write:', err);
+      }
+    });
+  }, [triggerUndo]);
+
+  const redo = useCallback(() => {
+    triggerRedo(async (action) => {
+      try {
+        if (action.type === 'ADD') {
+          const saved = await saveRecord(action.record);
+          setRecords((prev) => [saved, ...prev]);
+        } else if (action.type === 'DELETE') {
+          await dbDeleteRecord(action.record.id);
+          setRecords((prev) => prev.filter((r) => r.id !== action.record.id));
+        } else if (action.type === 'EDIT') {
+          const saved = await saveRecord(action.after);
+          setRecords((prev) => prev.map((r) => (r.id === saved.id ? saved : r)));
+        }
+      } catch (err) {
+        console.error('Failed to execute redo write:', err);
+      }
+    });
+  }, [triggerRedo]);
 
   const saveMappingTemplate = async (clientName, mapping, bookMapping = {}) => {
     try {
@@ -244,7 +365,6 @@ export const SessionProvider = ({ children }) => {
       };
       await saveTemplate(template);
       
-      // Update local templates list
       const savedTemplates = await getAllTemplates();
       setTemplates(savedTemplates || []);
     } catch (err) {
@@ -260,6 +380,59 @@ export const SessionProvider = ({ children }) => {
     exportAuditToExcel(records, sessionMetadata, bookStock);
   };
 
+  const downloadSessionSnapshot = () => {
+    const snapshot = {
+      app: 'BarcodeAudit',
+      version: '1.0.0',
+      exportedAt: new Date().toISOString(),
+      metadata: sessionMetadata,
+      records: records,
+      bookStock: bookStock
+    };
+    const blob = new Blob([JSON.stringify(snapshot, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `AuditSnapshot_${sessionMetadata?.clientName || 'Backup'}_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const importSessionSnapshot = async (snapshot) => {
+    if (!snapshot || snapshot.app !== 'BarcodeAudit') {
+      throw new Error('Invalid session snapshot file format.');
+    }
+    setLoading(true);
+    try {
+      await saveSessionMetadata(snapshot.metadata);
+      setSessionMetadata(snapshot.metadata);
+      setSetupStep(snapshot.metadata.setupStep || 'active');
+      setSessionActive(true);
+
+      // Save records in batch
+      await clearRecords();
+      for (let i = 0; i < (snapshot.records || []).length; i++) {
+        await saveRecord(snapshot.records[i]);
+      }
+      setRecords(snapshot.records || []);
+
+      // Save book stock in batch
+      if (snapshot.bookStock) {
+        await saveBookStock(snapshot.bookStock);
+        setBookStock(snapshot.bookStock);
+      } else {
+        await clearBookStock();
+        setBookStock([]);
+      }
+      clearHistory();
+    } catch (err) {
+      console.error('Failed to import snapshot:', err);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SessionContext.Provider
       value={{
@@ -268,19 +441,29 @@ export const SessionProvider = ({ children }) => {
         records,
         bookStock,
         templates,
+        sessionHistory,
         setupStep,
         loading,
+        canUndo,
+        canRedo,
+        actionLog,
         startSetup,
         saveMasterCatalog,
         saveBookStockCatalog,
         skipBookStock,
         saveColumnPreferences,
+        goToStep,
+        toggleSupervisorLock,
         endSession,
         addRecord,
         updateRecord,
         removeRecord,
+        undo,
+        redo,
         saveMappingTemplate,
-        exportData
+        exportData,
+        downloadSessionSnapshot,
+        importSessionSnapshot
       }}
     >
       {children}

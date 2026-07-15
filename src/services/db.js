@@ -144,28 +144,19 @@ export const saveMasterItems = async (items) => {
     const transaction = db.transaction(STORE_MASTER, 'readwrite');
     const store = transaction.objectStore(STORE_MASTER);
     
-    // Clear existing master items first
+    transaction.oncomplete = () => {
+      resolve(true);
+    };
+    
+    transaction.onerror = (e) => {
+      reject(e.target.error);
+    };
+
     store.clear();
 
-    // Use fast sequential additions (or batch adds)
-    let index = 0;
-    
-    function addNext() {
-      if (index >= items.length) {
-        resolve(true);
-        return;
-      }
-      const req = store.add(items[index]);
-      req.onsuccess = () => {
-        index++;
-        addNext();
-      };
-      req.onerror = (e) => {
-        reject(e.target.error);
-      };
+    for (let i = 0; i < items.length; i++) {
+      store.add(items[i]);
     }
-    
-    addNext();
   });
 };
 
@@ -222,26 +213,19 @@ export const saveBookStock = async (stockItems) => {
     const transaction = db.transaction(STORE_BOOK_STOCK, 'readwrite');
     const store = transaction.objectStore(STORE_BOOK_STOCK);
     
+    transaction.oncomplete = () => {
+      resolve(true);
+    };
+    
+    transaction.onerror = (e) => {
+      reject(e.target.error);
+    };
+
     store.clear();
 
-    let index = 0;
-    
-    function addNext() {
-      if (index >= stockItems.length) {
-        resolve(true);
-        return;
-      }
-      const req = store.put(stockItems[index]);
-      req.onsuccess = () => {
-        index++;
-        addNext();
-      };
-      req.onerror = (e) => {
-        reject(e.target.error);
-      };
+    for (let i = 0; i < stockItems.length; i++) {
+      store.put(stockItems[i]);
     }
-    
-    addNext();
   });
 };
 
@@ -360,5 +344,34 @@ export const clearSessionMetadata = async () => {
     request.onerror = () => {
       reject(request.error);
     };
+  });
+};
+
+export const saveSessionToHistory = async (sessionData) => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_SESSION, 'readwrite');
+    const store = transaction.objectStore(STORE_SESSION);
+    const historyKey = `history_${sessionData.startTime || new Date().toISOString()}`;
+    const request = store.put({ key: historyKey, value: sessionData });
+    request.onsuccess = () => resolve(true);
+    request.onerror = () => reject(request.error);
+  });
+};
+
+export const getSessionHistory = async () => {
+  const db = await initDB();
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction(STORE_SESSION, 'readonly');
+    const store = transaction.objectStore(STORE_SESSION);
+    const request = store.getAll();
+    request.onsuccess = () => {
+      const results = request.result || [];
+      const historySessions = results
+        .filter(r => r.key && r.key.startsWith('history_'))
+        .map(r => r.value);
+      resolve(historySessions);
+    };
+    request.onerror = () => reject(request.error);
   });
 };

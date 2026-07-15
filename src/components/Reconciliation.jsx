@@ -437,8 +437,8 @@ export default function Reconciliation() {
         </div>
       </div>
 
-      {/* 3. Variance Table */}
-      <div className="overflow-x-auto border border-slate-750 rounded-xl bg-slate-950/20">
+      {/* 3. Variance Table (Desktop Only) */}
+      <div className="hidden md:block overflow-x-auto border border-slate-750 rounded-xl bg-slate-950/20">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
             <tr className="bg-slate-950/60 border-b border-slate-750 text-slate-300 font-semibold">
@@ -488,9 +488,9 @@ export default function Reconciliation() {
                   <td className="px-4 py-3 text-center">
                     <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${
                       item.status === 'matched'
-                        ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-450'
+                        ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-455'
                         : item.status === 'deficit'
-                        ? 'bg-rose-500/10 border-rose-500/20 text-rose-405'
+                        ? 'bg-rose-500/10 border-rose-500/20 text-rose-400'
                         : 'bg-amber-500/10 border-amber-500/20 text-amber-450'
                     }`}>
                       {item.status === 'matched' ? 'MATCHED' : item.status === 'deficit' ? 'DEFICIT' : 'SURPLUS'}
@@ -501,6 +501,74 @@ export default function Reconciliation() {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* 3. Variance Cards (Mobile View Only) */}
+      <div className="block md:hidden space-y-3">
+        {paginatedList.length === 0 ? (
+          <div className="text-center text-slate-500 font-medium py-10 bg-slate-950/15 border border-slate-800 rounded-xl">
+            No inventory discrepancies match the selected filter.
+          </div>
+        ) : (
+          paginatedList.map((item) => (
+            <div
+              key={item.barcode}
+              className={`bg-slate-900/50 backdrop-blur-md border p-4 rounded-xl flex flex-col gap-3 transition-colors ${
+                item.status === 'deficit'
+                  ? 'border-rose-500/20 bg-rose-955/5'
+                  : item.status === 'surplus'
+                  ? 'border-amber-500/20 bg-amber-955/5'
+                  : 'border-slate-850'
+              }`}
+            >
+              {/* Header: Item Name & Status */}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h4 className="font-bold text-sm text-slate-200 leading-tight">{item.itemName}</h4>
+                  <p className="text-[10px] text-slate-500 mt-1 font-semibold">Code: {item.itemCode}</p>
+                </div>
+                <span className={`inline-flex items-center justify-center px-2 py-0.5 rounded text-[10px] font-bold uppercase border shrink-0 ${
+                  item.status === 'matched'
+                    ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-455'
+                    : item.status === 'deficit'
+                    ? 'bg-rose-500/10 border-rose-500/20 text-rose-400'
+                    : 'bg-amber-500/10 border-amber-500/20 text-amber-455'
+                }`}>
+                  {item.status === 'matched' ? 'MATCHED' : item.status === 'deficit' ? 'DEFICIT' : 'SURPLUS'}
+                </span>
+              </div>
+
+              {/* Quantities Panel */}
+              <div className="grid grid-cols-3 gap-x-2 gap-y-1 text-xs border-y border-slate-800/80 py-2.5 my-0.5 text-center">
+                <div>
+                  <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Book Stock</span>
+                  <strong className="text-slate-350 text-base font-extrabold block mt-0.5">{item.bookQty}</strong>
+                </div>
+                <div>
+                  <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Scanned Qty</span>
+                  <strong className="text-slate-200 text-base font-extrabold block mt-0.5">{item.scannedQty}</strong>
+                </div>
+                <div>
+                  <span className="text-slate-550 font-bold block text-[9px] uppercase tracking-wider">Variance</span>
+                  <strong className={`text-base font-extrabold block mt-0.5 ${
+                    item.variance === 0 
+                      ? 'text-slate-400' 
+                      : item.variance < 0 
+                      ? 'text-rose-450' 
+                      : 'text-amber-450'
+                  }`}>
+                    {item.variance > 0 ? `+${item.variance}` : item.variance}
+                  </strong>
+                </div>
+              </div>
+
+              {/* Footer: Barcode */}
+              <div className="text-[10px] text-slate-550 font-mono">
+                Barcode: <span className="text-slate-400 font-semibold">{item.barcode}</span>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* 4. Pagination */}

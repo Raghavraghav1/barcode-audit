@@ -1,5 +1,6 @@
 import * as XLSX from 'xlsx';
 import { formatDateStr, formatDateTime, calculateShelfLifeMetrics } from '../utils/date';
+import { validateAuditRecord } from './validation';
 
 const formatDuration = (ms) => {
   if (ms < 0) return '0 secs';
@@ -15,11 +16,19 @@ const formatDuration = (ms) => {
   return parts.join(' ');
 };
 
+const sanitizeFormulaVal = (val) => {
+  if (typeof val === 'string' && /^[=\+\-\@\t\r]/.test(val)) {
+    return `'${val}`;
+  }
+  return val;
+};
+
 export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => {
   const auditor = sessionMetadata?.auditor || 'Unknown';
   const clientName = sessionMetadata?.clientName || 'Unknown';
   const location = sessionMetadata?.location || 'Unknown';
   const auditDate = sessionMetadata?.auditDate || '';
+  const scanType = sessionMetadata?.scanType || 'audit';
   
   // Mappings
   const mapping = sessionMetadata?.mapping || {};
@@ -34,8 +43,8 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     'Scanned At', 'Auditor', 'Location'
   ];
 
-  // 1. Prepare Audit Report Data
-  const auditData = records.map((r) => {
+  // 1. Prepare Scanned Records Data
+  const scannedRecordsData = records.map((r) => {
     const { shelvedDays, balDays, pct } = calculateShelfLifeMetrics(r.mfd, r.exp, auditDate);
     const fullRow = {
       'Barcode': r.barcode || '',
@@ -63,80 +72,83 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
       'Location': location
     };
 
-    // Filter columns based on user preferences
     const filteredRow = {};
     selectedColumns.forEach((colName) => {
       if (fullRow.hasOwnProperty(colName)) {
-        filteredRow[colName] = fullRow[colName];
+        filteredRow[colName] = sanitizeFormulaVal(fullRow[colName]);
       }
     });
 
-    // Dynamically append any mapped custom fields at the end of the row
     if (r.customFields) {
       Object.entries(r.customFields).forEach(([key, val]) => {
-        filteredRow[key] = val || '';
+        filteredRow[key] = sanitizeFormulaVal(val || '');
       });
     }
 
     return filteredRow;
   });
 
-  // 2. Prepare Exception Report Data
-  const exceptions = [];
-  const scannedBarcodes = new Set();
-
+  // 2. Prepare Exceptions Sheet Data
+  const exceptionsData = [];
   records.forEach((r) => {
-    if (r.barcode) {
-      scannedBarcodes.add(r.barcode);
-    }
-  });
-
-  records.forEach((r) => {
-    const reasons = [];
-
-    const qty = typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0;
-    if (qty <= 0) {
-      reasons.push('Quantity must be greater than 0');
-    }
-
-    const mrpVal = typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0;
-    if (mrpVal <= 0) {
-      reasons.push('MRP must be greater than 0');
-    }
-
-    if (r.mfd && r.exp) {
-      const mfdDate = new Date(r.mfd);
-      const expDate = new Date(r.exp);
-      if (!isNaN(mfdDate.getTime()) && !isNaN(expDate.getTime()) && expDate <= mfdDate) {
-        reasons.push('Expiry Date must be after Manufacturing Date');
-      }
-    }
-
-    const now = new Date();
-    if (r.mfd && new Date(r.mfd) > now) {
-      reasons.push('Manufacturing Date cannot be in the future');
-    }
-
-    if (reasons.length > 0) {
-      exceptions.push({
-        'Barcode': r.barcode || '',
-        'Item Code': r.itemCode || '',
-        'Item Name': r.itemName || '',
-        'Batch Number': r.batchNumber || '',
+    const errs = validateAuditRecord(r, r.isManualEntry);
+    if (Object.keys(errs).length > 0) {
+      const qty = typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0;
+      const mrpVal = typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0;
+      exceptionsData.push({
+        'Barcode': sanitizeFormulaVal(r.barcode || ''),
+        'Item Code': sanitizeFormulaVal(r.itemCode || ''),
+        'Item Name': sanitizeFormulaVal(r.itemName || ''),
+        'Batch Number': sanitizeFormulaVal(r.batchNumber || ''),
         'Net Qty': qty,
         'MRP': mrpVal,
-        'Exception Reason(s)': reasons.join('; '),
+        'Validation Issues': sanitizeFormulaVal(Object.values(errs).join('; ')),
         'Scanned At': formatDateTime(r.scannedAt),
-        'Auditor': auditor
+        'Auditor': sanitizeFormulaVal(auditor)
       });
     }
   });
 
-  // 3. Prepare Variance Reconciliation Report Data
+  // 3. Prepare Not Found (Manual Entries) Sheet Data
+  const notFoundData = records
+    .filter((r) => r.isManualEntry || r.itemCode === 'UNREG')
+    .map((r) => ({
+      'Barcode': sanitizeFormulaVal(r.barcode || ''),
+      'Manual Item Name': sanitizeFormulaVal(r.itemName || ''),
+      'Scanned Qty': typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0,
+      'MRP': typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0,
+      'Batch Number': sanitizeFormulaVal(r.batchNumber || ''),
+      'Scanned At': formatDateTime(r.scannedAt),
+      'Remarks': sanitizeFormulaVal(r.remarks || '')
+    }));
+
+  // 4. Prepare Duplicates Sheet Data
+  // Group by barcode + batch
+  const barcodeBatchCounts = {};
+  records.forEach((r) => {
+    const key = `${r.barcode || ''}_${(r.batchNumber || '').trim().toUpperCase()}`;
+    barcodeBatchCounts[key] = (barcodeBatchCounts[key] || 0) + 1;
+  });
+
+  const duplicatesData = records
+    .filter((r) => {
+      const key = `${r.barcode || ''}_${(r.batchNumber || '').trim().toUpperCase()}`;
+      return barcodeBatchCounts[key] > 1;
+    })
+    .map((r) => ({
+      'Barcode': sanitizeFormulaVal(r.barcode || ''),
+      'Item Code': sanitizeFormulaVal(r.itemCode || ''),
+      'Item Name': sanitizeFormulaVal(r.itemName || ''),
+      'Batch Number': sanitizeFormulaVal(r.batchNumber || ''),
+      'Qty': typeof r.netQty === 'number' ? r.netQty : Number(r.netQty) || 0,
+      'MRP': typeof r.mrp === 'number' ? r.mrp : Number(r.mrp) || 0,
+      'Scanned At': formatDateTime(r.scannedAt),
+      'Auditor': sanitizeFormulaVal(auditor)
+    }));
+
+  // 5. Prepare Variance Reconciliation Sheet Data
   const varianceReportData = [];
-  
   if (bookStock && bookStock.length > 0) {
-    // Map of barcode -> sum of physical scanned quantities
     const scannedQtyMap = {};
     records.forEach((r) => {
       if (r.barcode) {
@@ -145,7 +157,6 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
       }
     });
 
-    // Map of barcode -> book stock item
     const bookStockMap = {};
     bookStock.forEach((item) => {
       const barcode = String(item.barcode).trim();
@@ -154,7 +165,6 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
       }
     });
 
-    // Generate union of all barcodes
     const allBarcodes = new Set([
       ...Object.keys(bookStockMap),
       ...Object.keys(scannedQtyMap)
@@ -166,32 +176,30 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
       const bookQty = bookItem ? Number(bookItem.qty) || 0 : 0;
       const variance = scannedQty - bookQty;
 
-      // Find item details from physical records
       const physicalMatch = records.find(r => r.barcode === barcode);
-      const itemName = physicalMatch ? physicalMatch.itemName : `Item ${barcode}`;
-      const itemCode = physicalMatch ? physicalMatch.itemCode : 'MANUAL';
+      const itemName = physicalMatch ? physicalMatch.itemName : (bookItem?.itemName || `Item ${barcode}`);
+      const itemCode = physicalMatch ? physicalMatch.itemCode : (bookItem?.itemCode || 'ERP_STOCK');
       
       let status = 'MATCHED';
       if (variance < 0) status = 'DEFICIT (MISSING)';
       if (variance > 0) status = 'SURPLUS (EXCESS)';
 
       varianceReportData.push({
-        'Barcode': barcode,
-        'Item Code': itemCode,
-        'Item Name': itemName,
+        'Barcode': sanitizeFormulaVal(barcode),
+        'Item Code': sanitizeFormulaVal(itemCode),
+        'Item Name': sanitizeFormulaVal(itemName),
         'Book Stock Qty (System)': bookQty,
         'Physical Scanned Qty': scannedQty,
         'Variance (Diff)': variance,
-        'Reconciliation Status': status
+        'Reconciliation Status': sanitizeFormulaVal(status)
       });
     });
   }
 
-  // 4. Prepare Summary Report Data
+  // 6. Prepare Dashboard & Summary Data
   let earliestScan = null;
   let latestScan = null;
   let totalQty = 0;
-
   records.forEach((r) => {
     if (r.scannedAt) {
       const d = new Date(r.scannedAt);
@@ -207,58 +215,97 @@ export const exportAuditToExcel = (records, sessionMetadata, bookStock = []) => 
     durationStr = formatDuration(diff);
   }
 
-  const summaryData = [
-    { 'Metric': 'Client Name', 'Value': clientName },
-    { 'Metric': 'Auditor Name', 'Value': auditor },
-    { 'Metric': 'Location', 'Value': location },
-    { 'Metric': 'Audit Date', 'Value': formatDateStr(auditDate) || formatDateStr(new Date().toISOString().split('T')[0]) },
-    { 'Metric': 'Total Scanned Entries', 'Value': records.length },
-    { 'Metric': 'Unique Products Scanned', 'Value': scannedBarcodes.size },
-    { 'Metric': 'Total Verified Item Quantity', 'Value': totalQty },
-    { 'Metric': 'Validation Exceptions Found', 'Value': exceptions.length },
-    { 'Metric': 'Audit Time Duration', 'Value': durationStr },
-    { 'Metric': 'First Scan Timestamp', 'Value': earliestScan ? formatDateTime(earliestScan.toISOString()) : 'N/A' },
-    { 'Metric': 'Last Scan Timestamp', 'Value': latestScan ? formatDateTime(latestScan.toISOString()) : 'N/A' }
+  const scannedBarcodes = new Set(records.map(r => r.barcode).filter(Boolean));
+
+  const dashboardData = [
+    { 'Metric Name': '--- AUDIT PARAMETERS ---', 'Value': '' },
+    { 'Metric Name': 'Client Name', 'Value': sanitizeFormulaVal(clientName) },
+    { 'Metric Name': 'Auditor Name', 'Value': sanitizeFormulaVal(auditor) },
+    { 'Metric Name': 'Location / Warehouse', 'Value': sanitizeFormulaVal(location) },
+    { 'Metric Name': 'Audit Date', 'Value': sanitizeFormulaVal(formatDateStr(auditDate) || formatDateStr(new Date().toISOString().split('T')[0])) },
+    { 'Metric Name': 'Audit Flow Type', 'Value': scanType.toUpperCase() },
+    { 'Metric Name': 'Start Time', 'Value': sessionMetadata?.startTime ? formatDateTime(sessionMetadata.startTime) : 'N/A' },
+    
+    { 'Metric Name': '--- SCANNED STATISTICS ---', 'Value': '' },
+    { 'Metric Name': 'Total Scanned Records', 'Value': records.length },
+    { 'Metric Name': 'Unique Barcodes Scanned', 'Value': scannedBarcodes.size },
+    { 'Metric Name': 'Total Physical Verified Quantity', 'Value': totalQty },
+    
+    { 'Metric Name': '--- AUDIT INTEGRITY METRICS ---', 'Value': '' },
+    { 'Metric Name': 'Validation Exceptions', 'Value': exceptionsData.length },
+    { 'Metric Name': 'Manual / Unregistered Items Scanned', 'Value': notFoundData.length },
+    { 'Metric Name': 'Duplicate Scans Found', 'Value': duplicatesData.length },
+    
+    { 'Metric Name': '--- DURATION METRICS ---', 'Value': '' },
+    { 'Metric Name': 'Active Audit Duration', 'Value': sanitizeFormulaVal(durationStr) },
+    { 'Metric Name': 'First Scan Stamp', 'Value': earliestScan ? formatDateTime(earliestScan.toISOString()) : 'N/A' },
+    { 'Metric Name': 'Last Scan Stamp', 'Value': latestScan ? formatDateTime(latestScan.toISOString()) : 'N/A' }
   ];
 
-  // 5. Create Workbook
+  // 7. Assemble Workbook Sheets
   const wb = XLSX.utils.book_new();
 
-  const wsAudit = XLSX.utils.json_to_sheet(auditData);
-  const wsException = XLSX.utils.json_to_sheet(exceptions);
-  const wsSummary = XLSX.utils.json_to_sheet(summaryData);
+  // Helper function to prepare sheet settings (frozen headers, column widths)
+  const configureSheet = (ws, data) => {
+    // Enable Autofilters
+    ws['!autofilter'] = { ref: ws['!ref'] };
 
-  // Auto-fit column widths
-  const fitWidth = (data) => {
-    if (!data || data.length === 0) return [];
-    const keys = Object.keys(data[0]);
-    return keys.map((key) => {
-      let maxLen = key.toString().length;
-      data.forEach((row) => {
-        const val = row[key];
-        if (val !== undefined && val !== null) {
-          maxLen = Math.max(maxLen, val.toString().length);
-        }
+    // Freeze Header Row (Row 1)
+    ws['!views'] = [
+      { state: 'frozen', ySplit: 1, xSplit: 0, topLeftCell: 'A2', activePane: 'bottomLeft' }
+    ];
+
+    // Auto-fit widths
+    if (data && data.length > 0) {
+      const keys = Object.keys(data[0]);
+      ws['!cols'] = keys.map((key) => {
+        let maxLen = key.toString().length;
+        data.forEach((row) => {
+          const val = row[key];
+          if (val !== undefined && val !== null) {
+            maxLen = Math.max(maxLen, val.toString().length);
+          }
+        });
+        return { wch: Math.min(maxLen + 3, 50) };
       });
-      return { wch: Math.min(maxLen + 3, 50) };
-    });
+    }
   };
 
-  wsAudit['!cols'] = fitWidth(auditData);
-  wsException['!cols'] = fitWidth(exceptions);
-  wsSummary['!cols'] = fitWidth(summaryData);
+  // Sheet A: Dashboard (No filters on Dashboard)
+  const wsDashboard = XLSX.utils.json_to_sheet(dashboardData);
+  wsDashboard['!cols'] = [{ wch: 35 }, { wch: 35 }];
+  XLSX.utils.book_append_sheet(wb, wsDashboard, 'Summary Dashboard');
 
-  XLSX.utils.book_append_sheet(wb, wsAudit, 'Audit Report');
-  XLSX.utils.book_append_sheet(wb, wsException, 'Exception Report');
-  
+  // Sheet B: Scanned Records
+  const wsScanned = XLSX.utils.json_to_sheet(scannedRecordsData);
+  configureSheet(wsScanned, scannedRecordsData);
+  XLSX.utils.book_append_sheet(wb, wsScanned, 'Scanned Records');
+
+  // Sheet C: Variance Reconciliation
   if (varianceReportData.length > 0) {
     const wsVariance = XLSX.utils.json_to_sheet(varianceReportData);
-    wsVariance['!cols'] = fitWidth(varianceReportData);
+    configureSheet(wsVariance, varianceReportData);
     XLSX.utils.book_append_sheet(wb, wsVariance, 'Variance Reconciliation');
   }
 
-  XLSX.utils.book_append_sheet(wb, wsSummary, 'Summary Report');
+  // Sheet D: Validation Exceptions
+  const wsExceptions = XLSX.utils.json_to_sheet(exceptionsData);
+  configureSheet(wsExceptions, exceptionsData);
+  XLSX.utils.book_append_sheet(wb, wsExceptions, 'Validation Exceptions');
 
-  const fileName = `Audit_Avengers_Report_${clientName.replace(/\s+/g, '_')}_${formatDateTime(new Date()).split(' ')[0]}.xlsx`;
+  // Sheet E: Not Found
+  const wsNotFound = XLSX.utils.json_to_sheet(notFoundData);
+  configureSheet(wsNotFound, notFoundData);
+  XLSX.utils.book_append_sheet(wb, wsNotFound, 'Not Found (Manual)');
+
+  // Sheet F: Duplicates
+  const wsDuplicates = XLSX.utils.json_to_sheet(duplicatesData);
+  configureSheet(wsDuplicates, duplicatesData);
+  XLSX.utils.book_append_sheet(wb, wsDuplicates, 'Session Duplicates');
+
+  // Save Workbook
+  const dateStr = new Date().toISOString().split('T')[0];
+  const cleanClientName = clientName.replace(/\s+/g, '_');
+  const fileName = `AuditReport_${cleanClientName}_${dateStr}.xlsx`;
   XLSX.writeFile(wb, fileName);
 };

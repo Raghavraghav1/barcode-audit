@@ -1,8 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { Search, ChevronUp, ChevronDown, Trash2, Edit2, AlertCircle, Layers, CheckSquare, Square } from 'lucide-react';
 import { formatDateStr } from '../utils/date';
+import { useSession } from '../store/SessionContext';
 
 export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
+  const { sessionMetadata } = useSession();
+  const locked = sessionMetadata?.locked || false;
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterSkuType, setFilterSkuType] = useState('all');
@@ -152,7 +155,7 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
           </h2>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
-            {selectedIds.size > 0 && (
+            {!locked && selectedIds.size > 0 && (
               <button
                 type="button"
                 onClick={handleBulkDeleteSubmit}
@@ -359,28 +362,34 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
                     </td>
 
                     <td className="px-4 py-3">
-                      <div className="flex items-center justify-center gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => onEdit(row)}
-                          title="Edit this record"
-                          className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 hover:text-amber-400 hover:border-amber-500/30 transition shadow-sm"
-                        >
-                          <Edit2 className="h-3.5 w-3.5" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (window.confirm('Delete this audit entry?')) {
-                              onDelete(row.id);
-                            }
-                          }}
-                          title="Delete this record"
-                          className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 hover:text-rose-455 hover:border-rose-500/30 transition shadow-sm"
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
+                      {!locked ? (
+                        <div className="flex items-center justify-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => onEdit(row)}
+                            title="Edit this record"
+                            className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 hover:text-amber-400 hover:border-amber-500/30 transition shadow-sm cursor-pointer"
+                          >
+                            <Edit2 className="h-3.5 w-3.5" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (window.confirm('Delete this audit entry?')) {
+                                onDelete(row.id);
+                              }
+                            }}
+                            title="Delete this record"
+                            className="p-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-400 hover:text-rose-455 hover:border-rose-500/30 transition shadow-sm cursor-pointer"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="text-center text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                          Locked
+                        </div>
+                      )}
                     </td>
                   </tr>
                 );
@@ -427,28 +436,34 @@ export default function AuditGrid({ records, onEdit, onDelete, onBulkDelete }) {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 shrink-0">
-                    <button
-                      type="button"
-                      onClick={() => onEdit(row)}
-                      className="p-2 bg-slate-800 hover:bg-slate-750 text-amber-400 hover:text-amber-300 rounded-lg transition border border-slate-700"
-                      title="Edit Row"
-                    >
-                      <Edit2 className="h-3.5 w-3.5" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (window.confirm('Delete this audit entry?')) {
-                          onDelete(row.id);
-                        }
-                      }}
-                      className="p-2 bg-slate-800 hover:bg-slate-750 text-rose-400 hover:text-rose-350 rounded-lg transition border border-slate-700"
-                      title="Delete Row"
-                    >
-                      <Trash2 className="h-3.5 w-3.5" />
-                    </button>
-                  </div>
+                  {!locked ? (
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => onEdit(row)}
+                        className="p-2 bg-slate-800 hover:bg-slate-750 text-amber-400 hover:text-amber-300 rounded-lg transition border border-slate-700 cursor-pointer"
+                        title="Edit Row"
+                      >
+                        <Edit2 className="h-3.5 w-3.5" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (window.confirm('Delete this audit entry?')) {
+                            onDelete(row.id);
+                          }
+                        }}
+                        className="p-2 bg-slate-800 hover:bg-slate-750 text-rose-400 hover:text-rose-355 rounded-lg transition border border-slate-700 cursor-pointer"
+                        title="Delete Row"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <span className="text-[10px] text-slate-550 font-bold uppercase tracking-widest bg-slate-950 px-2 py-1 rounded border border-slate-850">
+                      Locked
+                    </span>
+                  )}
                 </div>
 
                 {/* Subtitle details */}

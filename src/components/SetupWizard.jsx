@@ -9,14 +9,17 @@ import {
 // Synonym mapping dictionaries for Auto-detection
 const MASTER_SYNONYMS = {
   barcodeCol: ['barcode', 'ean', 'upc', 'code', 'barcode number', 'item barcode', 'material barcode'],
-  nameCol: ['name', 'description', 'desc', 'title', 'item name', 'display name', 'material name', 'product name'],
-  itemCodeCol: ['itemcode', 'item code', 'material number', 'material no', 'material num', 'sku code', 'product code', 'id'],
-  productCol: ['product', 'group', 'category', 'department', 'family', 'division'],
-  subCategoryCol: ['subcategory', 'sub category', 'category', 'group'],
-  skuTypeCol: ['sku type', 'skutype', 'type', 'channel', 'status'],
-  packTypeCol: ['pack type', 'packtype', 'pack', 'packaging', 'container'],
-  hsnCol: ['hsn', 'hsn code', 'hsncode', 'tax code', 'taxcode'],
-  unitsPerBoxCol: ['unit/pack', 'units/pack', 'units per pack', 'units per box', 'pack size', 'box size', 'case size', 'qty/pack', 'qty per pack', 'quantity per pack']
+  nameCol: ['name', 'description', 'desc', 'title', 'item name', 'display name', 'material name', 'product name']
+};
+
+const EXTRA_SYNONYMS = {
+  'Item Code': ['itemcode', 'item code', 'material number', 'material no', 'material num', 'sku code', 'product code', 'id'],
+  'Product Group': ['product', 'group', 'category', 'department', 'family', 'division'],
+  'Sub Category': ['subcategory', 'sub category', 'category', 'group'],
+  'SKU Type': ['sku type', 'skutype', 'type', 'channel', 'status'],
+  'Pack Type': ['pack type', 'packtype', 'pack', 'packaging', 'container'],
+  'HSN': ['hsn', 'hsn code', 'hsncode', 'tax code', 'taxcode'],
+  'Units Per Box': ['unit/pack', 'units/pack', 'units per pack', 'units per box', 'pack size', 'box size', 'case size', 'qty/pack', 'qty per pack', 'quantity per pack']
 };
 
 const BOOK_SYNONYMS = {
@@ -25,7 +28,7 @@ const BOOK_SYNONYMS = {
 };
 
 // Smart columns auto-detection utility
-const autoDetectColumn = (headers, synonyms) => {
+const autoDetectColumn = (headers, synonyms, fallbackToFirst = false) => {
   if (!headers || headers.length === 0) return '';
   
   // Clean headers (lowercase, strip space/underscores)
@@ -46,7 +49,7 @@ const autoDetectColumn = (headers, synonyms) => {
     if (substring) return substring.raw;
   }
   
-  return headers[0]; // fallback
+  return fallbackToFirst ? headers[0] : '';
 };
 
 export default function SetupWizard() {
@@ -58,7 +61,8 @@ export default function SetupWizard() {
     saveBookStockCatalog,
     skipBookStock,
     saveColumnPreferences,
-    saveMappingTemplate
+    saveMappingTemplate,
+    goToStep
   } = useSession();
 
   const ALL_COLUMNS = [
@@ -103,14 +107,7 @@ export default function SetupWizard() {
   const [masterRows, setMasterRows] = useState([]);
   const [masterMapping, setMasterMapping] = useState({
     barcodeCol: '',
-    nameCol: '',
-    itemCodeCol: '',
-    productCol: '',
-    subCategoryCol: '',
-    skuTypeCol: '',
-    packTypeCol: '',
-    hsnCol: '',
-    unitsPerBoxCol: ''
+    nameCol: ''
   });
   const [customCols, setCustomCols] = useState([]); // Array of { id: string, key: string, col: string }
 
@@ -192,12 +189,30 @@ export default function SetupWizard() {
       setMasterHeaders(headers);
       setMasterRows(rows);
 
-      // Auto-detect mappings using synonyms
-      const newMapping = {};
-      Object.keys(MASTER_SYNONYMS).forEach(field => {
-        newMapping[field] = autoDetectColumn(headers, MASTER_SYNONYMS[field]);
-      });
+      // Auto-detect default mappings (Barcode and Product Name)
+      const newMapping = {
+        barcodeCol: autoDetectColumn(headers, MASTER_SYNONYMS.barcodeCol, true),
+        nameCol: autoDetectColumn(headers, MASTER_SYNONYMS.nameCol, true)
+      };
       setMasterMapping(newMapping);
+
+      // Auto-detect other columns as custom columns
+      const detectedCustomCols = [];
+      const usedHeaders = new Set([newMapping.barcodeCol, newMapping.nameCol]);
+      
+      Object.entries(EXTRA_SYNONYMS).forEach(([key, synonyms]) => {
+        const remainingHeaders = headers.filter(h => !usedHeaders.has(h));
+        const detected = autoDetectColumn(remainingHeaders, synonyms, false);
+        if (detected) {
+          detectedCustomCols.push({
+            id: String(Date.now() + Math.random()),
+            key,
+            col: detected
+          });
+          usedHeaders.add(detected);
+        }
+      });
+      setCustomCols(detectedCustomCols);
     } catch (err) {
       setMasterError(err.message || 'Failed to parse master file.');
       setMasterFile(null);
@@ -226,19 +241,39 @@ export default function SetupWizard() {
       const standardizedItems = masterRows.map((r) => {
         const item = {
           barcode: String(r[masterMapping.barcodeCol] || '').trim(),
-          itemCode: String(r[masterMapping.itemCodeCol] || '').trim(),
           itemName: String(r[masterMapping.nameCol] || '').trim(),
-          product: String(r[masterMapping.productCol] || '').trim(),
-          subCategory: String(r[masterMapping.subCategoryCol] || '').trim(),
-          skuType: String(r[masterMapping.skuTypeCol] || '').trim(),
-          packType: String(r[masterMapping.packTypeCol] || '').trim(),
-          hsn: String(r[masterMapping.hsnCol] || '').trim(),
-          unitsPerBox: Number(r[masterMapping.unitsPerBoxCol]) || 1,
+          itemCode: '',
+          product: '',
+          subCategory: '',
+          skuType: '',
+          packType: '',
+          hsn: '',
+          unitsPerBox: 1,
           customFields: {}
         };
         
         mappingWithCustom.customCols.forEach((cc) => {
-          item.customFields[cc.key.trim()] = String(r[cc.col] || '').trim();
+          const rawVal = String(r[cc.col] || '').trim();
+          const key = cc.key.trim();
+          const cleanKey = key.toLowerCase().replace(/[\s_\-]/g, '');
+          
+          if (['itemcode', 'code', 'productcode', 'id', 'materialnumber', 'materialno'].includes(cleanKey)) {
+            item.itemCode = rawVal;
+          } else if (['product', 'productgroup', 'productcategory', 'category', 'group', 'department', 'division'].includes(cleanKey)) {
+            item.product = rawVal;
+          } else if (['subcategory', 'subcategorycolumn', 'subcat'].includes(cleanKey)) {
+            item.subCategory = rawVal;
+          } else if (['skutype', 'type', 'channel', 'status'].includes(cleanKey)) {
+            item.skuType = rawVal;
+          } else if (['packtype', 'pack', 'packaging', 'container'].includes(cleanKey)) {
+            item.packType = rawVal;
+          } else if (['hsn', 'hsncode', 'taxcode'].includes(cleanKey)) {
+            item.hsn = rawVal;
+          } else if (['unitsperbox', 'units/box', 'unitsperpack', 'units/pack', 'packsize', 'boxsize', 'casesize', 'qty/pack', 'qtyperpack'].includes(cleanKey)) {
+            item.unitsPerBox = Number(rawVal) || 1;
+          }
+          
+          item.customFields[key] = rawVal;
         });
 
         return item;
@@ -644,97 +679,6 @@ export default function SetupWizard() {
                       {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
                     </select>
                   </div>
-
-                  {/* Item Code */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Item Code Column</label>
-                    <select
-                      value={masterMapping.itemCodeCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, itemCodeCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* Product Category */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Product Category Column</label>
-                    <select
-                      value={masterMapping.productCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, productCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* Sub category */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Sub-Category Column</label>
-                    <select
-                      value={masterMapping.subCategoryCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, subCategoryCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* SKU Type */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">SKU Type Column</label>
-                    <select
-                      value={masterMapping.skuTypeCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, skuTypeCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* Pack Type */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Pack Type Column</label>
-                    <select
-                      value={masterMapping.packTypeCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, packTypeCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* HSN */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">HSN Column</label>
-                    <select
-                      value={masterMapping.hsnCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, hsnCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
-
-                  {/* Units Per Box */}
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Units Per Box (Pack Size) Column</label>
-                    <select
-                      value={masterMapping.unitsPerBoxCol}
-                      onChange={(e) => setMasterMapping({ ...masterMapping, unitsPerBoxCol: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-sm text-slate-300 focus:outline-none focus:border-amber-500"
-                    >
-                      <option value="">-- Select Column --</option>
-                      {masterHeaders.map(h => <option key={h} value={h}>{h}</option>)}
-                    </select>
-                  </div>
                 </div>
 
                 {/* Custom Column Mappings Section */}
@@ -816,11 +760,18 @@ export default function SetupWizard() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-800">
+              <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => goToStep('metadata')}
+                  className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition text-sm font-semibold cursor-pointer"
+                >
+                  Back
+                </button>
                 <button
                   onClick={handleMasterIngest}
                   disabled={ingestingData || !masterMapping.barcodeCol || !masterMapping.nameCol}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-sm shadow-md transition disabled:opacity-40 flex items-center gap-1.5"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-sm shadow-md transition disabled:opacity-40 flex items-center gap-1.5 cursor-pointer"
                 >
                   {ingestingData ? 'Ingesting rows...' : 'Process Master File'}
                   <ArrowRight className="h-4 w-4" />
@@ -887,6 +838,17 @@ export default function SetupWizard() {
                   Skip & Start Audit
                 </button>
               </div>
+
+              {/* Navigation Button */}
+              <div className="flex items-center justify-start pt-4 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => goToStep('master_upload')}
+                  className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition text-sm font-semibold cursor-pointer"
+                >
+                  Back
+                </button>
+              </div>
             </div>
           ) : (
             /* Mapping Book Stock Form */
@@ -951,17 +913,26 @@ export default function SetupWizard() {
               </div>
 
               <div className="flex items-center justify-between pt-4 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={skipBookStock}
-                  className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-755 text-slate-400 hover:text-slate-200 transition text-sm font-semibold"
-                >
-                  Skip & Start Audit
-                </button>
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => goToStep('master_upload')}
+                    className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition text-sm font-semibold cursor-pointer"
+                  >
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    onClick={skipBookStock}
+                    className="px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition text-xs font-semibold"
+                  >
+                    Skip & Start Audit
+                  </button>
+                </div>
                 <button
                   onClick={handleBookIngest}
                   disabled={ingestingData || !bookMapping.barcodeCol || !bookMapping.qtyCol}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-sm shadow-md transition disabled:opacity-40 flex items-center gap-1.5"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold text-sm shadow-md transition disabled:opacity-40 flex items-center gap-1.5 cursor-pointer"
                 >
                   {ingestingData ? 'Processing...' : 'Reconcile & Start Audit'}
                   <CheckCircle2 className="h-4.5 w-4.5" />
@@ -1065,6 +1036,13 @@ export default function SetupWizard() {
 
           <div className="flex items-center justify-between pt-4 border-t border-slate-800">
             <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => goToStep('book_stock_upload')}
+                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition text-xs font-semibold cursor-pointer mr-2"
+              >
+                Back
+              </button>
               <button
                 type="button"
                 onClick={handleSelectAllCols}

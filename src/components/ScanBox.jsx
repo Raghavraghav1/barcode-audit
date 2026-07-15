@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Camera, CameraOff, Sparkles, RefreshCw, Volume2, Keyboard, Layers } from 'lucide-react';
 import { BrowserMultiFormatReader } from '@zxing/library';
 import { findMasterItemsByBarcode } from '../services/db';
+import { useSession } from '../store/SessionContext';
 
-const playScanBeep = (type = 'success') => {
+export const playScanBeep = (type = 'success') => {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const osc = ctx.createOscillator();
@@ -36,7 +37,10 @@ const playScanBeep = (type = 'success') => {
   }
 };
 
-export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, isEditing, recordsCount }) {
+export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, isEditing, recordsCount, rapidScan, setRapidScan }) {
+  const { sessionMetadata } = useSession();
+  const locked = sessionMetadata?.locked || false;
+
   const [inputValue, setInputValue] = useState('');
   const [status, setStatus] = useState('idle');
   const [statusMsg, setStatusMsg] = useState('Ready for input');
@@ -54,7 +58,7 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
   const controlsRef = useRef(null);
 
   useEffect(() => {
-    if (cameraActive || isEditing) return;
+    if (cameraActive || isEditing || locked) return;
     
     const focusInput = () => {
       if (inputRef.current) {
@@ -75,7 +79,7 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
     const handleKeyDown = (e) => {
       if (e.key === 'F2') {
         e.preventDefault();
-        focusInput();
+        if (!locked) focusInput();
       }
     };
 
@@ -243,12 +247,29 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                   View Verified Stock ({recordsCount || 0})
                 </button>
 
+                 {/* Rapid Scan Mode Toggle */}
+                <button
+                  type="button"
+                  onClick={() => setRapidScan(!rapidScan)}
+                  disabled={locked}
+                  title={rapidScan ? "Disable Rapid Scan Mode" : "Enable Rapid Scan Mode (Auto Save +1)"}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer disabled:opacity-50 disabled:pointer-events-none ${
+                    rapidScan 
+                      ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-slate-955 border-amber-400 font-extrabold shadow-sm' 
+                      : 'bg-slate-800 hover:bg-slate-750 text-slate-300 border-slate-750'
+                  }`}
+                >
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>{rapidScan ? "Rapid Scan ON" : "Rapid Scan Mode"}</span>
+                </button>
+
                 {/* Keyboard Block Toggle Button */}
                 <button
                   type="button"
                   onClick={() => setPreventKeyboard(!preventKeyboard)}
+                  disabled={locked}
                   title={preventKeyboard ? "Enable Virtual Keyboard" : "Block Virtual Keyboard (Mobile Scanner Mode)"}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition cursor-pointer disabled:opacity-50 disabled:pointer-events-none ${
                     preventKeyboard 
                       ? 'bg-amber-500 text-slate-950 border-amber-400 font-extrabold' 
                       : 'bg-slate-800 hover:bg-slate-750 text-slate-300 border-slate-750'
@@ -262,13 +283,14 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                 <button
                   type="button"
                   onClick={() => playScanBeep('success')}
+                  disabled={locked}
                   title="Test Sound"
-                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-705 text-slate-350 transition border border-slate-750"
+                  className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-750 text-slate-355 transition border border-slate-750 disabled:opacity-50 disabled:pointer-events-none"
                 >
                   <Volume2 className="h-4 w-4 text-amber-500" />
                 </button>
 
-                <span className="text-xs text-slate-400 bg-slate-950 px-2 py-1 rounded font-mono border border-slate-800">
+                <span className="hidden sm:inline-block text-xs text-slate-400 bg-slate-950 px-2 py-1 rounded font-mono border border-slate-800">
                   Shortcut: F2 Focus
                 </span>
               </div>
@@ -286,14 +308,14 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Scan or type barcode here (Auto-Focused)..."
-                disabled={cameraActive || status === 'searching'}
+                placeholder={locked ? "Audit Locked by Supervisor" : "Scan or type barcode here (Auto-Focused)..."}
+                disabled={cameraActive || status === 'searching' || locked}
                 inputMode={preventKeyboard ? 'none' : 'text'}
                 className="w-full bg-slate-950/80 border-2 border-slate-750 rounded-xl px-5 py-4 text-xl font-mono text-amber-400 placeholder-slate-600 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/20 disabled:bg-slate-900/60 disabled:text-slate-600 transition-all shadow-inner"
               />
               <button
                 type="submit"
-                disabled={cameraActive || status === 'searching'}
+                disabled={cameraActive || status === 'searching' || locked}
                 className="absolute right-3 top-1/2 -translate-y-1/2 bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 font-bold px-4 py-2 rounded-lg transition disabled:opacity-40"
               >
                 Scan (Enter)
@@ -333,7 +355,8 @@ export default function ScanBox({ onScanMatch, onScanNotFound, onScanMultiple, i
           <button
             type="button"
             onClick={() => setCameraActive(!cameraActive)}
-            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border font-bold text-sm transition ${
+            disabled={locked}
+            className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border font-bold text-sm transition disabled:opacity-50 disabled:pointer-events-none ${
               cameraActive
                 ? 'bg-rose-500/20 text-rose-300 border-rose-500/30 hover:bg-rose-500/30'
                 : 'bg-amber-500/10 text-amber-400 border-amber-500/20 hover:bg-amber-500/20 hover:border-amber-500/40 shadow-sm'

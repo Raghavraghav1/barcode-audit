@@ -4,6 +4,7 @@ import { useSession } from '../store/SessionContext';
 
 export default function AuditForm({ activeProduct, onSave, onCancel, existingRecords, setIsEditing }) {
   const { sessionMetadata } = useSession();
+  const locked = sessionMetadata?.locked || false;
   const scanType = sessionMetadata?.scanType || 'audit';
 
   const [boxQty, setBoxQty] = useState('');
@@ -69,7 +70,7 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
     const barcode = activeProduct.barcode;
     
     const isDuplicateBatch = existingRecords.some(
-      (r) => r.barcode === barcode && r.batchNumber.trim().toUpperCase() === cleanBatch
+      (r) => r.id !== activeProduct.id && r.barcode === barcode && r.batchNumber.trim().toUpperCase() === cleanBatch
     );
 
     if (isDuplicateBatch) {
@@ -83,15 +84,15 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
     const handleKeyDown = (e) => {
       if (e.key === 'F2') {
         e.preventDefault();
-        handleSubmit(e);
+        if (!locked) handleSubmit(e);
       } else if (e.key === 'Escape') {
         e.preventDefault();
-        onCancel();
+        if (!locked) onCancel();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [boxQty, looseQty, unitsPerBox, mrp, mfd, exp, batchNumber, remarks, itemName, productGroup, skuType, packType, hsn, errors]);
+  }, [boxQty, looseQty, unitsPerBox, mrp, mfd, exp, batchNumber, remarks, itemName, productGroup, skuType, packType, hsn, errors, locked]);
 
   if (!activeProduct) {
     return (
@@ -161,6 +162,7 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
 
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
+    if (locked) return;
     if (!validate()) return;
 
     const bQty = Number(boxQty) || 0;
@@ -218,9 +220,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
-              disabled={!isNewBarcode}
+              disabled={!isNewBarcode || locked}
               className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium ${
-                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-300 border-slate-850'
+                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-355 border-slate-850'
               }`}
             />
             {errors.itemName && <p className="text-red-400 text-xs mt-1">{errors.itemName}</p>}
@@ -231,9 +233,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="text"
               value={productGroup}
               onChange={(e) => setProductGroup(e.target.value)}
-              disabled={!isNewBarcode}
+              disabled={!isNewBarcode || locked}
               className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium ${
-                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-300 border-slate-850'
+                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-355 border-slate-850'
               }`}
             />
           </div>
@@ -243,7 +245,8 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               <select
                 value={skuType}
                 onChange={(e) => setSkuType(e.target.value)}
-                className="w-full text-sm rounded bg-slate-950 border border-amber-500/30 text-amber-400 px-2.5 py-1.5 focus:outline-none"
+                disabled={locked}
+                className="w-full text-sm rounded bg-slate-950 border border-amber-500/30 text-amber-400 px-2.5 py-1.5 focus:outline-none disabled:opacity-50"
               >
                 <option value="RETAIL">RETAIL</option>
                 <option value="INSTITUTIONAL">INSTITUTIONAL</option>
@@ -265,7 +268,8 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               <select
                 value={packType}
                 onChange={(e) => setPackType(e.target.value)}
-                className="w-full text-sm rounded bg-slate-950 border border-amber-500/30 text-amber-400 px-2.5 py-1.5 focus:outline-none"
+                disabled={locked}
+                className="w-full text-sm rounded bg-slate-950 border border-amber-500/30 text-amber-400 px-2.5 py-1.5 focus:outline-none disabled:opacity-50"
               >
                 <option value="BOX">BOX</option>
                 <option value="POUCH">POUCH</option>
@@ -289,9 +293,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="text"
               value={hsn}
               onChange={(e) => setHsn(e.target.value)}
-              disabled={!isNewBarcode}
+              disabled={!isNewBarcode || locked}
               className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-mono ${
-                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-300 border-slate-850'
+                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-355 border-slate-850'
               }`}
             />
           </div>
@@ -318,8 +322,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               min="0"
               value={boxQty}
               onChange={(e) => setBoxQty(e.target.value)}
+              disabled={locked}
               placeholder="e.g. 2"
-              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 ${
+              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 disabled:opacity-50 ${
                 errors.quantity ? 'border-red-500' : 'border-slate-750'
               }`}
             />
@@ -333,8 +338,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               min="0"
               value={looseQty}
               onChange={(e) => setLooseQty(e.target.value)}
+              disabled={locked}
               placeholder="e.g. 5"
-              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 ${
+              className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium text-slate-200 disabled:opacity-50 ${
                 errors.quantity ? 'border-red-500' : 'border-slate-750'
               }`}
             />
@@ -348,9 +354,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               min="1"
               value={unitsPerBox}
               onChange={(e) => setUnitsPerBox(Math.max(1, Number(e.target.value) || 1))}
-              disabled={!isNewBarcode}
+              disabled={!isNewBarcode || locked}
               className={`w-full text-sm rounded bg-slate-950 border px-2.5 py-1.5 focus:outline-none focus:border-amber-500 font-medium ${
-                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-400 border-slate-850'
+                isNewBarcode ? 'text-amber-400 border-amber-500/30' : 'text-slate-455 border-slate-850'
               }`}
             />
             {errors.unitsPerBox && <p className="text-red-400 text-xs mt-1">{errors.unitsPerBox}</p>}
@@ -376,8 +382,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               min="0.01"
               value={mrp}
               onChange={(e) => setMrp(e.target.value)}
+              disabled={locked}
               placeholder="0.00"
-              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors ${
+              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50 ${
                 errors.mrp ? 'border-red-500 focus:ring-1 focus:ring-red-500/20' : 'border-slate-750'
               }`}
             />
@@ -390,8 +397,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="text"
               value={batchNumber}
               onChange={(e) => setBatchNumber(e.target.value)}
+              disabled={locked}
               placeholder="e.g. B2605"
-              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50"
             />
           </div>
 
@@ -404,7 +412,8 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="date"
               value={mfd}
               onChange={(e) => setMfd(e.target.value)}
-              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors ${
+              disabled={locked}
+              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50 ${
                 errors.mfd ? 'border-red-500' : 'border-slate-750'
               }`}
             />
@@ -420,7 +429,8 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="date"
               value={exp}
               onChange={(e) => setExp(e.target.value)}
-              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors ${
+              disabled={locked}
+              className={`w-full bg-slate-950 border rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50 ${
                 errors.exp ? 'border-red-500' : 'border-slate-750'
               }`}
             />
@@ -433,8 +443,9 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
               type="text"
               value={remarks}
               onChange={(e) => setRemarks(e.target.value)}
+              disabled={locked}
               placeholder="Auditor comments..."
-              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full bg-slate-950 border border-slate-750 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-amber-500 transition-colors disabled:opacity-50"
             />
           </div>
         </div>
@@ -468,23 +479,25 @@ export default function AuditForm({ activeProduct, onSave, onCancel, existingRec
         )}
 
         {/* Form Action Controls */}
-        <div className="flex items-center justify-between pt-4 border-t border-slate-750">
-          <div className="text-xs text-slate-400 space-y-0.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-750">
+          <div className="hidden sm:block text-xs text-slate-400 space-y-0.5">
             <p>Shortcuts: <kbd className="bg-slate-850 px-1 py-0.5 rounded text-[10px]">F2</kbd> Save Item • <kbd className="bg-slate-850 px-1 py-0.5 rounded text-[10px]">Esc</kbd> Cancel</p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-end gap-3 w-full sm:w-auto">
             <button
               type="button"
               onClick={onCancel}
-              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition"
+              disabled={locked}
+              className="flex-1 sm:flex-initial text-center justify-center flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/50 transition cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
             >
               <Trash2 className="h-4 w-4" />
               Cancel (Esc)
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 shadow-lg shadow-orange-950/20 hover:shadow-xl transition"
+              disabled={locked}
+              className="flex-1 sm:flex-initial text-center justify-center flex items-center gap-1.5 px-6 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 shadow-lg shadow-orange-950/20 hover:shadow-xl transition cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
             >
               <Save className="h-4 w-4" />
               Save Item (F2)
